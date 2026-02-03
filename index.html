@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOK - DAILY ORIGINAL KITCHEN</title>
+    <style>
+        :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 100px; }
+        .header { text-align: center; padding: 40px 20px; border-bottom: 2px solid var(--gold); background: #000; }
+        .logo { font-size: 28px; font-weight: 900; color: var(--gold); letter-spacing: 6px; border: 2px solid var(--gold); display: inline-block; padding: 8px 18px; text-transform: uppercase; }
+        .nav-bar { display: flex; overflow-x: auto; padding: 15px; gap: 10px; position: sticky; top: 0; background: rgba(5,5,5,0.98); z-index: 100; border-bottom: 1px solid #222; }
+        .btn-cat { background: #111; border: 1px solid #333; color: #888; padding: 10px 20px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; white-space: nowrap; }
+        .btn-cat.active { border-color: var(--gold); color: var(--gold); }
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+        .item { background: var(--card); border-radius: 18px; padding: 18px; margin-bottom: 15px; border: 1px solid #1f1f1f; display: flex; justify-content: space-between; align-items: center; }
+        .price { font-family: 'Courier New', monospace; font-size: 18px; font-weight: 900; color: var(--accent); }
+        .cart-float { position: fixed; bottom: 20px; left: 5%; width: 90%; background: var(--gold); color: #000; padding: 18px; border-radius: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; }
+    </style>
+</head>
+<body>
+    <div class="header"><div class="logo">DOK</div></div>
+    <div class="nav-bar">
+        <button class="btn-cat active" onclick="filter('todas')">TODAS</button>
+        <button class="btn-cat" onclick="filter('entradas')">ENTRADAS</button>
+        <button class="btn-cat" onclick="filter('principais')">PRATOS</button>
+        <button class="btn-cat" onclick="filter('bebidas')">BEBIDAS</button>
+    </div>
+    <div class="container" id="menu-list"></div>
+    <div class="cart-float" onclick="finalizarPedido()">
+        <span>ENVIAR PEDIDO</span>
+        <span id="total-display">R$ 0,00</span>
+    </div>
+    <script>
+        const itens = [
+            { cat: 'entradas', nome: 'Burrata ao Pesto', preco: 78, desc: 'Tomates cereja confit e pão artesanal.' },
+            { cat: 'entradas', nome: 'Croquetes de Picanha', preco: 59, desc: '6 unidades com mostarda escura.' },
+            { cat: 'principais', nome: 'Medalhão ao Poivre', preco: 112, desc: 'Com batatas gratinadas.' },
+            { cat: 'principais', nome: 'Risoto de Camarão', preco: 130, desc: 'Limão siciliano e camarões grelhados.' },
+            { cat: 'bebidas', nome: 'Gin Tônica', preco: 48, desc: 'Gin, tônica e especiarias.' }
+        ];
+        let total = 0; let pedido = [];
+        function render(l) {
+            const b = document.getElementById('menu-list'); b.innerHTML = '';
+            l.forEach(i => { b.innerHTML += `<div class="item" onclick="add('${i.nome}', ${i.preco})"><div><span style="color:#D4AF37;font-weight:bold">${i.nome}</span><p style="font-size:11px;color:#777">${i.desc}</p></div><div class="price">R$ ${i.preco}</div></div>`; });
+        }
+        function add(n, p) { total += p; pedido.push(n); document.getElementById('total-display').innerText = `R$ ${total.toFixed(2)}`; }
+        function filter(c) { render(c === 'todas' ? itens : itens.filter(i => i.cat === c)); }
+        function finalizarPedido() { if(total === 0) return; window.open(`https://wa.me/5511999999999?text=${encodeURIComponent('Pedido DOK: ' + pedido.join(', '))}`); }
+        window.onload = () => render(itens);
+    </script>
+</body>
+  </html>
+  
