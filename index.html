@@ -2,123 +2,112 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - MENU OFICIAL</title>
+    <title>DOK - ABA ENTRADAS</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 120px; }
-        .header { text-align: center; padding: 25px; border-bottom: 2px solid var(--gold); background: #000; }
-        .logo { font-size: 24px; font-weight: 900; color: var(--gold); letter-spacing: 5px; border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
-        .nav-scroll { display: flex; overflow-x: auto; padding: 15px; gap: 10px; position: sticky; top: 0; background: rgba(5,5,5,0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 1px solid #222; }
-        .btn-cat { background: #111; border: 1px solid #333; color: #888; padding: 10px 18px; border-radius: 20px; font-size: 10px; font-weight: bold; cursor: pointer; white-space: nowrap; text-transform: uppercase; }
-        .btn-cat.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.1); }
-        .container { padding: 15px; max-width: 600px; margin: auto; }
-        .item { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 10px; border: 1px solid #1f1f1f; display: flex; justify-content: space-between; align-items: center; }
-        .details { flex: 1; padding-right: 12px; }
-        .name { font-size: 14px; font-weight: bold; color: var(--gold); display: block; }
-        .desc { font-size: 10px; color: #888; margin-top: 4px; line-height: 1.3; }
-        .price { font-family: 'Courier New', monospace; font-size: 16px; font-weight: 900; color: var(--accent); }
-        .cart-float { position: fixed; bottom: 20px; left: 5%; width: 90%; background: var(--gold); color: #000; padding: 16px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; box-shadow: 0 8px 25px rgba(0,0,0,0.5); cursor: pointer; z-index: 1000; }
-        .ipi-small { font-size: 8px; text-align: center; color: #444; margin-top: 10px; font-weight: bold; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .logo-box { border: 2px solid var(--gold); padding: 10px; display: inline-block; margin-bottom: 20px; }
+        .logo-text { font-size: 24px; font-weight: 900; letter-spacing: 5px; color: var(--gold); }
+        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; letter-spacing: 3px; color: #888; font-size: 14px; }
+        .item-card { background: var(--card); border: 1px solid #1f1f1f; border-radius: 8px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .info { flex: 1; }
+        .name { color: var(--gold); font-weight: bold; font-size: 14px; display: block; }
+        .description { font-size: 11px; color: #777; margin-top: 5px; line-height: 1.4; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 15px; }
+        .tag-row { margin-top: 8px; }
+        .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: #222; color: #aaa; margin-right: 5px; text-transform: uppercase; }
+        .ipi-info { font-size: 9px; text-align: center; margin-top: 30px; color: #444; font-weight: bold; border-top: 1px solid #111; padding-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="logo">DOK</div>
-    <div style="font-size: 9px; color: #555; margin-top: 5px; letter-spacing: 2px;">DAILY ORIGINAL KITCHEN</div>
+<div class="logo-box">
+    <div class="logo-text">DOK</div>
 </div>
 
-<div class="nav-scroll">
-    <button class="btn-cat active" onclick="filter('entradas')">Entradas</button>
-    <button class="btn-cat" onclick="filter('principais')">Principais</button>
-    <button class="btn-cat" onclick="filter('sanduiches')">Sanduíches/Pizzas</button>
-    <button class="btn-cat" onclick="filter('sobremesas')">Sobremesas/Cafés</button>
-    <button class="btn-cat" onclick="filter('drinks')">Bebidas/Coquetéis</button>
+<div class="section-title">ENTRADAS | ENTRÉES</div>
+
+<div class="item-card">
+    <div class="info">
+        <span class="name">04 - Burrata ao Pesto</span>
+        <span class="description">Com Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</span>
+    </div>
+    <div class="price">R$ 78</div>
 </div>
 
-<div class="container" id="menu-list"></div>
-
-<div class="cart-float" onclick="finalizarPedido()">
-    <span>ENVIAR PEDIDO</span>
-    <span id="total-display">R$ 0,00</span>
+<div class="item-card">
+    <div class="info">
+        <span class="name">07 - Mini Croquetes de Picanha</span>
+        <span class="description">Na Cerveja Preta com Dip de Mostarda Escura.</span>
+    </div>
+    <div class="price">R$ 59</div>
 </div>
 
-<script>
-    const itens = [
-        // ENTRADAS
-        { cat: 'entradas', nome: '04 - Burrata ao Pesto', preco: 78, desc: 'Tomates cereja confit e torrada de pão fermentação natural.' },
-        { cat: 'entradas', nome: '07 - Mini Croquetes de Picanha', preco: 59, desc: 'Na cerveja preta com dip de mostarda escura.' },
-        { cat: 'entradas', nome: '13 - Mini Pastéis de Queijo', preco: 58, desc: '12 unidades com tomate e manjericão.' },
-        { cat: 'entradas', nome: '14 - Fritas Batata Palito', preco: 48, desc: 'Acompanha maionese do Chef.' },
-        { cat: 'entradas', nome: '23 - Bolinho de Milho', preco: 54, desc: 'Recheado de queijo com geléia de pimenta (12 unid).' },
-        { cat: 'entradas', nome: '24 - Pasta de Hommus', preco: 68, desc: 'Búfala, pesto, tomates confit e chips de pão sírio.' },
-        { cat: 'entradas', nome: 'Chicken Fingers', preco: 68, desc: 'Tiras de frango empanado com Honey Mustard.' },
-        { cat: 'entradas', nome: '17 - Tiras de Filé Mignon', preco: 98, desc: 'No molho de cerveja preta e cebola roxa.' },
+<div class="item-card">
+    <div class="info">
+        <span class="name">13 - Mini Pastéis de Queijo</span>
+        <span class="description">Com Tomate e Manjericão (12 unid.).</span>
+    </div>
+    <div class="price">R$ 58</div>
+</div>
 
-        // PRATOS PRINCIPAIS
-        { cat: 'principais', nome: '116 - Medalhão Crosta de Castanha', preco: 112, desc: 'Ao molho poivre com batata gratinada.' },
-        { cat: 'principais', nome: '114 - Risoto de Camarão', preco: 130, desc: 'Camarão grelhado, limão siciliano e muçarela de búfala.' },
-        { cat: 'principais', nome: '108 - Gnocchi de Mandioquinha', preco: 84, desc: 'Ao molho de queijo com lascas de filé mignon.' },
-        { cat: 'principais', nome: '111 - Risoto ao Funghi e Trufas', preco: 98, desc: 'Cogumelos frescos e azeite de trufas brancas.' },
-        { cat: 'principais', nome: '118 - Picadinho do Chef Gustavo', preco: 98, desc: 'Arroz, feijão, farofa caseira e ovo frito.' },
+<div class="item-card">
+    <div class="info">
+        <span class="name">14 - Fritas de Batata Palito</span>
+        <span class="description">Com Dips: Maionese do Chef.</span>
+        <div class="tag-row"><span class="tag">Gluten Free</span><span class="tag">Lactose Free</span></div>
+    </div>
+    <div class="price">R$ 48</div>
+</div>
 
-        // SANDUÍCHES E PIZZAS
-        { cat: 'sanduiches', nome: '54 - Bacon Burguer', preco: 64, desc: 'Hambúrguer de picanha, cheddar, bacon e cebola caramelizada.' },
-        { cat: 'sanduiches', nome: '51 - Cheeseburguer Salada', preco: 62, desc: 'Picanha, queijo prato, alface, tomate e maionese do Chef.' },
-        { cat: 'sanduiches', nome: '64 - Pizza Margherita', preco: 78, desc: 'Molho de tomate, muçarela, tomate e pesto de manjericão.' },
-        { cat: 'sanduiches', nome: '65 - Pizza Calabresa', preco: 86, desc: 'Muçarela, calabresa e cebola roxa.' },
+<div class="item-card">
+    <div class="info">
+        <span class="name">23 - Bolinho de Milho</span>
+        <span class="description">Recheado de queijo com geléia de pimenta (12 unid.).</span>
+    </div>
+    <div class="price">R$ 54</div>
+</div>
 
-        // SOBREMESAS E CAFÉS
-        { cat: 'sobremesas', nome: '70 - Pudim de Leite Perfeito', preco: 38, desc: 'O clássico cremoso da casa.' },
-        { cat: 'sobremesas', nome: '74 - Petit Gateau', preco: 39, desc: 'Chocolate Belga com sorvete de creme.' },
-        { cat: 'sobremesas', nome: '90 - Espresso', preco: 12, desc: 'Café premium selecionado.' },
-        { cat: 'sobremesas', nome: '94 - Capuccino', preco: 22, desc: 'Cremoso com toque de chocolate.' },
+<div class="item-card">
+    <div class="info">
+        <span class="name">24 - Pasta de Hommus (para compartilhar)</span>
+        <span class="description">Com Tomate Cereja Confit, Búfala Temperada e Pesto com Torrada de Pão de Fermentação natural e Chips de Pão Sírio.</span>
+    </div>
+    <div class="price">R$ 68</div>
+</div>
 
-        // BEBIDAS E COQUETÉIS
-        { cat: 'drinks', nome: '251 - Gin Tônica', preco: 48, desc: 'Gin, água tônica e limão.' },
-        { cat: 'drinks', nome: '257 - Aperol Spritz', preco: 45, desc: 'Espumante, Aperol e twist de laranja.' },
-        { cat: 'drinks', nome: '255 - Negroni', preco: 50, desc: 'Gin, Vermute tinto e Amaro.' },
-        { cat: 'drinks', nome: '210 - Coca-Cola Zero', preco: 12, desc: 'Lata 350ml.' },
-        { cat: 'drinks', nome: '240 - Stella Artois', preco: 22, desc: 'Long Neck.' }
-    ];
+<div class="item-card">
+    <div class="info">
+        <span class="name">15 - Chicken Fingers</span>
+        <span class="description">Tiras de Frango Empanado com Molho Honey Mustard.</span>
+    </div>
+    <div class="price">R$ 68</div>
+</div>
 
-    let total = 0; let pedido = [];
+<div class="item-card">
+    <div class="info">
+        <span class="name">16 - Mix de Nuts</span>
+        <span class="description">Especialmente Temperado com Azeite de Alecrim.</span>
+        <div class="tag-row"><span class="tag">Gluten Free</span><span class="tag">Lactose Free</span><span class="tag">Vegano</span></div>
+    </div>
+    <div class="price">R$ 49</div>
+</div>
 
-    function render(l) {
-        const b = document.getElementById('menu-list'); b.innerHTML = '';
-        l.forEach(i => {
-            b.innerHTML += `
-                <div class="item" onclick="add('${i.nome}', ${i.preco})">
-                    <div class="details">
-                        <span class="name">${i.nome}</span>
-                        <p class="desc">${i.desc}</p>
-                    </div>
-                    <div class="price">R$ ${i.preco.toFixed(2)}</div>
-                </div>
-            `;
-        });
-    }
+<div style="border: 1px solid #333; padding: 15px; margin-top: 20px; text-align: center;">
+    <div style="font-size: 10px; letter-spacing: 2px; color: #aaa;">DELICIOSA RECEITA DO CHEF GUSTAVO TORRES</div>
+    <div class="item-card" style="margin-top: 10px; border: none; background: transparent;">
+        <div class="info" style="text-align: left;">
+            <span class="name">17 - Tiras de Filé Mignon</span>
+            <span class="description">Ao Molho de Cerveja Preta e Cebola Roxa.</span>
+            <div class="tag-row"><span class="tag">Gluten Free</span></div>
+        </div>
+        <div class="price">R$ 98</div>
+    </div>
+</div>
 
-    function add(n, p) {
-        total += p; pedido.push(n);
-        document.getElementById('total-display').innerText = `R$ ${total.toFixed(2)}`;
-    }
+<div class="ipi-info">
+    SISTEMA DOK V2.0 | IPI INCLUSO CONFORME REGULAMENTAÇÃO | MAPA DE ERROS EM MEMÓRIA QUÂNTICA
+</div>
 
-    function filter(c) {
-        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-        render(itens.filter(i => i.cat === c));
-    }
-
-    function finalizarPedido() {
-        if(total === 0) return alert("Selecione um item!");
-        const msg = `DOK PEDIDO: ${pedido.join(', ')}. Total: R$ ${total.toFixed(2)}`;
-        window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`);
-    }
-
-    window.onload = () => render(itens.filter(i => i.cat === 'entradas'));
-</script>
-<div class="ipi-small">DOK SYSTEM V1.8 | IPI INTEGRADO</div>
 </body>
 </html>
