@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - MENU COMPLETO V1.5</title>
+    <title>DOK - MENU OFICIAL</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 100px; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 120px; }
         .header { text-align: center; padding: 25px; border-bottom: 2px solid var(--gold); background: #000; }
         .logo { font-size: 24px; font-weight: 900; color: var(--gold); letter-spacing: 5px; border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
         .nav-scroll { display: flex; overflow-x: auto; padding: 15px; gap: 10px; position: sticky; top: 0; background: rgba(5,5,5,0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 1px solid #222; }
@@ -32,9 +32,9 @@
 <div class="nav-scroll">
     <button class="btn-cat active" onclick="filter('entradas')">Entradas</button>
     <button class="btn-cat" onclick="filter('principais')">Principais</button>
-    <button class="btn-cat" onclick="filter('burgers')">Burgers</button>
-    <button class="btn-cat" onclick="filter('pizzas')">Pizzas</button>
-    <button class="btn-cat" onclick="filter('drinks')">Drinks</button>
+    <button class="btn-cat" onclick="filter('sanduiches')">Sanduíches/Pizzas</button>
+    <button class="btn-cat" onclick="filter('sobremesas')">Sobremesas/Cafés</button>
+    <button class="btn-cat" onclick="filter('drinks')">Bebidas/Coquetéis</button>
 </div>
 
 <div class="container" id="menu-list"></div>
@@ -47,28 +47,40 @@
 <script>
     const itens = [
         // ENTRADAS
-        { cat: 'entradas', nome: '04 - Burrata ao Pesto', preco: 78, desc: 'Tomates cereja confit e torrada de fermentação natural.' },
+        { cat: 'entradas', nome: '04 - Burrata ao Pesto', preco: 78, desc: 'Tomates cereja confit e torrada de pão fermentação natural.' },
         { cat: 'entradas', nome: '07 - Mini Croquetes de Picanha', preco: 59, desc: 'Na cerveja preta com dip de mostarda escura.' },
         { cat: 'entradas', nome: '13 - Mini Pastéis de Queijo', preco: 58, desc: '12 unidades com tomate e manjericão.' },
+        { cat: 'entradas', nome: '14 - Fritas Batata Palito', preco: 48, desc: 'Acompanha maionese do Chef.' },
+        { cat: 'entradas', nome: '23 - Bolinho de Milho', preco: 54, desc: 'Recheado de queijo com geléia de pimenta (12 unid).' },
+        { cat: 'entradas', nome: '24 - Pasta de Hommus', preco: 68, desc: 'Búfala, pesto, tomates confit e chips de pão sírio.' },
+        { cat: 'entradas', nome: 'Chicken Fingers', preco: 68, desc: 'Tiras de frango empanado com Honey Mustard.' },
         { cat: 'entradas', nome: '17 - Tiras de Filé Mignon', preco: 98, desc: 'No molho de cerveja preta e cebola roxa.' },
-        
-        // PRINCIPAIS
-        { cat: 'principais', nome: '30 - Medalhão em Crosta de Castanha', preco: 112, desc: 'Ao molho poivre com batata em camadas gratinada.' },
-        { cat: 'principais', nome: '31 - Risoto de Camarão', preco: 130, desc: 'Camarão grelhado, limão siciliano e muçarela de búfala.' },
-        { cat: 'principais', nome: '33 - Nhoque de Mandioquinha', preco: 84, desc: 'Ao molho de queijo com lascas de filé mignon.' },
 
-        // BURGERS
-        { cat: 'burgers', nome: 'Bacon Burguer', preco: 64, desc: 'Blend 160g, queijo cheddar, bacon crocante e maionese DOK.' },
-        { cat: 'burgers', nome: 'Classic Cheese', preco: 58, desc: 'Blend 160g, queijo prato e picles artesanal.' },
+        // PRATOS PRINCIPAIS
+        { cat: 'principais', nome: '116 - Medalhão Crosta de Castanha', preco: 112, desc: 'Ao molho poivre com batata gratinada.' },
+        { cat: 'principais', nome: '114 - Risoto de Camarão', preco: 130, desc: 'Camarão grelhado, limão siciliano e muçarela de búfala.' },
+        { cat: 'principais', nome: '108 - Gnocchi de Mandioquinha', preco: 84, desc: 'Ao molho de queijo com lascas de filé mignon.' },
+        { cat: 'principais', nome: '111 - Risoto ao Funghi e Trufas', preco: 98, desc: 'Cogumelos frescos e azeite de trufas brancas.' },
+        { cat: 'principais', nome: '118 - Picadinho do Chef Gustavo', preco: 98, desc: 'Arroz, feijão, farofa caseira e ovo frito.' },
 
-        // PIZZAS
-        { cat: 'pizzas', nome: 'Pizza Margherita', preco: 72, desc: 'Molho de tomate, muçarela, manjericão e azeite extra virgem.' },
-        { cat: 'pizzas', nome: 'Pizza Calabresa Speciale', preco: 78, desc: 'Calabresa artesanal, cebola roxa e azeitonas pretas.' },
+        // SANDUÍCHES E PIZZAS
+        { cat: 'sanduiches', nome: '54 - Bacon Burguer', preco: 64, desc: 'Hambúrguer de picanha, cheddar, bacon e cebola caramelizada.' },
+        { cat: 'sanduiches', nome: '51 - Cheeseburguer Salada', preco: 62, desc: 'Picanha, queijo prato, alface, tomate e maionese do Chef.' },
+        { cat: 'sanduiches', nome: '64 - Pizza Margherita', preco: 78, desc: 'Molho de tomate, muçarela, tomate e pesto de manjericão.' },
+        { cat: 'sanduiches', nome: '65 - Pizza Calabresa', preco: 86, desc: 'Muçarela, calabresa e cebola roxa.' },
 
-        // DRINKS
-        { cat: 'drinks', nome: 'Negroni Clássico', preco: 45, desc: 'Gin, Campari e Vermute Rosso.' },
-        { cat: 'drinks', nome: 'DOK Signature Gin', preco: 52, desc: 'Gin, tônica, hibisco e espuma de gengibre.' },
-        { cat: 'drinks', nome: 'Moscow Mule', preco: 42, desc: 'Vodka, limão e espuma artesanal de gengibre.' }
+        // SOBREMESAS E CAFÉS
+        { cat: 'sobremesas', nome: '70 - Pudim de Leite Perfeito', preco: 38, desc: 'O clássico cremoso da casa.' },
+        { cat: 'sobremesas', nome: '74 - Petit Gateau', preco: 39, desc: 'Chocolate Belga com sorvete de creme.' },
+        { cat: 'sobremesas', nome: '90 - Espresso', preco: 12, desc: 'Café premium selecionado.' },
+        { cat: 'sobremesas', nome: '94 - Capuccino', preco: 22, desc: 'Cremoso com toque de chocolate.' },
+
+        // BEBIDAS E COQUETÉIS
+        { cat: 'drinks', nome: '251 - Gin Tônica', preco: 48, desc: 'Gin, água tônica e limão.' },
+        { cat: 'drinks', nome: '257 - Aperol Spritz', preco: 45, desc: 'Espumante, Aperol e twist de laranja.' },
+        { cat: 'drinks', nome: '255 - Negroni', preco: 50, desc: 'Gin, Vermute tinto e Amaro.' },
+        { cat: 'drinks', nome: '210 - Coca-Cola Zero', preco: 12, desc: 'Lata 350ml.' },
+        { cat: 'drinks', nome: '240 - Stella Artois', preco: 22, desc: 'Long Neck.' }
     ];
 
     let total = 0; let pedido = [];
@@ -101,12 +113,12 @@
 
     function finalizarPedido() {
         if(total === 0) return alert("Selecione um item!");
-        const msg = `Olá! Gostaria de pedir: ${pedido.join(', ')}. Total: R$ ${total.toFixed(2)}`;
+        const msg = `DOK PEDIDO: ${pedido.join(', ')}. Total: R$ ${total.toFixed(2)}`;
         window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`);
     }
 
     window.onload = () => render(itens.filter(i => i.cat === 'entradas'));
 </script>
-<div class="ipi-small">DOK OPERATIONAL SYSTEM V1.5 | IPI INCLUÍDO</div>
+<div class="ipi-small">DOK SYSTEM V1.8 | IPI INTEGRADO</div>
 </body>
 </html>
