@@ -3,126 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - ELITE EXPERIENCE V35.0</title>
+    <title>DOK - ULTRA EXPERIENCE V40.0</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
         
-        /* HEADER COM GLOW NOTURNO */
-        .header { text-align: center; padding: 30px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: radial-gradient(circle, #1a1a1a 0%, #000 100%); box-shadow: 0 5px 20px rgba(255, 105, 180, 0.2); }
-        .logo-text { font-size: 28px; font-weight: 900; color: var(--rosa); letter-spacing: 12px; border: 2px solid var(--gold); padding: 10px 30px; display: inline-block; text-shadow: 0 0 10px var(--rosa); }
+        .header { text-align: center; padding: 30px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: #000; }
+        .logo-text { font-size: 28px; font-weight: 900; color: var(--rosa); letter-spacing: 12px; border: 2px solid var(--gold); padding: 10px 30px; display: inline-block; }
 
-        /* FILTROS MOOD */
-        .mood-container { display: flex; justify-content: space-around; margin-bottom: 25px; gap: 5px; }
-        .mood-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); font-size: 9px; padding: 10px 5px; border-radius: 20px; flex: 1; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
-        .mood-btn.active { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
-
-        /* CATEGORIAS */
-        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 20px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); background: #222; }
-
+        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 20px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; }
         .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 3px solid var(--rosa); }
-        .lista-itens.open { display: block; animation: flowIn 0.5s ease; }
+        .lista-itens.open { display: block; }
 
-        /* CARDS E INTERATIVIDADE */
-        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; transition: 0.3s; }
-        .item-card.highlight { border: 1px solid var(--gold); background: #1a1608; transform: scale(1.02); z-index: 2; }
+        /* ITEM CARD */
+        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
+        .item-card:hover { background: #1a1a1a; border-left: 3px solid var(--gold); }
+        .name { font-weight: bold; font-size: 14px; }
+        .price { color: var(--accent); font-weight: 900; font-size: 18px; }
+
+        /* MODAL POP-UP */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
+        .modal-content { background: var(--card); margin: 15% auto; padding: 30px; border: 1px solid var(--gold); width: 85%; border-radius: 20px; position: relative; animation: popIn 0.3s ease-out; }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
-        .name { color: #fff; font-weight: bold; font-size: 14px; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 18px; }
-        
-        .premium-star { color: var(--gold); animation: pulse 2s infinite; margin-right: 5px; }
-        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; text-shadow: 0 0 10px var(--gold); } }
+        .close-modal { position: absolute; right: 20px; top: 10px; color: var(--rosa); font-size: 30px; font-weight: bold; cursor: pointer; }
+        .modal-title { color: var(--gold); font-size: 22px; margin-bottom: 10px; border-bottom: 1px solid var(--rosa); padding-bottom: 5px; }
+        .modal-desc { font-size: 14px; line-height: 1.6; color: #ccc; font-style: italic; }
+        .modal-price { font-size: 24px; color: var(--accent); margin-top: 20px; display: block; }
 
-        /* BOTÃO FLUTUANTE GARÇOM */
-        .btn-panic { position: fixed; bottom: 20px; right: 20px; background: var(--rosa); color: #000; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px var(--rosa); z-index: 100; cursor: pointer; border: none; font-weight: 900; }
-
-        .h-box { display: none; font-size: 10px; color: var(--rosa); background: #1a1a1a; padding: 8px; border-radius: 5px; margin-top: 8px; border: 1px dashed var(--rosa); }
-        @keyframes flowIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .ipi-footer { font-size: 11px; text-align: center; margin-top: 50px; color: #666; padding: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-text">DOK</div>
-    <div style="font-size: 10px; color: var(--gold); margin-top: 12px; letter-spacing: 3px;">ELITE SYSTEM V35.0</div>
-</div>
-
-<div class="mood-container">
-    <button class="mood-btn" onclick="filterMood('light', this)">🥗 Leve</button>
-    <button class="mood-btn" onclick="filterMood('gold', this)">💎 Ostentar</button>
-    <button class="mood-btn" onclick="filterMood('fast', this)">⚡ Pressa</button>
+    <div style="font-size: 10px; color: var(--gold); margin-top: 12px;">ULTRA SYSTEM V40.0 - POP-UP EDITION</div>
 </div>
 
 <button class="categoria-btn" onclick="t(this, 'b1')">🥪 01. ENTRADAS & ANTEPASTOS</button>
 <div id="b1" class="lista-itens">
-    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>04 - BURRATA AO PESTO</span><br><span style="font-size:10px; color:#888;">Tomates confit e torradas de fermentação.</span></div><div class="price">78</div></div>
-    <div class="item-card" data-mood="light"><div class="info"><span class="name">16 - MIX DE NUTS (VEGANO)</span></div><div class="price">49</div></div>
-    <div class="item-card"><div class="info"><span class="name">07 - MINI CROQUETES DE PICANHA</span></div><div class="price">59</div></div>
-</div>
-
-<button class="categoria-btn" onclick="t(this, 'b2')">🥗 02. SALADAS & OVOS</button>
-<div id="b2" class="lista-itens">
-    <div class="item-card" data-mood="light"><div class="info"><span class="name">30 - SALADA CAPRESE DOK</span></div><div class="price">78</div></div>
-    <div class="item-card" data-mood="fast"><div class="info"><span class="name">45 - OVOS MEXIDOS (3 UN)</span></div><div class="price">38</div></div>
+    <div class="item-card" onclick="openModal('04 - Burrata ao Pesto', 'Burrata cremosa, tomates cereja confitados em azeite, pesto de manjericão fresco e torradas de pão de fermentação natural da casa.', '78')">
+        <span class="name">★ 04 - BURRATA AO PESTO</span><span class="price">78</span>
+    </div>
+    <div class="item-card" onclick="openModal('07 - Mini Croquetes', 'Mini croquetes de picanha servidos com dip de mostarda escura e redução de cerveja preta.', '59')">
+        <span class="name">07 - MINI CROQUETES</span><span class="price">59</span>
+    </div>
 </div>
 
 <button class="categoria-btn" onclick="t(this, 'b3')">🍽️ 03. PRATOS PRINCIPAIS</button>
 <div id="b3" class="lista-itens">
-    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>116 - MEDALHÃO EM CROSTA</span><br><button style="font-size:8px; border:1px solid var(--gold); background:none; color:var(--gold); padding:2px 5px; border-radius:10px;" onclick="h('h116')">Harmonizar</button><div id="h116" class="h-box">Sugestão: Vinho Tinto Malbec Reserva.</div></div><div class="price">112</div></div>
-    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>114 - RISOTO DE CAMARÃO</span></div><div class="price">130</div></div>
-    <div class="item-card" data-mood="fast"><div class="info"><span class="name">118 - PICADINHO DOK</span></div><div class="price">98</div></div>
+    <div class="item-card" onclick="openModal('116 - Medalhão em Crosta', 'Filé mignon em crosta de castanhas, molho poivre clássico e batata gratinada em camadas.', '112')">
+        <span class="name">★ 116 - MEDALHÃO EM CROSTA</span><span class="price">112</span>
+    </div>
+    <div class="item-card" onclick="openModal('114 - Risoto de Camarão', 'Arroz arbóreo, camarões grelhados no ponto, limão siciliano, manjericão fresco e muçarela de búfala.', '130')">
+        <span class="name">114 - RISOTO DE CAMARÃO</span><span class="price">130</span>
+    </div>
 </div>
 
-<button class="categoria-btn" onclick="t(this, 'b4')">🍸 04. DRINKS & BAR</button>
-<div id="b4" class="lista-itens">
-    <div class="item-card" data-mood="gold"><div class="info"><span class="name">255 - NEGRONI CLÁSSICO</span></div><div class="price">50</div></div>
-    <div class="item-card" data-mood="light"><div class="info"><span class="name">PINK LEMONADE</span></div><div class="price">24</div></div>
+<div id="itemModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="mTitle" class="modal-title"></div>
+        <div id="mDesc" class="modal-desc"></div>
+        <div id="mPrice" class="modal-price"></div>
+    </div>
 </div>
 
-<button class="btn-panic" onclick="alert('Chamando especialista para sugestão personalizada...')">DOK</button>
-
-<div class="ipi-footer">DOK V35.0 | SISTEMA MONOLÍTICO CUMULATIVO | IPI INCLUSO</div>
+<div class="ipi-footer">DOK V40.0 | IPI INCLUSO | TOQUE NO ITEM PARA VER DETALHES</div>
 
 <script>
     function t(btn, id) {
         var el = document.getElementById(id);
-        if (el.style.display === 'block') {
-            el.style.display = 'none';
-            btn.classList.remove('active');
-        } else {
-            el.style.display = 'block';
-            btn.classList.add('active');
-        }
-    }
-    
-    function h(id) {
-        var box = document.getElementById(id);
-        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        btn.classList.toggle('active');
     }
 
-    function filterMood(mood, btn) {
-        // Reset botões
-        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Reset cards
-        document.querySelectorAll('.item-card').forEach(card => {
-            card.classList.remove('highlight');
-            if(card.getAttribute('data-mood') === mood) {
-                card.classList.add('highlight');
-                // Abre a categoria do card automaticamente
-                card.parentElement.style.display = 'block';
-                card.parentElement.previousElementSibling.classList.add('active');
-            }
-        });
+    function openModal(title, desc, price) {
+        document.getElementById('mTitle').innerText = title;
+        document.getElementById('mDesc').innerText = desc;
+        document.getElementById('mPrice').innerText = 'R$ ' + price;
+        document.getElementById('itemModal').style.display = 'block';
     }
 
-    // GLOW NOTURNO DINÂMICO
-    const hora = new Date().getHours();
-    if (hora >= 18 || hora < 6) {
-        document.body.style.boxShadow = "inset 0 0 100px rgba(0,0,0,0.9)";
-        console.log("Modo Noturno DOK Ativado");
+    function closeModal() {
+        document.getElementById('itemModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('itemModal')) closeModal();
     }
 </script>
 </body>
