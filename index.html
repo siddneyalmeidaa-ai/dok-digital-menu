@@ -3,134 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - ESPELHAMENTO TOTAL</title>
+    <title>DOK - ESPELHAMENTO INTEGRAL V15.0</title>
     <style>
-        :root { --bg: #000000; --gold: #D4AF37; --rosa: #FF69B4; --text: #FFFFFF; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; }
+        :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 50px; }
+        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--rosa); margin-bottom: 20px; }
+        .logo-text { font-size: 22px; font-weight: 900; color: var(--rosa); letter-spacing: 7px; border: 2px solid var(--gold); padding: 5px 20px; display: inline-block; }
         
-        /* CABEÇALHO DO SISTEMA */
-        .system-header { border: 2px solid var(--gold); padding: 10px; text-align: center; margin-bottom: 20px; background: rgba(212, 175, 55, 0.1); }
-        .logo { font-size: 28px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; }
+        /* SISTEMA ACUMULATIVO DE SANFONA */
+        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 15px; text-align: left; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 5px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); }
+        .lista-itens { display: none; padding: 5px; margin-bottom: 15px; border-left: 1px solid var(--rosa); }
+        .lista-itens.open { display: block; animation: slideIn 0.3s ease; }
 
-        /* PÁGINAS ESPELHADAS */
-        .page-title { background: var(--gold); color: #000; padding: 5px 10px; font-weight: bold; font-size: 12px; margin-top: 20px; text-transform: uppercase; display: inline-block; }
+        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin-bottom: 2px; }
+        .info { flex: 1; }
+        .name { color: #fff; font-weight: bold; font-size: 13px; display: block; }
+        .desc { font-size: 10px; color: #888; margin-top: 4px; line-height: 1.4; font-style: italic; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 15px; margin-left: 10px; }
         
-        .menu-item { border-bottom: 1px dashed #333; padding: 15px 0; display: flex; flex-direction: column; }
-        .row-top { display: flex; justify-content: space-between; align-items: flex-start; }
-        .number-name { color: var(--gold); font-weight: bold; font-size: 14px; flex: 1; }
-        .price { color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 10px; }
-        .description { color: #aaa; font-size: 11px; margin-top: 5px; line-height: 1.4; font-style: italic; }
-        
-        .section-divider { border-top: 2px solid var(--rosa); margin: 30px 0 10px 0; }
-        .footer-ipi { font-size: 10px; text-align: center; margin: 40px 0; border-top: 1px solid #333; padding-top: 10px; color: var(--rosa); }
+        .tag { font-size: 8px; padding: 2px 5px; border-radius: 3px; background: #222; color: var(--gold); margin-top: 5px; display: inline-block; border: 1px solid #444; margin-right: 5px; }
+        .ipi-footer { font-size: 10px; text-align: center; margin-top: 40px; color: #555; font-weight: bold; border-top: 1px solid #222; padding-top: 15px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
 <body>
 
-<div class="system-header">
-    <div class="logo">DOK</div>
-    <div style="font-size: 8px; color: var(--gold);">SISTEMA DE ESPELHAMENTO DIGITAL V11.0</div>
+<div class="header">
+    <div class="logo-text">DOK</div>
+    <div style="font-size: 9px; color: var(--gold); margin-top: 10px; letter-spacing: 2px;">SISTEMA DE ESPELHAMENTO CUMULATIVO</div>
 </div>
 
-<div class="page-title">PÁGINA 01: ENTRADAS & ANTEPASTOS</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">01 - COUVERT DA CASA</span><span class="price">35</span></div>
-    <div class="description">Cesto de pães variados (fermentação natural e brioche), manteiga temperada com flor de sal e pastinha artesanal do dia.</div>
+<button class="categoria-btn" onclick="toggleMenu('b1')">🥪 ENTRADAS & ANTEPASTOS</button>
+<div id="b1" class="lista-itens">
+    <div class="item-card"><div class="info"><span class="name">01 - COUVERT DA CASA</span><span class="desc">Cesto de pães variados, manteiga temperada e pastinha artesanal.</span></div><div class="price">35</div></div>
+    <div class="item-card"><div class="info"><span class="name">04 - BURRATA AO PESTO</span><span class="desc">Tomates cereja confit e torradas de fermentação natural.</span></div><div class="price">78</div></div>
+    <div class="item-card"><div class="info"><span class="name">07 - MINI CROQUETES DE PICANHA</span><span class="desc">Na cerveja preta com dip de mostarda escura (6 un).</span></div><div class="price">59</div></div>
+    <div class="item-card"><div class="info"><span class="name">13 - MINI PASTÉIS DE QUEIJO</span><span class="desc">Mix de queijos, tomate concassé e manjericão (12 un).</span></div><div class="price">58</div></div>
+    <div class="item-card"><div class="info"><span class="name">14 - FRITAS DE BATATA PALITO</span><span class="desc">Com maionese artesanal do Chef.</span><br><span class="tag">GF / LF</span></div><div class="price">48</div></div>
+    <div class="item-card"><div class="info"><span class="name">23 - BOLINHO DE MILHO</span><span class="desc">Recheado com queijo e geleia de pimenta (12 un).</span></div><div class="price">54</div></div>
+    <div class="item-card"><div class="info"><span class="name">17 - TIRAS DE FILÉ MIGNON</span><span class="desc">Ao molho de cerveja preta e cebola roxa.</span></div><div class="price">98</div></div>
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">04 - BURRATA AO PESTO</span><span class="price">78</span></div>
-    <div class="description">Burrata cremosa, molho pesto de manjericão clássico, tomates cereja confitados no azeite e torradas de pão de fermentação natural.</div>
+<button class="categoria-btn" onclick="toggleMenu('b2')">🥗 SALADAS, SOPAS & OVOS</button>
+<div id="b2" class="lista-itens">
+    <div class="item-card"><div class="info"><span class="name">30 - SALADA CAPRESE DOK</span><span class="desc">Folhas verdes, tomate, búfala e pesto.</span></div><div class="price">78</div></div>
+    <div class="item-card"><div class="info"><span class="name">31 - CAESAR SALAD</span><span class="desc">Frango, croutons, molho caesar e parmigiano.</span></div><div class="price">78</div></div>
+    <div class="item-card"><div class="info"><span class="name">41 - CANJA DE GALINHA</span><span class="desc">Legumes da terra e cesto de pães.</span></div><div class="price">54</div></div>
+    <div class="item-card"><div class="info"><span class="name">42 - CREME DE MANDIOQUINHA</span><span class="desc">Servido com torradinhas da casa.</span></div><div class="price">59</div></div>
+    <div class="item-card"><div class="info"><span class="name">40 - OMELETE SALADA</span><span class="desc">Presunto e queijo com mix de folhas.</span></div><div class="price">58</div></div>
+    <div class="item-card"><div class="info"><span class="name">45 - OVOS MEXIDOS (3 UN)</span><span class="desc">Na manteiga com torradas de pão de miga.</span></div><div class="price">38</div></div>
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">07 - MINI CROQUETES DE PICANHA</span><span class="price">59</span></div>
-    <div class="description">Croquetes de picanha cozida lentamente na cerveja preta, servidos com dip de mostarda escura artesanal (6 unidades).</div>
+<button class="categoria-btn" onclick="toggleMenu('b3')">🍽️ PRATOS PRINCIPAIS & EXTRAS</button>
+<div id="b3" class="lista-itens">
+    <div class="item-card"><div class="info"><span class="name">116 - MEDALHÃO EM CROSTA</span><span class="desc">Crosta de castanhas, molho poivre e batata gratinada.</span></div><div class="price">112</div></div>
+    <div class="item-card"><div class="info"><span class="name">114 - RISOTO DE CAMARÃO</span><span class="desc">Limão siciliano e muçarela de búfala.</span></div><div class="price">130</div></div>
+    <div class="item-card"><div class="info"><span class="name">118 - PICADINHO DO CHEF</span><span class="desc">Arroz, feijão, farofa, ovo e banana frita.</span></div><div class="price">98</div></div>
+    <div class="item-card"><div class="info"><span class="name">105 - SALMÃO GRELHADO</span><span class="desc">Com legumes salteados no azeite.</span></div><div class="price">105</div></div>
+    <div class="item-card"><div class="info"><span class="name">EXTRA: OVO FRITO</span><span class="desc">Adicional de ovo caipira.</span></div><div class="price">06</div></div>
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">13 - MINI PASTÉIS DE QUEIJO</span><span class="price">58</span></div>
-    <div class="description">Pastéis crocantes recheados com mix de queijos, tomate concassé e manjericão fresco (12 unidades).</div>
+<button class="categoria-btn" onclick="toggleMenu('b4')">🍸 DRINKS CLÁSSICOS & MIXOLOGIA</button>
+<div id="b4" class="lista-itens">
+    <div class="item-card"><div class="info"><span class="name">251 - GIN TÔNICA CLÁSSICA</span><span class="desc">Gin Premium, tônica e limão siciliano.</span></div><div class="price">48</div></div>
+    <div class="item-card"><div class="info"><span class="name">255 - NEGRONI</span><span class="desc">Gin, Campari e Vermute tinto.</span></div><div class="price">50</div></div>
+    <div class="item-card"><div class="info"><span class="name">265 - MOSCOW MULE</span><span class="desc">Vodka, limão e espuma artesanal de gengibre.</span></div><div class="price">48</div></div>
+    <div class="item-card"><div class="info"><span class="name">270 - CAIPIRINHA SAGATIBA</span><span class="desc">Limão taiti e açúcar.</span></div><div class="price">36</div></div>
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">14 - FRITAS DE BATATA PALITO</span><span class="price">48</span></div>
-    <div class="description">Batatas fritas crocantes, sequinhas, servidas com maionese artesanal do Chef. (Opções: GF / LF).</div>
+<button class="categoria-btn" onclick="toggleMenu('b5')">🥤 BEBIDAS & SUCOS COMBINADOS</button>
+<div id="b5" class="lista-itens">
+    <div class="item-card"><div class="info"><span class="name">SUCOS NATURAIS</span><span class="desc">Laranja, Limão, Melancia ou Abacaxi.</span></div><div class="price">18</div></div>
+    <div class="item-card"><div class="info"><span class="name">SUCOS COMBINADOS</span><span class="desc">Abacaxi com Hortelã ou Laranja com Morango.</span></div><div class="price">22</div></div>
+    <div class="item-card"><div class="info"><span class="name">PINK LEMONADE</span><span class="desc">Limão siciliano e frutas vermelhas.</span></div><div class="price">24</div></div>
+    <div class="item-card"><div class="info"><span class="name">ÁGUA MINERAL (310ml)</span></div><div class="price">10</div></div>
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">15 - CHICKEN FINGERS</span><span class="price">68</span></div>
-    <div class="description">Tiras de peito de frango empanadas na farinha panko, servidas com molho Honey Mustard.</div>
+<div class="ipi-footer">
+    DOK V15.0 | CARGA TOTAL ACUMULADA | IPI INCLUSO
 </div>
 
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">17 - TIRAS DE FILÉ MIGNON</span><span class="price">98</span></div>
-    <div class="description">Tiras de filé mignon salteadas ao molho de cerveja preta, finalizadas com cebola roxa e ervas.</div>
-</div>
-
-<div class="section-divider"></div>
-<div class="page-title">PÁGINA 02: SALADAS, SOPAS & OVOS</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">30 - SALADA CAPRESE DOK</span><span class="price">78</span></div>
-    <div class="description">Mix de folhas verdes, tomate italiano, muçarela de búfala, molho pesto e redução de balsâmico.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">40 - OMELETE SALADA</span><span class="price">58</span></div>
-    <div class="description">Omelete clássica de presunto e queijo acompanhada de mix de folhas verdes da estação.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">45 - OVOS MEXIDOS</span><span class="price">38</span></div>
-    <div class="description">Três ovos mexidos na manteiga de garrafa, servidos com torradas de pão de miga.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">42 - CREME DE MANDIOQUINHA</span><span class="price">59</span></div>
-    <div class="description">Creme aveludado de mandioquinha, finalizado com azeite e servido com cesto de pães.</div>
-</div>
-
-<div class="section-divider"></div>
-<div class="page-title">PÁGINA 03: PRATOS PRINCIPAIS</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">116 - MEDALHÃO EM CROSTA</span><span class="price">112</span></div>
-    <div class="description">Medalhão de filé mignon em crosta de castanhas, molho poivre e batata gratinada em camadas.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">118 - PICADINHO DO CHEF</span><span class="price">98</span></div>
-    <div class="description">Picadinho de filé, arroz branco, feijão preto, farofa caseira, ovo frito e banana frita.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">114 - RISOTO DE CAMARÃO</span><span class="price">130</span></div>
-    <div class="description">Arroz arbóreo, camarões grelhados, limão siciliano, manjericão e muçarela de búfala.</div>
-</div>
-
-<div class="section-divider"></div>
-<div class="page-title">PÁGINA 04: BEBIDAS & BAR</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">SUCO NATURAL (300ml)</span><span class="price">18</span></div>
-    <div class="description">Laranja, Limão, Melancia, Abacaxi ou Abacaxi com Hortelã.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">PINK LEMONADE</span><span class="price">24</span></div>
-    <div class="description">Suco de limão siciliano, água gaseificada e xarope de frutas vermelhas.</div>
-</div>
-
-<div class="menu-item">
-    <div class="row-top"><span class="number-name">CAFÉ ESPRESSO</span><span class="price">12</span></div>
-    <div class="description">Blend gourmet 100% arábica.</div>
-</div>
-
-<div class="footer-ipi">
-    VALORES EM REAIS (R$) | IPI INCLUSO | DOK ESPELHAMENTO OPERACIONAL
-</div>
-
+<script>
+    function toggleMenu(id) {
+        var element = document.getElementById(id);
+        var btn = element.previousElementSibling;
+        if (element.classList.contains('open')) {
+            element.classList.remove('open');
+            btn.classList.remove('active');
+        } else {
+            element.classList.add('open');
+            btn.classList.add('active');
+        }
+    }
+</script>
 </body>
 </html>
