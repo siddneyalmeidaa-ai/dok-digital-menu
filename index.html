@@ -3,121 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - EXPERIENCE V25.0</title>
+    <title>DOK - ELITE EXPERIENCE V35.0</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 80px; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
         
-        .header { text-align: center; padding: 25px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); }
-        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        /* HEADER COM GLOW NOTURNO */
+        .header { text-align: center; padding: 30px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: radial-gradient(circle, #1a1a1a 0%, #000 100%); box-shadow: 0 5px 20px rgba(255, 105, 180, 0.2); }
+        .logo-text { font-size: 28px; font-weight: 900; color: var(--rosa); letter-spacing: 12px; border: 2px solid var(--gold); padding: 10px 30px; display: inline-block; text-shadow: 0 0 10px var(--rosa); }
 
-        /* INTERATIVIDADE: BOTÕES DE CATEGORIA */
-        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 18px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); transform: scale(1.02); background: #222; }
+        /* FILTROS MOOD */
+        .mood-container { display: flex; justify-content: space-around; margin-bottom: 25px; gap: 5px; }
+        .mood-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); font-size: 9px; padding: 10px 5px; border-radius: 20px; flex: 1; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
+        .mood-btn.active { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
+
+        /* CATEGORIAS */
+        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 20px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); background: #222; }
 
         .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 3px solid var(--rosa); }
-        .lista-itens.open { display: block; animation: flowIn 0.5s ease forwards; }
+        .lista-itens.open { display: block; animation: flowIn 0.5s ease; }
 
-        /* ITEM CARD INTERATIVO */
-        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
-        .item-card:active { background: #1d1d1d; }
-
-        /* ESTRELA DE OURO PISCANTE */
-        .premium-star { color: var(--gold); font-size: 14px; animation: pulseGold 2s infinite; margin-right: 5px; }
-        @keyframes pulseGold { 0% { opacity: 0.5; } 50% { opacity: 1; text-shadow: 0 0 10px var(--gold); } 100% { opacity: 0.5; } }
-
-        .name { color: #fff; font-weight: bold; font-size: 14px; display: block; }
+        /* CARDS E INTERATIVIDADE */
+        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; transition: 0.3s; }
+        .item-card.highlight { border: 1px solid var(--gold); background: #1a1608; transform: scale(1.02); z-index: 2; }
+        
+        .name { color: #fff; font-weight: bold; font-size: 14px; }
         .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 18px; }
-
-        /* TAGS DE INTERESSE */
-        .tag-popular { font-size: 8px; background: var(--rosa); color: #000; padding: 2px 6px; border-radius: 10px; font-weight: 900; margin-left: 8px; vertical-align: middle; }
         
-        /* BOTÃO HARMONIZAR */
-        .btn-harmonizar { font-size: 9px; color: var(--gold); border: 1px solid var(--gold); padding: 3px 8px; border-radius: 20px; margin-top: 10px; display: inline-block; cursor: pointer; text-transform: uppercase; }
-        
-        .harmonizacao-box { display: none; font-size: 10px; color: var(--rosa); background: #1a1a1a; padding: 8px; border-radius: 5px; margin-top: 5px; border: 1px dashed var(--rosa); }
+        .premium-star { color: var(--gold); animation: pulse 2s infinite; margin-right: 5px; }
+        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; text-shadow: 0 0 10px var(--gold); } }
 
-        @keyframes flowIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* BOTÃO FLUTUANTE GARÇOM */
+        .btn-panic { position: fixed; bottom: 20px; right: 20px; background: var(--rosa); color: #000; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px var(--rosa); z-index: 100; cursor: pointer; border: none; font-weight: 900; }
 
-        .ipi-footer { font-size: 11px; text-align: center; margin-top: 50px; color: #666; font-weight: bold; padding: 20px; }
+        .h-box { display: none; font-size: 10px; color: var(--rosa); background: #1a1a1a; padding: 8px; border-radius: 5px; margin-top: 8px; border: 1px dashed var(--rosa); }
+        @keyframes flowIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-text">DOK</div>
-    <div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 3px;">EXPERIÊNCIA INTERATIVA PREMIUM</div>
+    <div style="font-size: 10px; color: var(--gold); margin-top: 12px; letter-spacing: 3px;">ELITE SYSTEM V35.0</div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p1')">💎 01. ENTRADAS & ANTEPASTOS</button>
-<div id="p1" class="lista-itens">
-    <div class="item-card">
-        <div class="info">
-            <span class="name"><span class="premium-star">★</span>04 - BURRATA AO PESTO <span class="tag-popular">MAIS VENDIDO</span></span>
-            <span style="font-size: 11px; color: #888;">Tomates cereja confit e torradas artesanais.</span><br>
-            <div class="btn-harmonizar" onclick="toggleHarmonizar('h4')">💡 Harmonizar</div>
-            <div id="h4" class="harmonizacao-box">Sugerimos: Aperol Spritz ou Vinho Branco Sauvignon Blanc.</div>
-        </div>
-        <div class="price">78</div>
-    </div>
-    <div class="item-card"><div class="info"><span class="name">01 - COUVERT DA CASA</span></div><div class="price">35</div></div>
+<div class="mood-container">
+    <button class="mood-btn" onclick="filterMood('light', this)">🥗 Leve</button>
+    <button class="mood-btn" onclick="filterMood('gold', this)">💎 Ostentar</button>
+    <button class="mood-btn" onclick="filterMood('fast', this)">⚡ Pressa</button>
+</div>
+
+<button class="categoria-btn" onclick="t(this, 'b1')">🥪 01. ENTRADAS & ANTEPASTOS</button>
+<div id="b1" class="lista-itens">
+    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>04 - BURRATA AO PESTO</span><br><span style="font-size:10px; color:#888;">Tomates confit e torradas de fermentação.</span></div><div class="price">78</div></div>
+    <div class="item-card" data-mood="light"><div class="info"><span class="name">16 - MIX DE NUTS (VEGANO)</span></div><div class="price">49</div></div>
     <div class="item-card"><div class="info"><span class="name">07 - MINI CROQUETES DE PICANHA</span></div><div class="price">59</div></div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p2')">🍽️ 02. PRATOS PRINCIPAIS</button>
-<div id="p2" class="lista-itens">
-    <div class="item-card">
-        <div class="info">
-            <span class="name"><span class="premium-star">★</span>116 - MEDALHÃO EM CROSTA</span>
-            <span style="font-size: 11px; color: #888;">Molho poivre e batata gratinada.</span><br>
-            <div class="btn-harmonizar" onclick="toggleHarmonizar('h116')">💡 Harmonizar</div>
-            <div id="h116" class="harmonizacao-box">Sugerimos: Vinho Tinto Malbec ou Negroni.</div>
-        </div>
-        <div class="price">112</div>
-    </div>
-    <div class="item-card">
-        <div class="info">
-            <span class="name"><span class="premium-star">★</span>114 - RISOTO DE CAMARÃO <span class="tag-popular">PREMIUM</span></span>
-            <span style="font-size: 11px; color: #888;">Limão siciliano e muçarela de búfala.</span><br>
-            <div class="btn-harmonizar" onclick="toggleHarmonizar('h114')">💡 Harmonizar</div>
-            <div id="h114" class="harmonizacao-box">Sugerimos: Vinho Rosé ou Gin Tônica Clássica.</div>
-        </div>
-        <div class="price">130</div>
-    </div>
+<button class="categoria-btn" onclick="t(this, 'b2')">🥗 02. SALADAS & OVOS</button>
+<div id="b2" class="lista-itens">
+    <div class="item-card" data-mood="light"><div class="info"><span class="name">30 - SALADA CAPRESE DOK</span></div><div class="price">78</div></div>
+    <div class="item-card" data-mood="fast"><div class="info"><span class="name">45 - OVOS MEXIDOS (3 UN)</span></div><div class="price">38</div></div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p3')">🍸 03. MIXOLOGIA & CLÁSSICOS</button>
-<div id="p3" class="lista-itens">
-    <div class="item-card">
-        <div class="info">
-            <span class="name">251 - GIN TÔNICA CLÁSSICA <span class="tag-popular">SUGESTÃO</span></span>
-            <span style="font-size: 11px; color: #888;">Gin Premium e especiarias.</span>
-        </div>
-        <div class="price">48</div>
-    </div>
-    <div class="item-card"><div class="info"><span class="name">255 - NEGRONI</span></div><div class="price">50</div></div>
+<button class="categoria-btn" onclick="t(this, 'b3')">🍽️ 03. PRATOS PRINCIPAIS</button>
+<div id="b3" class="lista-itens">
+    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>116 - MEDALHÃO EM CROSTA</span><br><button style="font-size:8px; border:1px solid var(--gold); background:none; color:var(--gold); padding:2px 5px; border-radius:10px;" onclick="h('h116')">Harmonizar</button><div id="h116" class="h-box">Sugestão: Vinho Tinto Malbec Reserva.</div></div><div class="price">112</div></div>
+    <div class="item-card" data-mood="gold"><div class="info"><span class="name"><span class="premium-star">★</span>114 - RISOTO DE CAMARÃO</span></div><div class="price">130</div></div>
+    <div class="item-card" data-mood="fast"><div class="info"><span class="name">118 - PICADINHO DOK</span></div><div class="price">98</div></div>
 </div>
 
-<div class="ipi-footer">
-    DOK EXPERIENCE V25.0 | INTERATIVIDADE ATIVADA | IPI INCLUSO
+<button class="categoria-btn" onclick="t(this, 'b4')">🍸 04. DRINKS & BAR</button>
+<div id="b4" class="lista-itens">
+    <div class="item-card" data-mood="gold"><div class="info"><span class="name">255 - NEGRONI CLÁSSICO</span></div><div class="price">50</div></div>
+    <div class="item-card" data-mood="light"><div class="info"><span class="name">PINK LEMONADE</span></div><div class="price">24</div></div>
 </div>
+
+<button class="btn-panic" onclick="alert('Chamando especialista para sugestão personalizada...')">DOK</button>
+
+<div class="ipi-footer">DOK V35.0 | SISTEMA MONOLÍTICO CUMULATIVO | IPI INCLUSO</div>
 
 <script>
-    function toggleMenu(id) {
-        var element = document.getElementById(id);
-        var btn = element.previousElementSibling;
-        if (element.classList.contains('open')) {
-            element.classList.remove('open');
+    function t(btn, id) {
+        var el = document.getElementById(id);
+        if (el.style.display === 'block') {
+            el.style.display = 'none';
             btn.classList.remove('active');
         } else {
-            element.classList.add('open');
+            el.style.display = 'block';
             btn.classList.add('active');
         }
     }
-
-    function toggleHarmonizar(id) {
+    
+    function h(id) {
         var box = document.getElementById(id);
         box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function filterMood(mood, btn) {
+        // Reset botões
+        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Reset cards
+        document.querySelectorAll('.item-card').forEach(card => {
+            card.classList.remove('highlight');
+            if(card.getAttribute('data-mood') === mood) {
+                card.classList.add('highlight');
+                // Abre a categoria do card automaticamente
+                card.parentElement.style.display = 'block';
+                card.parentElement.previousElementSibling.classList.add('active');
+            }
+        });
+    }
+
+    // GLOW NOTURNO DINÂMICO
+    const hora = new Date().getHours();
+    if (hora >= 18 || hora < 6) {
+        document.body.style.boxShadow = "inset 0 0 100px rgba(0,0,0,0.9)";
+        console.log("Modo Noturno DOK Ativado");
     }
 </script>
 </body>
