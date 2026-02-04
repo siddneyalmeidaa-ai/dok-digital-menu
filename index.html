@@ -3,115 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - SISTEMA INTEGRAL V60.0</title>
+    <title>DOK - ELITE SYSTEM V70.0</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
+        
+        /* HEADER */
         .header { text-align: center; padding: 25px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; }
-        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; }
+        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+
+        /* BOTÕES DE MOOD (INTELIGÊNCIA) */
+        .mood-container { display: flex; justify-content: space-around; margin-bottom: 25px; gap: 8px; }
+        .mood-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); font-size: 10px; padding: 12px; border-radius: 20px; flex: 1; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
+        .mood-btn.active { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold); }
+
+        /* CATEGORIAS */
         .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 18px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 6px; border-radius: 8px; display: flex; justify-content: space-between; }
-        .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 2px solid var(--rosa); }
-        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 2px solid var(--rosa); animation: fadeIn 0.3s; }
+
+        /* ITEM CARDS */
+        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .item-card.highlight { border: 1px solid var(--gold); background: #1a1608; }
         .name { color: #fff; font-weight: bold; font-size: 14px; }
         .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 17px; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
-        .modal-content { background: var(--card); margin: 15% auto; padding: 30px; border: 1px solid var(--gold); width: 85%; border-radius: 20px; position: relative; }
-        .close { position: absolute; right: 20px; top: 10px; color: var(--rosa); font-size: 30px; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
+        .modal-content { background: var(--card); margin: 15% auto; padding: 30px; border: 1px solid var(--gold); width: 85%; border-radius: 25px; position: relative; animation: pop 0.3s ease; }
+        .close { position: absolute; right: 20px; top: 10px; color: var(--rosa); font-size: 35px; font-weight: bold; }
+        .m-title { color: var(--gold); font-size: 22px; margin-bottom: 10px; border-bottom: 1px solid var(--rosa); padding-bottom: 5px; text-transform: uppercase; }
+        .m-desc { font-size: 15px; color: #ccc; line-height: 1.5; margin: 15px 0; }
+        .m-price { font-size: 28px; color: var(--accent); font-weight: 900; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pop { from { transform: scale(0.8); } to { transform: scale(1); } }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-text">DOK</div>
-    <div style="font-size: 10px; color: var(--gold); margin-top: 10px;">CARGA TOTAL: TODOS OS ITENS</div>
+    <div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 2px;">ELITE SYSTEM V70.0</div>
+</div>
+
+<div class="mood-container">
+    <button class="mood-btn" onclick="filterM('gold', this)">💎 Luxo</button>
+    <button class="mood-btn" onclick="filterM('light', this)">🥗 Leve</button>
+    <button class="mood-btn" onclick="filterM('fast', this)">⚡ Rápido</button>
 </div>
 
 <button class="categoria-btn" onclick="t('b1')">🥪 01. ENTRADAS & ANTEPASTOS</button>
 <div id="b1" class="lista-itens">
-    <div class="item-card" onclick="o('01 - Couvert', 'Pães artesanais, manteiga e pasta.', '35')"><span>01 - COUVERT DA CASA</span><span class="price">35</span></div>
-    <div class="item-card" onclick="o('04 - Burrata', 'Búfala, pesto e tomates confit.', '78')"><span>04 - BURRATA AO PESTO</span><span class="price">78</span></div>
-    <div class="item-card" onclick="o('07 - Croquetes', 'Picanha na cerveja preta (6un).', '59')"><span>07 - MINI CROQUETES</span><span class="price">59</span></div>
-    <div class="item-card" onclick="o('13 - Pastéis', 'Queijo e manjericão (12un).', '58')"><span>13 - MINI PASTÉIS</span><span class="price">58</span></div>
-    <div class="item-card" onclick="o('14 - Fritas', 'Batatas crocantes e maionese.', '48')"><span>14 - BATATAS FRITAS</span><span class="price">48</span></div>
-    <div class="item-card" onclick="o('15 - Chicken', 'Frango panko e honey mustard.', '68')"><span>15 - CHICKEN FINGERS</span><span class="price">68</span></div>
-    <div class="item-card" onclick="o('16 - Nuts', 'Seleção de castanhas tostadas.', '49')"><span>16 - MIX DE NUTS</span><span class="price">49</span></div>
-    <div class="item-card" onclick="o('17 - Mignon', 'Tiras de filé e cebola roxa.', '98')"><span>17 - TIRAS DE MIGNON</span><span class="price">98</span></div>
-    <div class="item-card" onclick="o('23 - Bolinho', 'Milho e queijo (12un).', '54')"><span>23 - BOLINHO DE MILHO</span><span class="price">54</span></div>
-    <div class="item-card" onclick="o('24 - Hommus', 'Grão de bico e chips sírio.', '68')"><span>24 - PASTA DE HOMMUS</span><span class="price">68</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('01-Couvert', 'Cesto de pães, manteiga e antepastos.', '35')"><span>01 - COUVERT DA CASA</span><span class="price">35</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('04-Burrata', 'Búfala, pesto, tomates cereja e pão artesanal.', '78')"><span>★ 04 - BURRATA AO PESTO</span><span class="price">78</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('07-Croquetes', '6un de croquete de picanha na cerveja preta.', '59')"><span>07 - MINI CROQUETES</span><span class="price">59</span></div>
+    <div class="item-card" onclick="o('13-Pastéis', '12un de queijo com manjericão.', '58')"><span>13 - MINI PASTÉIS</span><span class="price">58</span></div>
+    <div class="item-card" data-mood="light" onclick="o('14-Fritas', 'Crocantes, acompanha maionese do chef.', '48')"><span>14 - BATATAS FRITAS</span><span class="price">48</span></div>
+    <div class="item-card" onclick="o('15-Chicken', 'Frango panko e molho honey mustard.', '68')"><span>15 - CHICKEN FINGERS</span><span class="price">68</span></div>
+    <div class="item-card" data-mood="light" onclick="o('16-Nuts', 'Mix de castanhas e amêndoas tostadas.', '49')"><span>16 - MIX DE NUTS</span><span class="price">49</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('17-Mignon', 'Tiras de filé com cebola roxa.', '98')"><span>17 - TIRAS DE MIGNON</span><span class="price">98</span></div>
+    <div class="item-card" onclick="o('23-Bolinho', '12un de milho cremoso com queijo.', '54')"><span>23 - BOLINHO DE MILHO</span><span class="price">54</span></div>
+    <div class="item-card" onclick="o('24-Hommus', 'Grão de bico e chips de pão sírio.', '68')"><span>24 - PASTA DE HOMMUS</span><span class="price">68</span></div>
 </div>
 
 <button class="categoria-btn" onclick="t('b2')">🥗 02. SALADAS, SOPAS & OVOS</button>
 <div id="b2" class="lista-itens">
-    <div class="item-card" onclick="o('30 - Caprese', 'Folhas e muçarela de búfala.', '78')"><span>30 - SALADA CAPRESE</span><span class="price">78</span></div>
-    <div class="item-card" onclick="o('31 - Caesar', 'Frango, croutons e parmigiano.', '78')"><span>31 - CAESAR SALAD</span><span class="price">78</span></div>
-    <div class="item-card" onclick="o('37 - Carpaccio', 'Carne, rúcula e alcaparras.', '73')"><span>37 - CARPACCIO SALADA</span><span class="price">73</span></div>
-    <div class="item-card" onclick="o('40 - Omelete', 'Presunto e queijo com salada.', '58')"><span>40 - OMELETE SALADA</span><span class="price">58</span></div>
-    <div class="item-card" onclick="o('45 - Mexidos', '3 ovos e torradas de miga.', '38')"><span>45 - OVOS MEXIDOS</span><span class="price">38</span></div>
-    <div class="item-card" onclick="o('46 - Beneditinos', 'Poché, bacon e holandês.', '52')"><span>46 - OVOS BENEDITINOS</span><span class="price">52</span></div>
-    <div class="item-card" onclick="o('41 - Canja', 'Galinha, legumes e pães.', '54')"><span>41 - CANJA DE GALINHA</span><span class="price">54</span></div>
-    <div class="item-card" onclick="o('42 - Mandioquinha', 'Creme aveludado com torradas.', '59')"><span>42 - CREME MANDIOQUINHA</span><span class="price">59</span></div>
+    <div class="item-card" data-mood="light" onclick="o('30-Caprese', 'Tomate, búfala e mix de folhas.', '78')"><span>30 - SALADA CAPRESE</span><span class="price">78</span></div>
+    <div class="item-card" data-mood="light" onclick="o('31-Caesar', 'Alface americana, frango e parmigiano.', '78')"><span>31 - CAESAR SALAD</span><span class="price">78</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('37-Carpaccio', 'Lâminas de carne e molho de mostarda.', '73')"><span>37 - CARPACCIO SALADA</span><span class="price">73</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('40-Omelete', 'Presunto, queijo e mix de folhas.', '58')"><span>40 - OMELETE SALADA</span><span class="price">58</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('45-Mexidos', '3 ovos na manteiga com torradas.', '38')"><span>45 - OVOS MEXIDOS (3 UN)</span><span class="price">38</span></div>
+    <div class="item-card" onclick="o('41-Canja', 'Clássica com legumes e pães.', '54')"><span>41 - CANJA DE GALINHA</span><span class="price">54</span></div>
+    <div class="item-card" onclick="o('42-Mandioquinha', 'Creme aveludado e torradas.', '59')"><span>42 - CREME MANDIOQUINHA</span><span class="price">59</span></div>
 </div>
 
 <button class="categoria-btn" onclick="t('b3')">🍽️ 03. PRATOS PRINCIPAIS</button>
 <div id="b3" class="lista-itens">
-    <div class="item-card" onclick="o('116 - Medalhão', 'Mignon e batata gratinada.', '112')"><span>116 - MEDALHÃO CROSTA</span><span class="price">112</span></div>
-    <div class="item-card" onclick="o('114 - Risoto', 'Camarão e limão siciliano.', '130')"><span>114 - RISOTO CAMARÃO</span><span class="price">130</span></div>
-    <div class="item-card" onclick="o('108 - Gnocchi', 'Mandaioquinha e mignon.', '84')"><span>108 - GNOCCHI MIGNON</span><span class="price">84</span></div>
-    <div class="item-card" onclick="o('118 - Picadinho', 'Completo com banana e ovo.', '98')"><span>118 - PICADINHO DOK</span><span class="price">98</span></div>
-    <div class="item-card" onclick="o('105 - Salmão', 'Grelhado com legumes.', '105')"><span>105 - SALMÃO GRELHADO</span><span class="price">105</span></div>
-    <div class="item-card" onclick="o('111 - Risoto', 'Funghi e azeite trufado.', '98')"><span>111 - RISOTO AO FUNGHI</span><span class="price">98</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('116-Medalhão', 'Mignon em crosta de castanha e batata gratin.', '112')"><span>★ 116 - MEDALHÃO EM CROSTA</span><span class="price">112</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('114-Risoto', 'Camarões grelhados e limão siciliano.', '130')"><span>★ 114 - RISOTO DE CAMARÃO</span><span class="price">130</span></div>
+    <div class="item-card" onclick="o('108-Gnocchi', 'Mandioquinha com ragu de mignon.', '84')"><span>108 - GNOCCHI MIGNON</span><span class="price">84</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('118-Picadinho', 'Arroz, feijão, farofa, ovo e banana.', '98')"><span>118 - PICADINHO DO CHEF</span><span class="price">98</span></div>
+    <div class="item-card" data-mood="light" onclick="o('105-Salmão', 'Grelhado com legumes sazonais.', '105')"><span>105 - SALMÃO GRELHADO</span><span class="price">105</span></div>
 </div>
 
-<button class="categoria-btn" onclick="t('b4')">🍚 04. GUARNIÇÕES (EXTRAS)</button>
+<button class="categoria-btn" onclick="t('b4')">🍸 04. BAR & MIXOLOGIA</button>
 <div id="b4" class="lista-itens">
-    <div class="item-card" onclick="o('Arroz', 'Porção individual branca.', '18')"><span>ARROZ BRANCO</span><span class="price">18</span></div>
-    <div class="item-card" onclick="o('Feijão', 'Porção de feijão caseiro.', '18')"><span>FEIJÃO PRETO/CARIOCA</span><span class="price">18</span></div>
-    <div class="item-card" onclick="o('Farofa', 'Farofa crocante da casa.', '15')"><span>FAROFA ARTESANAL</span><span class="price">15</span></div>
-    <div class="item-card" onclick="o('Ovo', 'Ovo frito gema mole/dura.', '15')"><span>OVO FRITO EXTRA</span><span class="price">15</span></div>
-    <div class="item-card" onclick="o('Purê', 'Purê de batata lisinho.', '22')"><span>PURÊ DE BATATA</span><span class="price">22</span></div>
-    <div class="item-card" onclick="o('Legumes', 'Sazonal salteados.', '22')"><span>LEGUMES SALTEADOS</span><span class="price">22</span></div>
+    <div class="item-card" data-mood="gold" onclick="o('251-Gin', 'Gin Premium e tônica.', '48')"><span>251 - GIN TÔNICA</span><span class="price">48</span></div>
+    <div class="item-card" onclick="o('255-Negroni', 'Campari, Gin e Vermute.', '50')"><span>255 - NEGRONI</span><span class="price">50</span></div>
+    <div class="item-card" data-mood="fast" onclick="o('210-Refrigerante', 'Coca, Guaraná ou Sprite.', '12')"><span>REFRIGERANTE LATA</span><span class="price">12</span></div>
 </div>
 
-<button class="categoria-btn" onclick="t('b5')">🍕 05. LANCHES & PIZZAS</button>
-<div id="b5" class="lista-itens">
-    <div class="item-card" onclick="o('50 - Tostex', 'Misto no pão de miga.', '49')"><span>50 - TOSTEX MISTO</span><span class="price">49</span></div>
-    <div class="item-card" onclick="o('53 - Club', 'Sanduíche completo.', '59')"><span>53 - CLUB SANDUÍCHE</span><span class="price">59</span></div>
-    <div class="item-card" onclick="o('51 - Cheese', 'Burger de picanha e fritas.', '62')"><span>51 - CHEESE SALADA</span><span class="price">62</span></div>
-    <div class="item-card" onclick="o('54 - Bacon', 'Cheddar e bacon crocante.', '64')"><span>54 - BACON BURGUER</span><span class="price">64</span></div>
-    <div class="item-card" onclick="o('64 - Margherita', 'Clássica com pesto.', '78')"><span>64 - PIZZA MARGHERITA</span><span class="price">78</span></div>
-    <div class="item-card" onclick="o('65 - Calabresa', 'Artesanal com cebola.', '86')"><span>65 - PIZZA CALABRESA</span><span class="price">86</span></div>
+<div id="md" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="c()">&times;</span>
+        <div id="mt" class="m-title"></div>
+        <div id="ms" class="m-desc"></div>
+        <div id="mp" class="m-price"></div>
+    </div>
 </div>
 
-<button class="categoria-btn" onclick="t('b6')">🍸 06. BAR & MIXOLOGIA</button>
-<div id="b6" class="lista-itens">
-    <div class="item-card" onclick="o('251 - Gin', 'Tônica e botânicos.', '48')"><span>251 - GIN TÔNICA</span><span class="price">48</span></div>
-    <div class="item-card" onclick="o('255 - Negroni', 'Clássico amargo.', '50')"><span>255 - NEGRONI</span><span class="price">50</span></div>
-    <div class="item-card" onclick="o('265 - Moscow', 'Vodka e gengibre.', '48')"><span>265 - MOSCOW MULE</span><span class="price">48</span></div>
-    <div class="item-card" onclick="o('270 - Caipi', 'Cachaça Sagatiba.', '36')"><span>270 - CAIPIRINHA</span><span class="price">36</span></div>
-    <div class="item-card" onclick="o('272 - Caipiroska', 'Vodka Importada.', '42')"><span>272 - CAIPIROSKA</span><span class="price">42</span></div>
-    <div class="item-card" onclick="o('260 - Aperol', 'Spritz refrescante.', '46')"><span>260 - APEROL SPRITZ</span><span class="price">46</span></div>
-    <div class="item-card" onclick="o('Stella', 'Long Neck.', '22')"><span>CERVEJA STELLA</span><span class="price">22</span></div>
-    <div class="item-card" onclick="o('Spaten', 'Long Neck.', '18')"><span>CERVEJA SPATEN</span><span class="price">18</span></div>
-</div>
-
-<button class="categoria-btn" onclick="t('b7')">🍰 07. SOBREMESAS & CAFÉS</button>
-<div id="b7" class="lista-itens">
-    <div class="item-card" onclick="o('70 - Pudim', 'Leite condensado.', '38')"><span>70 - PUDIM DE LEITE</span><span class="price">38</span></div>
-    <div class="item-card" onclick="o('74 - Petit', 'Com sorvete baunilha.', '39')"><span>74 - PETIT GATEAU</span><span class="price">39</span></div>
-    <div class="item-card" onclick="o('78 - Frutas', 'Sazonais laminadas.', '28')"><span>78 - FRUTAS ESTAÇÃO</span><span class="price">28</span></div>
-    <div class="item-card" onclick="o('90 - Espresso', 'Gourmet.', '12')"><span>90 - CAFÉ ESPRESSO</span><span class="price">12</span></div>
-    <div class="item-card" onclick="o('94 - Capuccino', 'Receita DOK.', '22')"><span>94 - CAPUCCINO DOK</span><span class="price">22</span></div>
-</div>
-
-<div id="md" class="modal"><div class="modal-content"><span class="close" onclick="c()">&times;</span><h2 id="mt"></h2><p id="ms"></p><h1 id="mp"></h1></div></div>
-
-<div class="ipi-footer">DOK V60.0 | IPI INCLUSO | ESPELHAMENTO TOTAL</div>
+<div class="ipi-footer" style="text-align:center; padding:30px; font-size:10px; color:#444;">DOK V70.0 | IPI INCLUSO | FILTROS ATIVOS</div>
 
 <script>
     function t(id){var e=document.getElementById(id);e.style.display=(e.style.display=='block')?'none':'block';}
     function o(t,s,p){document.getElementById('mt').innerText=t;document.getElementById('ms').innerText=s;document.getElementById('mp').innerText='R$ '+p;document.getElementById('md').style.display='block';}
     function c(){document.getElementById('md').style.display='none';}
+    
+    function filterM(m, btn){
+        document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.item-card').forEach(card=>{
+            card.classList.remove('highlight');
+            if(card.getAttribute('data-mood') === m){
+                card.classList.add('highlight');
+                card.parentElement.style.display = 'block';
+            }
+        });
+    }
 </script>
 </body>
-    </html>
-    
+                                                                                                                                                                                            </html>
+        
