@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - MENU INTEGRAL 100%</title>
+    <title>DOK - MENU COMPLETO</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 80px; }
-        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--gold); background: #000; position: sticky; top: 0; z-index: 1000; }
-        .logo-text { font-size: 20px; font-weight: 900; letter-spacing: 5px; color: var(--gold); border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
-        .nav-tabs { display: flex; overflow-x: auto; background: #111; border-bottom: 1px solid #333; -webkit-overflow-scrolling: touch; }
-        .tab-link { flex: 0 0 auto; padding: 15px 20px; border: none; background: none; color: #555; font-weight: bold; font-size: 10px; text-transform: uppercase; cursor: pointer; }
-        .tab-link.active { color: var(--gold); border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.05); }
-        .container { padding: 15px; max-width: 600px; margin: auto; }
-        .tab-content { display: none; animation: fadeIn 0.3s; }
-        .tab-content.active { display: block; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; }
+        
+        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); background: #000; position: sticky; top: 0; z-index: 1000; }
+        .logo-text { font-size: 18px; font-weight: 900; letter-spacing: 4px; color: var(--gold); border: 2px solid var(--gold); display: inline-block; padding: 5px 12px; }
+        
+        /* NAVEGAÇÃO AJUSTADA PARA CABER TUDO */
+        .nav-tabs { display: flex; overflow-x: auto; background: #111; border-bottom: 1px solid #333; gap: 5px; padding: 5px; -webkit-overflow-scrolling: touch; }
+        .tab-link { flex: 0 0 auto; padding: 12px 18px; border: 1px solid #222; background: #000; color: #666; font-weight: bold; font-size: 10px; text-transform: uppercase; cursor: pointer; border-radius: 5px; }
+        .tab-link.active { color: var(--gold); border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+
+        .container { padding: 10px; max-width: 600px; margin: auto; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .item-card { background: var(--card); border: 1px solid #1f1f1f; border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+
+        .item-card { background: var(--card); border-left: 3px solid var(--gold); border-radius: 5px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
         .info { flex: 1; }
         .name { color: var(--gold); font-weight: bold; font-size: 13px; display: block; }
-        .desc { font-size: 10px; color: #777; margin-top: 4px; line-height: 1.4; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 15px; margin-left: 10px; }
-        .tag { font-size: 8px; padding: 2px 5px; border-radius: 3px; background: #222; color: #888; margin-top: 5px; display: inline-block; border: 1px solid #333; margin-right: 5px; }
-        .ipi-footer { font-size: 9px; text-align: center; margin: 30px 0; color: #444; font-weight: bold; }
+        .desc { font-size: 10px; color: #888; margin-top: 3px; line-height: 1.3; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 15px; margin-left: 8px; }
+        
+        .tag { font-size: 8px; padding: 2px 4px; border-radius: 3px; background: #222; color: #aaa; margin-top: 5px; display: inline-block; border: 1px solid #333; margin-right: 4px; }
+        .footer-ipi { font-size: 9px; text-align: center; margin: 25px 0; color: #444; font-weight: bold; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -32,70 +39,85 @@
 </div>
 
 <div class="nav-tabs">
-    <button class="tab-link active" onclick="openTab(event, 'entradas')">Entradas</button>
-    <button class="tab-link" onclick="openTab(event, 'principais')">Principais</button>
-    <button class="tab-link" onclick="openTab(event, 'sanduiches')">Burgers/Pizzas</button>
-    <button class="tab-link" onclick="openTab(event, 'saladas')">Saladas/Sopas</button>
-    <button class="tab-link" onclick="openTab(event, 'ovos')">Ovos/Omeletes</button>
-    <button class="tab-link" onclick="openTab(event, 'acompanhamentos')">Guarnições</button>
-    <button class="tab-link" onclick="openTab(event, 'sobremesas')">Sobremesas</button>
-    <button class="tab-link" onclick="openTab(event, 'bebidas')">Bebidas</button>
-    <button class="tab-link" onclick="openTab(event, 'vinhos')">Vinhos/Bar</button>
+    <button class="tab-link active" onclick="openTab(event, 'aba1')">Entradas</button>
+    <button class="tab-link" onclick="openTab(event, 'aba2')">Sanduíches/Pizzas</button>
+    <button class="tab-link" onclick="openTab(event, 'aba3')">Saladas/Sopas/Ovos</button>
+    <button class="tab-link" onclick="openTab(event, 'aba4')">Principais</button>
+    <button class="tab-link" onclick="openTab(event, 'aba5')">Bebidas/Sobremesas</button>
 </div>
 
 <div class="container">
     
-    <div id="entradas" class="tab-content active">
-        <div class="item-card"><div class="info"><span class="name">01 - Couvert da Casa</span><span class="desc">Cesto de Pães Variados, Manteiga Temperada e Pastinha do Dia.</span></div><div class="price">R$ 35</div></div>
+    <div id="aba1" class="tab-content active">
+        <div class="item-card"><div class="info"><span class="name">01 - Couvert da Casa</span><span class="desc">Cesto de Pães Variados, Manteiga Temperada e Pastinha.</span></div><div class="price">R$ 35</div></div>
         <div class="item-card"><div class="info"><span class="name">04 - Burrata ao Pesto</span><span class="desc">Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</span></div><div class="price">R$ 78</div></div>
         <div class="item-card"><div class="info"><span class="name">07 - Mini Croquetes de Picanha</span><span class="desc">Na Cerveja Preta com Dip de Mostarda Escura (6 unid.).</span></div><div class="price">R$ 59</div></div>
-        <div class="item-card"><div class="info"><span class="name">13 - Mini Pastéis de Queijo</span><span class="desc">Com Tomate e Manjericão (12 unid.).</span></div><div class="price">R$ 58</div></div>
-        <div class="item-card"><div class="info"><span class="name">14 - Fritas de Batata Palito</span><span class="desc">Com Dips: Maionese do Chef.</span><br><span class="tag">GF/LF</span></div><div class="price">R$ 48</div></div>
+        <div class="item-card"><div class="info"><span class="name">13 - Mini Pastéis de Queijo</span><span class="desc">Com Tomate e Manjericão (12 unidades).</span></div><div class="price">R$ 58</div></div>
+        <div class="item-card"><div class="info"><span class="name">14 - Fritas de Batata Palito</span><span class="desc">Acompanha Maionese do Chef.</span><br><span class="tag">GF/LF</span></div><div class="price">R$ 48</div></div>
         <div class="item-card"><div class="info"><span class="name">23 - Bolinho de Milho</span><span class="desc">Recheado de Queijo com Geleia de Pimenta (12 unid.).</span></div><div class="price">R$ 54</div></div>
         <div class="item-card"><div class="info"><span class="name">24 - Pasta de Hommus</span><span class="desc">Búfala, Pesto, Tomates Confit, Torrada e Chips Sírio.</span></div><div class="price">R$ 68</div></div>
-        <div class="item-card"><div class="info"><span class="name">15 - Chicken Fingers</span><span class="desc">Frango Empanado com Molho Honey Mustard.</span></div><div class="price">R$ 68</div></div>
+        <div class="item-card"><div class="info"><span class="name">15 - Chicken Fingers</span><span class="desc">Tiras de Frango Empanado com Molho Honey Mustard.</span></div><div class="price">R$ 68</div></div>
+        <div class="item-card"><div class="info"><span class="name">16 - Mix de Nuts</span><span class="desc">Temperado com Azeite de Alecrim.</span><br><span class="tag">Vegano</span></div><div class="price">R$ 49</div></div>
         <div class="item-card"><div class="info"><span class="name">17 - Tiras de Filé Mignon</span><span class="desc">Ao Molho de Cerveja Preta e Cebola Roxa.</span></div><div class="price">R$ 98</div></div>
     </div>
 
-    <div id="principais" class="tab-content">
+    <div id="aba2" class="tab-content">
+        <div class="item-card"><div class="info"><span class="name">50 - Tostex Misto</span><span class="desc">Pão de Miga com Presunto Magro e Queijo Prato.</span></div><div class="price">R$ 49</div></div>
+        <div class="item-card"><div class="info"><span class="name">53 - Club Sanduíche</span><span class="desc">Peru, Tomate, Ovo Frito, Alface Americana, Bacon e Maionese.</span></div><div class="price">R$ 59</div></div>
+        <div class="item-card"><div class="info"><span class="name">51 - Cheeseburguer Salada</span><span class="desc">Hambúrguer de Picanha com Fritas e Maionese do Chef.</span></div><div class="price">R$ 62</div></div>
+        <div class="item-card"><div class="info"><span class="name">54 - Bacon Burguer</span><span class="desc">Hambúrguer de Picanha, Bacon e Cebola Caramelizada.</span></div><div class="price">R$ 64</div></div>
+        <div class="item-card"><div class="info"><span class="name">64 - Pizza Margherita</span><span class="desc">Mussarela, Rodelas de Tomate e Pesto de Manjericão.</span></div><div class="price">R$ 78</div></div>
+        <div class="item-card"><div class="info"><span class="name">65 - Pizza Calabresa</span><span class="desc">Calabresa Artesanal, Cebola Roxa e Orégano.</span></div><div class="price">R$ 86</div></div>
+        <div class="item-card"><div class="info"><span class="name">67 - Pizza Portuguesa</span><span class="desc">Mussarela, Presunto, Ovo e Cebola.</span></div><div class="price">R$ 86</div></div>
+    </div>
+
+    <div id="aba3" class="tab-content">
+        <div class="item-card"><div class="info"><span class="name">30 - Salada Caprese com Folhas</span><span class="desc">Tomate Italiano, Búfala, Pesto e Folhas Verdes.</span></div><div class="price">R$ 78</div></div>
+        <div class="item-card"><div class="info"><span class="name">31 - Caesar Salad</span><span class="desc">Frango, Croutons, Molho Caesar e Parmigiano.</span></div><div class="price">R$ 78</div></div>
+        <div class="item-card"><div class="info"><span class="name">41 - Canja de Galinha</span><span class="desc">Com Mini Legumes da Terra e Cesto de Pães.</span></div><div class="price">R$ 54</div></div>
+        <div class="item-card"><div class="info"><span class="name">42 - Creme de Mandioquinha</span><span class="desc">Acompanha Cesto de Pães da Casa.</span></div><div class="price">R$ 59</div></div>
+        <div class="item-card"><div class="info"><span class="name">40 - Omelete Salada</span><span class="desc">Presunto e Queijo com Mix de Folhas Verdes.</span></div><div class="price">R$ 58</div></div>
+        <div class="item-card"><div class="info"><span class="name">45 - Ovos Mexidos (3 unidades)</span><span class="desc">Na Manteiga com Torradas de Pão de Miga.</span></div><div class="price">R$ 38</div></div>
+    </div>
+
+    <div id="aba4" class="tab-content">
         <div class="item-card"><div class="info"><span class="name">116 - Medalhão Crosta de Castanha</span><span class="desc">Molho Poivre com Batata Gratinada.</span></div><div class="price">R$ 112</div></div>
-        <div class="item-card"><div class="info"><span class="name">114 - Risoto de Camarão</span><span class="desc">Limão Siciliano e Muçarela de Búfala.</span></div><div class="price">R$ 130</div></div>
-        <div class="item-card"><div class="info"><span class="name">108 - Gnocchi de Mandioquinha</span><span class="desc">Molho de Queijo e Filé Mignon.</span></div><div class="price">R$ 84</div></div>
-        <div class="item-card"><div class="info"><span class="name">118 - Picadinho DOK</span><span class="desc">Arroz, Feijão, Farofa, Ovo e Banana.</span></div><div class="price">R$ 98</div></div>
-        <div class="item-card"><div class="info"><span class="name">105 - Salmão Grelhado</span><span class="desc">Com Legumes Salteados.</span></div><div class="price">R$ 105</div></div>
-        <div class="item-card"><div class="info"><span class="name">111 - Risoto ao Funghi</span><span class="desc">Mix de Cogumelos e Azeite de Trufas.</span></div><div class="price">R$ 98</div></div>
+        <div class="item-card"><div class="info"><span class="name">114 - Risoto de Camarão</span><span class="desc">Grelhado com Limão Siciliano e Búfala.</span></div><div class="price">R$ 130</div></div>
+        <div class="item-card"><div class="info"><span class="name">108 - Gnocchi de Mandioquinha</span><span class="desc">Molho de Queijo com Lascas de Filé Mignon.</span></div><div class="price">R$ 84</div></div>
+        <div class="item-card"><div class="info"><span class="name">118 - Picadinho DOK</span><span class="desc">Arroz, Feijão, Farofa, Ovo e Banana Frita.</span></div><div class="price">R$ 98</div></div>
+        <div class="item-card"><div class="info"><span class="name">105 - Salmão Grelhado</span><span class="desc">Com Legumes Salteados no Azeite de Ervas.</span></div><div class="price">R$ 105</div></div>
+        <div class="item-card"><div class="info"><span class="name">Guarnições Extras</span><span class="desc">Arroz, Feijão, Purê ou Farofa.</span></div><div class="price">R$ 18</div></div>
     </div>
 
-    <div id="sanduiches" class="tab-content">
-        <div class="item-card"><div class="info"><span class="name">50 - Tostex Misto</span><span class="desc">Pão de Miga, Presunto e Queijo.</span></div><div class="price">R$ 49</div></div>
-        <div class="item-card"><div class="info"><span class="name">51 - Cheese Salada</span><span class="desc">Hambúrguer de Picanha com Fritas.</span></div><div class="price">R$ 62</div></div>
-        <div class="item-card"><div class="info"><span class="name">54 - Bacon Burguer</span><span class="desc">Cheddar, Bacon e Cebola Caramelizada.</span></div><div class="price">R$ 64</div></div>
-        <div class="item-card"><div class="info"><span class="name">64 - Pizza Margherita</span><span class="desc">Mussarela, Tomate e Pesto.</span></div><div class="price">R$ 78</div></div>
-        <div class="item-card"><div class="info"><span class="name">65 - Pizza Calabresa</span><span class="desc">Calabresa Artesanal e Cebola.</span></div><div class="price">R$ 86</div></div>
-        <div class="item-card"><div class="info"><span class="name">67 - Pizza Portuguesa</span><span class="desc">Presunto, Ovo e Cebola.</span></div><div class="price">R$ 86</div></div>
+    <div id="aba5" class="tab-content">
+        <div class="item-card"><div class="info"><span class="name">70 - Pudim de Leite DOK</span><span class="desc">O Clássico Cremoso da Casa.</span></div><div class="price">R$ 38</div></div>
+        <div class="item-card"><div class="info"><span class="name">74 - Petit Gateau Chocolate</span><span class="desc">Com Sorvete de Creme.</span></div><div class="price">R$ 39</div></div>
+        <div class="item-card"><div class="info"><span class="name">Sucos Naturais / Combinados</span><span class="desc">Laranja, Limão, Abacaxi ou Mistos.</span></div><div class="price">R$ 18</div></div>
+        <div class="item-card"><div class="info"><span class="name">Refrigerantes / Cervejas</span><span class="desc">Lata 350ml / Long Neck.</span></div><div class="price">R$ 12</div></div>
+        <div class="item-card"><div class="info"><span class="name">Vinhos / Bar</span><span class="desc">Consulte nossa carta de Gins e Vinhos.</span></div><div class="price">R$ 48</div></div>
     </div>
 
-    <div id="bebidas" class="tab-content">
-        <div class="item-card"><div class="info"><span class="name">Água Mineral</span><span class="desc">Com ou Sem Gás 310ml.</span></div><div class="price">R$ 10</div></div>
-        <div class="item-card"><div class="info"><span class="name">Sucos Naturais</span><span class="desc">Laranja, Limão, Melancia ou Abacaxi.</span></div><div class="price">R$ 18</div></div>
-        <div class="item-card"><div class="info"><span class="name">Sucos Combinados</span><span class="desc">Abacaxi com Hortelã ou Laranja com Morango.</span></div><div class="price">R$ 22</div></div>
-        <div class="item-card"><div class="info"><span class="name">Refrigerantes</span><span class="desc">Lata 350ml.</span></div><div class="price">R$ 12</div></div>
-    </div>
-
-    <div class="ipi-footer">DOK V6.0 | CARGA 100% CONFERIDA | IPI INCLUSO</div>
+    <div class="footer-ipi">DOK OPERATIONAL SYSTEM V7.0 | FULL DATABASE | IPI INCLUSO</div>
 </div>
 
 <script>
-    function openTab(evt, tabId) {
-        var i, content, links;
-        content = document.getElementsByClassName("tab-content");
-        for (i = 0; i < content.length; i++) { content[i].style.display = "none"; content[i].classList.remove("active"); }
-        links = document.getElementsByClassName("tab-link");
-        for (i = 0; i < links.length; i++) { links[i].classList.remove("active"); }
-        document.getElementById(tabId).style.display = "block";
-        document.getElementById(tabId).classList.add("active");
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
     }
 </script>
+
 </body>
-</html>
+                                                     </html>
+    
