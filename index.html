@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - MENU DIGITAL OFICIAL</title>
+    <title>DOK - MENU DIGITAL</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 100px; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; }
         
         /* HEADER */
         .header { text-align: center; padding: 25px; border-bottom: 2px solid var(--gold); background: #000; }
-        .logo-text { font-size: 24px; font-weight: 900; letter-spacing: 5px; color: var(--gold); border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
+        .logo-text { font-size: 22px; font-weight: 900; letter-spacing: 5px; color: var(--gold); border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
         
-        /* NAVEGAÇÃO */
-        .nav-scroll { display: flex; overflow-x: auto; padding: 15px; gap: 10px; position: sticky; top: 0; background: rgba(5,5,5,0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 1px solid #222; }
-        .btn-cat { background: #111; border: 1px solid #333; color: #888; padding: 10px 18px; border-radius: 20px; font-size: 10px; font-weight: bold; cursor: pointer; white-space: nowrap; text-transform: uppercase; }
-        .btn-cat.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.1); }
+        /* SISTEMA DE ABAS (TABS) */
+        .tab-container { display: flex; background: #111; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
+        .tab-btn { flex: 1; padding: 15px; border: none; background: none; color: #666; font-weight: bold; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .tab-btn.active { color: var(--gold); border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.05); }
 
-        /* LISTAGEM */
+        /* CONTEÚDO */
         .container { padding: 15px; max-width: 600px; margin: auto; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* CARDS */
         .item-card { background: var(--card); border: 1px solid #1f1f1f; border-radius: 8px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .info { flex: 1; }
         .name { color: var(--gold); font-weight: bold; font-size: 14px; display: block; }
-        .description { font-size: 11px; color: #777; margin-top: 5px; line-height: 1.4; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 15px; }
+        .desc { font-size: 11px; color: #777; margin-top: 5px; line-height: 1.4; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 10px; }
         
-        /* TAGS */
-        .tag-row { margin-top: 8px; }
-        .tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: #222; color: #aaa; margin-right: 5px; text-transform: uppercase; }
-        
-        /* FOOTER IPI */
-        .ipi-info { font-size: 9px; text-align: center; margin: 30px 10px; color: #444; font-weight: bold; border-top: 1px solid #111; padding-top: 10px; }
+        .ipi-info { font-size: 9px; text-align: center; margin-top: 30px; color: #444; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -39,73 +37,92 @@
     <div class="logo-text">DOK</div>
 </div>
 
-<div class="nav-scroll">
-    <button class="btn-cat active" onclick="filter('entradas')">Entradas</button>
-    <button class="btn-cat" onclick="filter('sanduiches')">Sanduíches & Pizzas</button>
-    <button class="btn-cat" onclick="filter('saladas')">Saladas & Sopas</button>
+<div class="tab-container">
+    <button class="tab-btn active" onclick="openTab(event, 'aba1')">Entradas</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba2')">Sanduíches & Pizzas</button>
 </div>
 
-<div class="container" id="menu-box">
+<div class="container">
+    
+    <div id="aba1" class="tab-content active">
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">04 - Burrata ao Pesto</span>
+                <span class="desc">Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</span>
+            </div>
+            <div class="price">R$ 78</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">07 - Mini Croquetes de Picanha</span>
+                <span class="desc">Na Cerveja Preta com Dip de Mostarda Escura.</span>
+            </div>
+            <div class="price">R$ 59</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">13 - Mini Pastéis de Queijo</span>
+                <span class="desc">Com Tomate e Manjericão (12 unidades).</span>
+            </div>
+            <div class="price">R$ 58</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">14 - Fritas de Batata Palito</span>
+                <span class="desc">Acompanha Maionese do Chef.</span>
+            </div>
+            <div class="price">R$ 48</div>
+        </div>
     </div>
 
-<div class="ipi-info">
-    SISTEMA DOK V2.5 | IPI INCLUSO | QUANTUM MEMORY ACTIVE
+    <div id="aba2" class="tab-content">
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">54 - Bacon Burguer</span>
+                <span class="desc">Hambúrguer de Picanha, Cheddar, Bacon e Cebola Caramelizada.</span>
+            </div>
+            <div class="price">R$ 64</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">64 - Pizza Margherita</span>
+                <span class="desc">Mussarela, Rodelas de Tomate e Pesto de Manjericão.</span>
+            </div>
+            <div class="price">R$ 78</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">30 - Salada Caprese com Folhas</span>
+                <span class="desc">Tomate, Mussarela de Búfala e Mix de Folhas Verdes.</span>
+            </div>
+            <div class="price">R$ 78</div>
+        </div>
+        <div class="item-card">
+            <div style="flex:1">
+                <span class="name">41 - Canja de Galinha</span>
+                <span class="desc">Com Mini Legumes da Terra e Cesto de Pães.</span>
+            </div>
+            <div class="price">R$ 54</div>
+        </div>
+    </div>
+
+    <div class="ipi-info">IPI INCLUSO | DOK SYSTEM V2.6</div>
 </div>
 
 <script>
-    const cardapio = [
-        // ENTRADAS
-        { cat: 'entradas', id: '04', nome: 'Burrata ao Pesto', preco: 78, desc: 'Tomates Cereja Confit e Torrada de Pão Fermentação Natural.' },
-        { cat: 'entradas', id: '07', nome: 'Mini Croquetes de Picanha', preco: 59, desc: 'Na Cerveja Preta com Dip de Mostarda Escura.' },
-        { cat: 'entradas', id: '13', nome: 'Mini Pastéis de Queijo', preco: 58, desc: 'Com Tomate e Manjericão (12 unid.).' },
-        { cat: 'entradas', id: '14', nome: 'Fritas de Batata Palito', preco: 48, desc: 'Com Dips: Maionese do Chef.', tags: ['GF', 'LF'] },
-        { cat: 'entradas', id: '23', nome: 'Bolinho de Milho', preco: 54, desc: 'Recheado de queijo com geléia de pimenta (12 unid.).' },
-        { cat: 'entradas', id: '24', nome: 'Pasta de Hommus', preco: 68, desc: 'Búfala, Pesto, Tomates Confit, Torrada e Chips.' },
-        { cat: 'entradas', id: '15', nome: 'Chicken Fingers', preco: 68, desc: 'Tiras de Frango Empanado com Molho Honey Mustard.' },
-        { cat: 'entradas', id: '16', nome: 'Mix de Nuts', preco: 49, desc: 'Temperado com Azeite de Alecrim.', tags: ['GF', 'LF', 'V'] },
-        { cat: 'entradas', id: '17', nome: 'Tiras de Filé Mignon', preco: 98, desc: 'Ao Molho de Cerveja Preta e Cebola Roxa.', tags: ['GF'] },
-
-        // SANDUÍCHES E PIZZAS
-        { cat: 'sanduiches', id: '50', nome: 'Tostex Misto', preco: 49, desc: 'Pão de Miga com Presunto Magro e Queijo Prato.' },
-        { cat: 'sanduiches', id: '53', nome: 'Club Sanduíche', preco: 59, desc: 'Peru, Tomate, Ovo, Alface, Bacon e Maionese.' },
-        { cat: 'sanduiches', id: '51', nome: 'Cheeseburguer Salada', preco: 62, desc: 'Picanha, Queijo Prato, Alface, Tomate e Maionese.' },
-        { cat: 'sanduiches', id: '54', nome: 'Bacon Burguer', preco: 64, desc: 'Picanha, Cheddar, Bacon e Cebola Caramelizada.' },
-        { cat: 'sanduiches', id: '64', nome: 'Pizza Margherita', preco: 78, desc: 'Molho, Mussarela, Tomate e Pesto de Manjericão.' },
-        { cat: 'sanduiches', id: '65', nome: 'Pizza Calabresa', preco: 86, desc: 'Molho de Tomate, Mussarela, Calabresa e Cebola Roxa.' },
-
-        // SALADAS E SOPAS
-        { cat: 'saladas', id: '30', nome: 'Salada Caprese', preco: 78, desc: 'Búfala, Pesto e Tomate com Mix de Folhas.', tags: ['GF'] },
-        { cat: 'saladas', id: '31', nome: 'Caesar Salad', preco: 78, desc: 'Frango, Croutons Integrais, Molho Caesar e Parmigiano.' },
-        { cat: 'saladas', id: '41', nome: 'Canja de Galinha', preco: 54, desc: 'Com Mini Legumes da Terra e Cesto de Pães.', tags: ['LF'] },
-        { cat: 'saladas', id: '42', nome: 'Creme de Mandioquinha', preco: 59, desc: 'Acompanha Cesto de Pães.', tags: ['LF'] }
-    ];
-
-    function filter(c) {
-        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
-        const lista = cardapio.filter(i => i.cat === c);
-        render(lista);
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
     }
-
-    function render(itens) {
-        const box = document.getElementById('menu-box');
-        box.innerHTML = '';
-        itens.forEach(i => {
-            let tagsHtml = i.tags ? `<div class="tag-row">${i.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
-            box.innerHTML += `
-                <div class="item-card">
-                    <div class="info">
-                        <span class="name">${i.id} - ${i.nome}</span>
-                        <span class="description">${i.desc}</span>
-                        ${tagsHtml}
-                    </div>
-                    <div class="price">R$ ${i.preco}</div>
-                </div>
-            `;
-        });
-    }
-
-    window.onload = () => render(cardapio.filter(i => i.cat === 'entradas'));
 </script>
 
 </body>
