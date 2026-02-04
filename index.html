@@ -3,118 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - CARDÁPIO DIGITAL COMPLETO</title>
+    <title>DOK - EXPERIENCE V25.0</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 60px; }
-        .header { text-align: center; padding: 25px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: #000; }
-        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 80px; }
         
-        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 18px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 6px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); box-shadow: 0 0 10px rgba(255, 105, 180, 0.3); }
-        .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 2px solid var(--rosa); }
-        .lista-itens.open { display: block; animation: fadeIn 0.4s ease; }
+        .header { text-align: center; padding: 25px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); }
+        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 
-        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .info { flex: 1; }
-        .name { color: #fff; font-weight: bold; font-size: 14px; display: block; text-transform: uppercase; }
-        .desc { font-size: 11px; color: #999; margin-top: 5px; line-height: 1.5; font-style: italic; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 17px; margin-left: 15px; }
+        /* INTERATIVIDADE: BOTÕES DE CATEGORIA */
+        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 18px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .categoria-btn.active { border-color: var(--rosa); color: var(--rosa); transform: scale(1.02); background: #222; }
+
+        .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 3px solid var(--rosa); }
+        .lista-itens.open { display: block; animation: flowIn 0.5s ease forwards; }
+
+        /* ITEM CARD INTERATIVO */
+        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
+        .item-card:active { background: #1d1d1d; }
+
+        /* ESTRELA DE OURO PISCANTE */
+        .premium-star { color: var(--gold); font-size: 14px; animation: pulseGold 2s infinite; margin-right: 5px; }
+        @keyframes pulseGold { 0% { opacity: 0.5; } 50% { opacity: 1; text-shadow: 0 0 10px var(--gold); } 100% { opacity: 0.5; } }
+
+        .name { color: #fff; font-weight: bold; font-size: 14px; display: block; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 18px; }
+
+        /* TAGS DE INTERESSE */
+        .tag-popular { font-size: 8px; background: var(--rosa); color: #000; padding: 2px 6px; border-radius: 10px; font-weight: 900; margin-left: 8px; vertical-align: middle; }
         
-        .tag { font-size: 9px; padding: 3px 6px; border-radius: 4px; background: #222; color: var(--gold); margin-top: 7px; display: inline-block; border: 1px solid #444; margin-right: 6px; font-weight: bold; }
-        .ipi-footer { font-size: 11px; text-align: center; margin-top: 50px; color: #666; font-weight: bold; border-top: 2px solid #222; padding-top: 20px; letter-spacing: 1px; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* BOTÃO HARMONIZAR */
+        .btn-harmonizar { font-size: 9px; color: var(--gold); border: 1px solid var(--gold); padding: 3px 8px; border-radius: 20px; margin-top: 10px; display: inline-block; cursor: pointer; text-transform: uppercase; }
+        
+        .harmonizacao-box { display: none; font-size: 10px; color: var(--rosa); background: #1a1a1a; padding: 8px; border-radius: 5px; margin-top: 5px; border: 1px dashed var(--rosa); }
+
+        @keyframes flowIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .ipi-footer { font-size: 11px; text-align: center; margin-top: 50px; color: #666; font-weight: bold; padding: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-text">DOK</div>
-    <div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 3px;">SISTEMA OPERACIONAL COMPLETO</div>
+    <div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 3px;">EXPERIÊNCIA INTERATIVA PREMIUM</div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p1')">🥪 01. ENTRADAS & ANTEPASTOS</button>
+<button class="categoria-btn" onclick="toggleMenu('p1')">💎 01. ENTRADAS & ANTEPASTOS</button>
 <div id="p1" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">01 - Couvert da Casa</span><span class="desc">Cesto de pães artesanais, manteiga temperada e pastinha do dia.</span></div><div class="price">35</div></div>
-    <div class="item-card"><div class="info"><span class="name">04 - Burrata ao Pesto</span><span class="desc">Tomates cereja confitados e torradas de fermentação natural.</span></div><div class="price">78</div></div>
-    <div class="item-card"><div class="info"><span class="name">07 - Mini Croquetes de Picanha</span><span class="desc">Cozidos na cerveja preta com dip de mostarda escura (6 un).</span></div><div class="price">59</div></div>
-    <div class="item-card"><div class="info"><span class="name">13 - Mini Pastéis de Queijo</span><span class="desc">Queijos selecionados, tomate concassé e manjericão (12 un).</span></div><div class="price">58</div></div>
-    <div class="item-card"><div class="info"><span class="name">14 - Batatas Fritas Palito</span><span class="desc">Crocantes com maionese artesanal do Chef.</span><br><span class="tag">GF</span> <span class="tag">LF</span></div><div class="price">48</div></div>
-    <div class="item-card"><div class="info"><span class="name">15 - Chicken Fingers</span><span class="desc">Tiras de frango empanadas na panko com Honey Mustard.</span></div><div class="price">68</div></div>
-    <div class="item-card"><div class="info"><span class="name">16 - Mix de Nuts</span><span class="desc">Castanhas tostadas com alecrim e flor de sal.</span><br><span class="tag">VEGANO</span></div><div class="price">49</div></div>
-    <div class="item-card"><div class="info"><span class="name">17 - Tiras de Filé Mignon</span><span class="desc">Salteadas ao molho de cerveja preta e cebola roxa.</span></div><div class="price">98</div></div>
-    <div class="item-card"><div class="info"><span class="name">23 - Bolinho de Milho</span><span class="desc">Recheado com queijo e geleia de pimenta (12 un).</span></div><div class="price">54</div></div>
-    <div class="item-card"><div class="info"><span class="name">24 - Pasta de Hommus</span><span class="desc">Búfala, pesto, tomates confit e chips sírio.</span></div><div class="price">68</div></div>
+    <div class="item-card">
+        <div class="info">
+            <span class="name"><span class="premium-star">★</span>04 - BURRATA AO PESTO <span class="tag-popular">MAIS VENDIDO</span></span>
+            <span style="font-size: 11px; color: #888;">Tomates cereja confit e torradas artesanais.</span><br>
+            <div class="btn-harmonizar" onclick="toggleHarmonizar('h4')">💡 Harmonizar</div>
+            <div id="h4" class="harmonizacao-box">Sugerimos: Aperol Spritz ou Vinho Branco Sauvignon Blanc.</div>
+        </div>
+        <div class="price">78</div>
+    </div>
+    <div class="item-card"><div class="info"><span class="name">01 - COUVERT DA CASA</span></div><div class="price">35</div></div>
+    <div class="item-card"><div class="info"><span class="name">07 - MINI CROQUETES DE PICANHA</span></div><div class="price">59</div></div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p2')">🥗 02. SALADAS, SOPAS & OVOS</button>
+<button class="categoria-btn" onclick="toggleMenu('p2')">🍽️ 02. PRATOS PRINCIPAIS</button>
 <div id="p2" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">30 - Salada Caprese DOK</span><span class="desc">Folhas, tomate italiano, búfala e pesto clássico.</span></div><div class="price">78</div></div>
-    <div class="item-card"><div class="info"><span class="name">31 - Caesar Salad</span><span class="desc">Frango, croutons, molho caesar e parmigiano.</span></div><div class="price">78</div></div>
-    <div class="item-card"><div class="info"><span class="name">37 - Carpaccio Salada</span><span class="desc">Lâminas de carne, rúcula, alcaparras e parmigiano.</span></div><div class="price">73</div></div>
-    <div class="item-card"><div class="info"><span class="name">40 - Omelete Salada</span><span class="desc">Presunto e queijo com mix de folhas verdes.</span></div><div class="price">58</div></div>
-    <div class="item-card"><div class="info"><span class="name">45 - Ovos Mexidos</span><span class="desc">3 Ovos na manteiga com torradas de pão de miga.</span></div><div class="price">38</div></div>
-    <div class="item-card"><div class="info"><span class="name">46 - Ovos Beneditinos</span><span class="desc">Poché, bacon crocante e molho holandês.</span></div><div class="price">52</div></div>
-    <div class="item-card"><div class="info"><span class="name">41 - Canja de Galinha</span><span class="desc">Com mini legumes e cesto de pães.</span></div><div class="price">54</div></div>
-    <div class="item-card"><div class="info"><span class="name">42 - Creme de Mandioquinha</span><span class="desc">Aveludado, servido com torradas artesanais.</span></div><div class="price">59</div></div>
+    <div class="item-card">
+        <div class="info">
+            <span class="name"><span class="premium-star">★</span>116 - MEDALHÃO EM CROSTA</span>
+            <span style="font-size: 11px; color: #888;">Molho poivre e batata gratinada.</span><br>
+            <div class="btn-harmonizar" onclick="toggleHarmonizar('h116')">💡 Harmonizar</div>
+            <div id="h116" class="harmonizacao-box">Sugerimos: Vinho Tinto Malbec ou Negroni.</div>
+        </div>
+        <div class="price">112</div>
+    </div>
+    <div class="item-card">
+        <div class="info">
+            <span class="name"><span class="premium-star">★</span>114 - RISOTO DE CAMARÃO <span class="tag-popular">PREMIUM</span></span>
+            <span style="font-size: 11px; color: #888;">Limão siciliano e muçarela de búfala.</span><br>
+            <div class="btn-harmonizar" onclick="toggleHarmonizar('h114')">💡 Harmonizar</div>
+            <div id="h114" class="harmonizacao-box">Sugerimos: Vinho Rosé ou Gin Tônica Clássica.</div>
+        </div>
+        <div class="price">130</div>
+    </div>
 </div>
 
-<button class="categoria-btn" onclick="toggleMenu('p3')">🍽️ 03. PRATOS PRINCIPAIS & EXTRAS</button>
+<button class="categoria-btn" onclick="toggleMenu('p3')">🍸 03. MIXOLOGIA & CLÁSSICOS</button>
 <div id="p3" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">116 - Medalhão Crosta Castanha</span><span class="desc">Ao molho poivre com batata gratinada.</span></div><div class="price">112</div></div>
-    <div class="item-card"><div class="info"><span class="name">114 - Risoto de Camarão</span><span class="desc">Grelhados, limão siciliano e búfala.</span></div><div class="price">130</div></div>
-    <div class="item-card"><div class="info"><span class="name">108 - Gnocchi de Mandioquinha</span><span class="desc">Molho de queijo com lascas de filé mignon.</span></div><div class="price">84</div></div>
-    <div class="item-card"><div class="info"><span class="name">118 - Picadinho DOK</span><span class="desc">Arroz, feijão, farofa, ovo e banana frita.</span></div><div class="price">98</div></div>
-    <div class="item-card"><div class="info"><span class="name">105 - Salmão Grelhado</span><span class="desc">Com legumes salteados no azeite de ervas.</span></div><div class="price">105</div></div>
-    <div class="item-card"><div class="info"><span class="name">111 - Risoto ao Funghi</span><span class="desc">Mix de cogumelos e azeite trufado.</span></div><div class="price">98</div></div>
-    <div class="item-card"><div class="info"><span class="name">EXTRA: Arroz ou Feijão</span></div><div class="price">18</div></div>
-    <div class="item-card"><div class="info"><span class="name">EXTRA: Farofa ou Ovo Frito</span></div><div class="price">15</div></div>
-    <div class="item-card"><div class="info"><span class="name">EXTRA: Purê ou Legumes</span></div><div class="price">22</div></div>
-</div>
-
-<button class="categoria-btn" onclick="toggleMenu('p4')">🍕 04. BURGERS, SANDUÍCHES & PIZZAS</button>
-<div id="p4" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">50 - Tostex Misto</span><span class="desc">Pão de miga, presunto e queijo prato.</span></div><div class="price">49</div></div>
-    <div class="item-card"><div class="info"><span class="name">53 - Club Sanduíche</span><span class="desc">Peru, bacon, ovo frito e maionese.</span></div><div class="price">59</div></div>
-    <div class="item-card"><div class="info"><span class="name">51 - Cheese Salada</span><span class="desc">Picanha, queijo e fritas.</span></div><div class="price">62</div></div>
-    <div class="item-card"><div class="info"><span class="name">54 - Bacon Burguer</span><span class="desc">Picanha, cheddar, bacon e fritas.</span></div><div class="price">64</div></div>
-    <div class="item-card"><div class="info"><span class="name">64 - Pizza Margherita</span><span class="desc">Mussarela, tomate e pesto.</span></div><div class="price">78</div></div>
-    <div class="item-card"><div class="info"><span class="name">65 - Pizza Calabresa</span><span class="desc">Artesanal com cebola roxa.</span></div><div class="price">86</div></div>
-    <div class="item-card"><div class="info"><span class="name">67 - Pizza Portuguesa</span><span class="desc">Clássica completa.</span></div><div class="price">86</div></div>
-</div>
-
-<button class="categoria-btn" onclick="toggleMenu('p5')">🍸 05. DRINKS CLÁSSICOS & BAR</button>
-<div id="p5" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">251 - Gin Tônica Clássica</span></div><div class="price">48</div></div>
-    <div class="item-card"><div class="info"><span class="name">255 - Negroni Clássico</span></div><div class="price">50</div></div>
-    <div class="item-card"><div class="info"><span class="name">265 - Moscow Mule</span></div><div class="price">48</div></div>
-    <div class="item-card"><div class="info"><span class="name">270 - Caipirinha Sagatiba</span></div><div class="price">36</div></div>
-    <div class="item-card"><div class="info"><span class="name">272 - Caipiroska Importada</span></div><div class="price">42</div></div>
-    <div class="item-card"><div class="info"><span class="name">260 - Aperol Spritz</span></div><div class="price">46</div></div>
-    <div class="item-card"><div class="info"><span class="name">Cerveja Stella Artois</span></div><div class="price">22</div></div>
-    <div class="item-card"><div class="info"><span class="name">Cerveja Spaten</span></div><div class="price">18</div></div>
-</div>
-
-<button class="categoria-btn" onclick="toggleMenu('p6')">🥤 06. BEBIDAS, SUCOS & CAFÉS</button>
-<div id="p6" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">Sucos Naturais</span><span class="desc">Laranja, Limão, Melancia ou Abacaxi.</span></div><div class="price">18</div></div>
-    <div class="item-card"><div class="info"><span class="name">Sucos Combinados</span><span class="desc">Sabores especiais do dia.</span></div><div class="price">22</div></div>
-    <div class="item-card"><div class="info"><span class="name">Pink Lemonade</span></div><div class="price">24</div></div>
-    <div class="item-card"><div class="info"><span class="name">Água Mineral (310ml)</span></div><div class="price">10</div></div>
-    <div class="item-card"><div class="info"><span class="name">Refrigerantes Lata</span></div><div class="price">12</div></div>
-    <div class="item-card"><div class="info"><span class="name">90 - Café Espresso Gourmet</span></div><div class="price">12</div></div>
-    <div class="item-card"><div class="info"><span class="name">94 - Capuccino DOK</span></div><div class="price">22</div></div>
-</div>
-
-<button class="categoria-btn" onclick="toggleMenu('p7')">🍰 07. SOBREMESAS</button>
-<div id="p7" class="lista-itens">
-    <div class="item-card"><div class="info"><span class="name">70 - Pudim de Leite Condensado</span></div><div class="price">38</div></div>
-    <div class="item-card"><div class="info"><span class="name">74 - Petit Gateau Chocolate</span></div><div class="price">39</div></div>
-    <div class="item-card"><div class="info"><span class="name">78 - Frutas Frescas Estação</span></div><div class="price">28</div></div>
+    <div class="item-card">
+        <div class="info">
+            <span class="name">251 - GIN TÔNICA CLÁSSICA <span class="tag-popular">SUGESTÃO</span></span>
+            <span style="font-size: 11px; color: #888;">Gin Premium e especiarias.</span>
+        </div>
+        <div class="price">48</div>
+    </div>
+    <div class="item-card"><div class="info"><span class="name">255 - NEGRONI</span></div><div class="price">50</div></div>
 </div>
 
 <div class="ipi-footer">
-    DOK V20.0 | IPI INCLUSO | ESPELHAMENTO TOTAL CUMULATIVO
+    DOK EXPERIENCE V25.0 | INTERATIVIDADE ATIVADA | IPI INCLUSO
 </div>
 
 <script>
@@ -128,6 +113,11 @@
             element.classList.add('open');
             btn.classList.add('active');
         }
+    }
+
+    function toggleHarmonizar(id) {
+        var box = document.getElementById(id);
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
     }
 </script>
 </body>
