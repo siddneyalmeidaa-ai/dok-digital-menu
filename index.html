@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - MENU DIGITAL</title>
+    <title>DOK - MENU DIGITAL OFICIAL</title>
     <style>
         :root { --bg: #050505; --gold: #D4AF37; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 60px; }
         
         /* HEADER */
         .header { text-align: center; padding: 25px; border-bottom: 2px solid var(--gold); background: #000; }
         .logo-text { font-size: 22px; font-weight: 900; letter-spacing: 5px; color: var(--gold); border: 2px solid var(--gold); display: inline-block; padding: 5px 15px; }
         
-        /* SISTEMA DE ABAS (TABS) */
-        .tab-container { display: flex; background: #111; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
-        .tab-btn { flex: 1; padding: 15px; border: none; background: none; color: #666; font-weight: bold; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .tab-btn.active { color: var(--gold); border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.05); }
+        /* NAVEGAÇÃO POR ABAS */
+        .tab-navigation { display: flex; background: #111; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
+        .tab-link { flex: 1; padding: 18px; border: none; background: none; color: #555; font-weight: bold; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .tab-link.active { color: var(--gold); border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.05); }
 
-        /* CONTEÚDO */
+        /* CONTAINER DE CONTEÚDO */
         .container { padding: 15px; max-width: 600px; margin: auto; }
-        .tab-content { display: none; }
+        .tab-content { display: none; animation: fadeIn 0.4s; }
         .tab-content.active { display: block; }
 
-        /* CARDS */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* CARDS DO MENU */
         .item-card { background: var(--card); border: 1px solid #1f1f1f; border-radius: 8px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .name { color: var(--gold); font-weight: bold; font-size: 14px; display: block; }
-        .desc { font-size: 11px; color: #777; margin-top: 5px; line-height: 1.4; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 10px; }
+        .info { flex: 1; }
+        .name { color: var(--gold); font-weight: bold; font-size: 14px; display: block; text-transform: uppercase; }
+        .description { font-size: 11px; color: #777; margin-top: 5px; line-height: 1.4; }
+        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 16px; margin-left: 15px; white-space: nowrap; }
         
-        .ipi-info { font-size: 9px; text-align: center; margin-top: 30px; color: #444; font-weight: bold; }
+        /* TAGS INFORMATIVAS */
+        .tag { font-size: 8px; padding: 2px 5px; border-radius: 3px; background: #222; color: #888; margin-right: 4px; border: 1px solid #333; }
+
+        .ipi-info { font-size: 9px; text-align: center; margin: 40px 0; color: #444; font-weight: bold; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -37,91 +43,96 @@
     <div class="logo-text">DOK</div>
 </div>
 
-<div class="tab-container">
-    <button class="tab-btn active" onclick="openTab(event, 'aba1')">Entradas</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba2')">Sanduíches & Pizzas</button>
+<div class="tab-navigation">
+    <button class="tab-link active" onclick="switchTab(event, 'entradas')">1ª Aba: Entradas</button>
+    <button class="tab-link" onclick="switchTab(event, 'outros')">2ª Aba: Sanduíches & Cia</button>
 </div>
 
 <div class="container">
     
-    <div id="aba1" class="tab-content active">
+    <div id="entradas" class="tab-content active">
         <div class="item-card">
-            <div style="flex:1">
+            <div class="info">
                 <span class="name">04 - Burrata ao Pesto</span>
-                <span class="desc">Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</span>
+                <span class="description">Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</span>
             </div>
             <div class="price">R$ 78</div>
         </div>
         <div class="item-card">
-            <div style="flex:1">
+            <div class="info">
                 <span class="name">07 - Mini Croquetes de Picanha</span>
-                <span class="desc">Na Cerveja Preta com Dip de Mostarda Escura.</span>
+                <span class="description">Na Cerveja Preta com Dip de Mostarda Escura.</span>
             </div>
             <div class="price">R$ 59</div>
         </div>
         <div class="item-card">
-            <div style="flex:1">
+            <div class="info">
                 <span class="name">13 - Mini Pastéis de Queijo</span>
-                <span class="desc">Com Tomate e Manjericão (12 unidades).</span>
+                <span class="description">Com Tomate e Manjericão (12 unidades).</span>
             </div>
             <div class="price">R$ 58</div>
         </div>
         <div class="item-card">
-            <div style="flex:1">
+            <div class="info">
                 <span class="name">14 - Fritas de Batata Palito</span>
-                <span class="desc">Acompanha Maionese do Chef.</span>
+                <span class="description">Acompanha Maionese do Chef.</span>
+                <div style="margin-top:5px;"><span class="tag">Glúten Free</span><span class="tag">Lactose Free</span></div>
             </div>
             <div class="price">R$ 48</div>
         </div>
-    </div>
-
-    <div id="aba2" class="tab-content">
         <div class="item-card">
-            <div style="flex:1">
-                <span class="name">54 - Bacon Burguer</span>
-                <span class="desc">Hambúrguer de Picanha, Cheddar, Bacon e Cebola Caramelizada.</span>
-            </div>
-            <div class="price">R$ 64</div>
-        </div>
-        <div class="item-card">
-            <div style="flex:1">
-                <span class="name">64 - Pizza Margherita</span>
-                <span class="desc">Mussarela, Rodelas de Tomate e Pesto de Manjericão.</span>
-            </div>
-            <div class="price">R$ 78</div>
-        </div>
-        <div class="item-card">
-            <div style="flex:1">
-                <span class="name">30 - Salada Caprese com Folhas</span>
-                <span class="desc">Tomate, Mussarela de Búfala e Mix de Folhas Verdes.</span>
-            </div>
-            <div class="price">R$ 78</div>
-        </div>
-        <div class="item-card">
-            <div style="flex:1">
-                <span class="name">41 - Canja de Galinha</span>
-                <span class="desc">Com Mini Legumes da Terra e Cesto de Pães.</span>
+            <div class="info">
+                <span class="name">23 - Bolinho de Milho</span>
+                <span class="description">Recheado de Queijo com Geleia de Pimenta (12 unidades).</span>
             </div>
             <div class="price">R$ 54</div>
         </div>
     </div>
 
-    <div class="ipi-info">IPI INCLUSO | DOK SYSTEM V2.6</div>
+    <div id="outros" class="tab-content">
+        <div class="item-card">
+            <div class="info">
+                <span class="name">54 - Bacon Burguer</span>
+                <span class="description">Hambúrguer de Picanha, Cheddar, Bacon e Cebola Caramelizada.</span>
+            </div>
+            <div class="price">R$ 64</div>
+        </div>
+        <div class="item-card">
+            <div class="info">
+                <span class="name">64 - Pizza Margherita</span>
+                <span class="description">Mussarela, Rodelas de Tomate e Pesto de Manjericão.</span>
+            </div>
+            <div class="price">R$ 78</div>
+        </div>
+        <div class="item-card">
+            <div class="info">
+                <span class="name">30 - Salada Caprese</span>
+                <span class="description">Búfala, Pesto e Tomate com Mix de Folhas Verdes.</span>
+            </div>
+            <div class="price">R$ 78</div>
+        </div>
+    </div>
+
+    <div class="ipi-info">
+        DOK DIGITAL SYSTEM | IPI INCLUSO | OPERAÇÃO CUMULATIVA
+    </div>
 </div>
 
 <script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+    function switchTab(evt, tabId) {
+        var i, content, links;
+        content = document.getElementsByClassName("tab-content");
+        for (i = 0; i < content.length; i++) {
+            content[i].style.display = "none";
+            content[i].classList.remove("active");
         }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        links = document.getElementsByClassName("tab-link");
+        for (i = 0; i < links.length; i++) {
+            links[i].classList.remove("active");
         }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+        document.getElementById(tabId).style.display = "block";
+        document.getElementById(tabId).classList.add("active");
+        evt.currentTarget.classList.add("active");
     }
 </script>
 
