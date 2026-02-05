@@ -2,189 +2,126 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEMA DOK - MASTER VISUAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DOK PREMIUM - SISTEMA C.S.</title>
     <style>
         :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --txt: #e0e0e0; --green: #27ae60; }
-        body { background: var(--bg); color: var(--txt); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: var(--txt); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; }
         
-        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        
-        /* Menu de Navegação Segmentado */
-        .nav-container { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #111; }
-        .nav-btn { background: #222; color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        /* HEADER FIXO */
+        .header { background: rgba(10,10,10,0.95); padding: 15px; border-bottom: 2px solid var(--gold); text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* NAVEGAÇÃO SEM CORTE */
+        .nav-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 10px; background: #111; border-bottom: 1px solid #222; }
+        .nav-btn { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 8px 16px; border-radius: 20px; white-space: nowrap; font-size: 11px; font-weight: bold; cursor: pointer; }
         .nav-btn.active { background: var(--gold); color: #000; }
 
-        .section { display: none; padding: 15px; animation: fadeIn 0.4s; }
-        .section.active { display: block; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        /* LISTA DE ITENS */
+        .container { padding: 15px; padding-bottom: 100px; display: flex; flex-direction: column; gap: 10px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: flex; flex-direction: column; }
 
-        .cat-label { color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin: 20px 0 10px 5px; display: block; border-left: 3px solid var(--gold); padding-left: 10px; }
+        .item-card { background: var(--card); border-radius: 12px; border: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; min-height: 80px; }
+        .item-card:active { background: #222; transform: scale(0.98); }
+        .item-info { flex: 1; }
+        .item-name { display: block; font-weight: bold; font-size: 14px; color: #fff; margin-bottom: 4px; }
+        .item-tag { font-size: 10px; color: var(--green); text-transform: uppercase; font-weight: 800; }
+        .item-price { color: var(--gold); font-size: 18px; font-weight: 900; margin-left: 15px; }
 
-        /* Estilo dos Itens */
-        .item { background: var(--card); margin-bottom: 10px; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; cursor: pointer; }
-        .item:hover { border-color: var(--gold); }
-        .item-info .name { display: block; font-weight: bold; color: #fff; font-size: 14px; }
-        .item-info .meta { font-size: 10px; color: #777; margin-top: 4px; }
-        .price { color: var(--gold); font-weight: bold; font-size: 18px; }
-
-        /* Modal (Pop-up) */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; }
-        .modal-content { background: var(--card); width: 90%; max-width: 450px; border-radius: 20px; border: 1px solid var(--gold); overflow: hidden; position: relative; }
-        .modal-img { width: 100%; height: 280px; background-size: cover; background-position: center; background-color: #222; }
+        /* MODAL PSICÓTICO (POP-UP) */
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); align-items: flex-end; }
+        .modal-content { background: var(--card); width: 100%; max-height: 90vh; border-radius: 25px 25px 0 0; border-top: 3px solid var(--gold); overflow-y: auto; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
+        
+        .modal-img { width: 100%; height: 280px; background-size: cover; background-position: center; background-color: #222; border-bottom: 1px solid #333; }
         .modal-body { padding: 25px; }
-        .modal-title { color: var(--gold); font-size: 22px; margin: 0 0 10px 0; }
-        .modal-desc { font-size: 14px; color: #bbb; line-height: 1.6; margin-bottom: 20px; }
-        .modal-footer { display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 15px; }
-        .stat-box { font-size: 12px; font-weight: bold; }
-        .btn-close { background: var(--gold); color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; font-size: 14px; }
-
-        ::-webkit-scrollbar { height: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+        .modal-title { color: var(--gold); font-size: 22px; margin-bottom: 10px; font-weight: 900; }
+        .modal-desc { color: #ccc; font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+        .modal-stats { display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 15px; margin-bottom: 20px; }
+        .stat-item { font-size: 12px; font-weight: bold; }
+        
+        .btn-close { background: var(--gold); color: #000; border: none; width: 100%; padding: 18px; font-weight: 900; text-transform: uppercase; cursor: pointer; position: sticky; bottom: 0; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0; font-size: 20px; color: var(--gold);">DOK PREMIUM MASTER</h1>
-    <small style="color: var(--green);">OPERADOR: C.S. | SINCRONIA 01-85</small>
+    <h1>DOK PREMIUM MASTER</h1>
+    <div style="font-size:9px; color:var(--green); margin-top:5px;">OPERADOR: C.S. | SINCRONIA 01-85</div>
 </div>
 
-<div class="nav-container">
-    <button class="nav-btn active" onclick="showTab('tab-entradas', this)">Entradas</button>
-    <button class="nav-btn" onclick="showTab('tab-massas', this)">Massas & Risotos</button>
-    <button class="nav-btn" onclick="showTab('tab-carnes', this)">Carnes & Peixes</button>
-    <button class="nav-btn" onclick="showTab('tab-bebidas', this)">Bebidas</button>
-    <button class="nav-btn" onclick="showTab('tab-drinks', this)">Bar & Adega</button>
+<div class="nav-scroll">
+    <button class="nav-btn active" onclick="switchTab(event, 't1')">ENTRADAS</button>
+    <button class="nav-btn" onclick="switchTab(event, 't2')">MASSAS/RISOTOS</button>
+    <button class="nav-btn" onclick="switchTab(event, 't3')">CARNES/PEIXES</button>
+    <button class="nav-btn" onclick="switchTab(event, 't4')">DRINKS/VINHOS</button>
+    <button class="nav-btn" onclick="switchTab(event, 't5')">NÃO ALCOÓLICOS</button>
 </div>
 
-<div id="tab-entradas" class="section active">
-    <span class="cat-label">Petiscos e Inícios</span>
-    <div class="item" onclick="openModal('02', 'Burrata ao Pesto', 'Burrata cremosa, pesto artesanal, tomates cereja e torradas.', '580 kcal', '0%', 'https://via.placeholder.com/400x280/161616/d4af37?text=BURRATA')">
-        <div class="item-info">
-            <span class="name">02. BURRATA AO PESTO ★</span>
-            <span class="meta">DETALHES NUTRICIONAIS</span>
+<div class="container">
+    <div id="t1" class="tab-content active">
+        <div class="item-card" onclick="verItem('02', 'Burrata ao Pesto', 'Burrata cremosa, molho pesto artesanal, tomates cereja marinados e fatias de pão italiano crocante.', '580 kcal', '0%', 'https://images.unsplash.com/photo-1541529086526-db283c563270')">
+            <div class="item-info"><span class="item-name">02. BURRATA AO PESTO ★</span><span class="item-tag">Ingredientes e Foto</span></div>
+            <div class="item-price">78</div>
         </div>
-        <div class="price">78</div>
-    </div>
-    <div class="item" onclick="openModal('10', 'Tiras de Mignon', 'Filé mignon ao molho de cerveja preta e torradas.', '420 kcal', '0%', 'https://via.placeholder.com/400x280/161616/d4af37?text=MIGNON')">
-        <div class="item-info">
-            <span class="name">10. TIRAS DE MIGNON ★</span>
-            <span class="meta">RECEITA GUSTAVO TORRES</span>
+        <div class="item-card" onclick="verItem('10', 'Tiras de Mignon', 'Tiras de filé mignon ao molho de cerveja preta, servidas com torradas de fermentação natural.', '420 kcal', '0%', 'https://images.unsplash.com/photo-1551183053-bf91a1d81141')">
+            <div class="item-info"><span class="item-name">10. TIRAS DE MIGNON</span><span class="item-tag">Ingredientes e Foto</span></div>
+            <div class="item-price">98</div>
         </div>
-        <div class="price">98</div>
     </div>
-</div>
 
-<div id="tab-massas" class="section">
-    <span class="cat-label">Massas Artesanais</span>
-    <div class="item" onclick="openModal('18', 'Sorrentino de Búfala', 'Massa artesanal recheada com mussarela de búfala ao molho pomodoro.', '520 kcal', '0%', '')">
-        <div class="item-info">
-            <span class="name">18. SORRENTINO DE BÚFALA</span>
-            <span class="meta">CLÁSSICO DA CASA</span>
+    <div id="t3" class="tab-content">
+        <div class="item-card" onclick="verItem('29', 'Picadinho G. Torres', 'Mignon picado, arroz soltinho, feijão, farofa crocante, ovo gema mole e batatas fritas.', '750 kcal', '0%', 'https://images.unsplash.com/photo-1504674900247-0877df9cc836')">
+            <div class="item-info"><span class="item-name">29. PICADINHO G. TORRES ★</span><span class="item-tag">Ingredientes e Foto</span></div>
+            <div class="item-price">98</div>
         </div>
-        <div class="price">105</div>
-    </div>
-    <div class="item" onclick="openModal('23', 'Risoto de Camarão', 'Arroz arbóreo, camarões médios, limão siciliano e grana padano.', '610 kcal', '0%', '')">
-        <div class="item-info">
-            <span class="name">23. RISOTO DE CAMARÃO ★</span>
-            <span class="meta">DESTAQUE DO CHEF</span>
+        <div class="item-card" onclick="verItem('34', 'Arroz de Pato', 'Arroz de pato desfiado, finalizado com chouriço português, azeitonas e especiarias.', '690 kcal', '0%', 'https://images.unsplash.com/photo-1512058560560-69e3691a1f11')">
+            <div class="item-info"><span class="item-name">34. ARROZ DE PATO (RESGATADO)</span><span class="item-tag">Ingredientes e Foto</span></div>
+            <div class="item-price">108</div>
         </div>
-        <div class="price">130</div>
     </div>
 </div>
 
-<div id="tab-carnes" class="section">
-    <span class="cat-label">Proteínas Nobres</span>
-    <div class="item" onclick="openModal('29', 'Picadinho G. Torres', 'Filé mignon picado, arroz, feijão, farofa, ovo e fritas.', '750 kcal', '0%', '')">
-        <div class="item-info">
-            <span class="name">29. PICADINHO G. TORRES ★</span>
-            <span class="meta">O MAIS PEDIDO</span>
-        </div>
-        <div class="price">98</div>
-    </div>
-    <div class="item" onclick="openModal('32', 'Entrecôte com Batatas', 'Corte nobre grelhado acompanhado de batatas rústicas e molho especial.', '820 kcal', '0%', '')">
-        <div class="item-info">
-            <span class="name">32. ENTRECÔTE NOBRE</span>
-            <span class="meta">CORTE ARGENTINO</span>
-        </div>
-        <div class="price">115</div>
-    </div>
-</div>
-
-<div id="tab-bebidas" class="section">
-    <span class="cat-label">Refrescos e Hidratação</span>
-    <div class="item" onclick="openModal('45', 'Red Bull', 'Bebida energética original ou sabores tropicais.', '110 kcal', '0%', '')">
-        <div class="item-info">
-            <span class="name">45. RED BULL</span>
-            <span class="meta">ENERGIA PURA</span>
-        </div>
-        <div class="price">26</div>
-    </div>
-</div>
-
-<div id="tab-drinks" class="section">
-    <span class="cat-label">Drinks e Cervejas</span>
-    <div class="item" onclick="openModal('49', 'Cerpa Export', 'Cerveja Premium de baixa fermentação.', '150 kcal', '4.8% ABV', '')">
-        <div class="item-info">
-            <span class="name">49. CERPA EXPORT</span>
-            <span class="meta">CERVEJA DO PARÁ</span>
-        </div>
-        <div class="price">26</div>
-    </div>
-    <div class="item" onclick="openModal('54', 'GT Hendricks ★', 'Gin Hendricks, tônica premium, pepino e pétalas de rosa.', '145 kcal', '12% ABV', '')">
-        <div class="item-info">
-            <span class="name">54. GT HENDRICKS ★</span>
-            <span class="meta">DRINK REFRESCANTE</span>
-        </div>
-        <div class="price">65</div>
-    </div>
-</div>
-
-<div id="mainModal" class="modal">
+<div id="pop" class="modal">
     <div class="modal-content">
-        <div id="modalImg" class="modal-img"></div>
+        <div id="pImg" class="modal-img"></div>
         <div class="modal-body">
-            <h2 id="modalTitle" class="modal-title"></h2>
-            <p id="modalDesc" class="modal-desc"></p>
-            <div class="modal-footer">
-                <div class="stat-box" style="color: var(--green);">⚡ CALORIAS: <span id="modalKcal"></span></div>
-                <div class="stat-box" style="color: var(--gold);">🍷 TEOR: <span id="modalAbv"></span></div>
+            <div id="pTitle" class="modal-title"></div>
+            <div id="pDesc" class="modal-desc"></div>
+            <div class="modal-stats">
+                <div class="stat-item" style="color:var(--green);">⚡ CALORIAS: <span id="pKcal"></span></div>
+                <div class="stat-item" style="color:var(--gold);">🍷 TEOR: <span id="pAbv"></span></div>
             </div>
         </div>
-        <button class="btn-close" onclick="closeModal()">VOLTAR AO CARDÁPIO</button>
+        <button class="btn-close" onclick="fechar()">VOLTAR AO CARDÁPIO</button>
     </div>
 </div>
 
 <script>
-    function showTab(tabId, btn) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    function switchTab(e, id) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        btn.classList.add('active');
+        document.getElementById(id).classList.add('active');
+        e.currentTarget.classList.add('active');
     }
 
-    function openModal(id, title, desc, kcal, abv, img) {
-        document.getElementById('modalTitle').innerText = id + ". " + title;
-        document.getElementById('modalDesc').innerText = desc;
-        document.getElementById('modalKcal').innerText = kcal;
-        document.getElementById('modalAbv').innerText = abv;
-        // Se não houver imagem, usa um padrão escuro
-        const imgPath = img || 'https://via.placeholder.com/400x280/161616/d4af37?text=DOK+GASTRONOMIA';
-        document.getElementById('modalImg').style.backgroundImage = "url('" + imgPath + "')";
-        document.getElementById('mainModal').style.display = 'flex';
+    function verItem(id, tit, desc, kcal, abv, img) {
+        document.getElementById('pTitle').innerText = id + ". " + tit;
+        document.getElementById('pDesc').innerText = desc;
+        document.getElementById('pKcal').innerText = kcal;
+        document.getElementById('pAbv').innerText = abv;
+        const foto = img || 'https://via.placeholder.com/500x300/161616/d4af37?text=DOK+PREMIUM';
+        document.getElementById('pImg').style.backgroundImage = "url('" + foto + "')";
+        document.getElementById('pop').style.display = 'flex';
     }
 
-    function closeModal() {
-        document.getElementById('mainModal').style.display = 'none';
-    }
-
-    // Fechar ao clicar fora
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('mainModal')) { closeModal(); }
-    }
+    function fechar() { document.getElementById('pop').style.display = 'none'; }
+    
+    // Fecha ao clicar fora da área branca
+    window.onclick = function(event) { if (event.target == document.getElementById('pop')) { fechar(); } }
 </script>
 
 </body>
-                    </html>
-                    
+</html>
