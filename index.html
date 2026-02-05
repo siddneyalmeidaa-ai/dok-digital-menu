@@ -1,126 +1,55 @@
+                                                                                                                                                                                     </html>
+        
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - ELITE SYSTEM V70.0</title>
+    <title>DOK - SISTEMA MODULAR V101.0</title>
     <style>
-        :root { --bg: #050505; --gold: #D4AF37; --rosa: #FF69B4; --card: #121212; --text: #f0f0f0; --accent: #00FF41; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; padding-bottom: 100px; }
-        
-        /* HEADER */
-        .header { text-align: center; padding: 25px; border-bottom: 3px solid var(--rosa); margin-bottom: 20px; }
-        .logo-text { font-size: 26px; font-weight: 900; color: var(--rosa); letter-spacing: 10px; border: 2px solid var(--gold); padding: 8px 25px; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-
-        /* BOTÕES DE MOOD (INTELIGÊNCIA) */
-        .mood-container { display: flex; justify-content: space-around; margin-bottom: 25px; gap: 8px; }
-        .mood-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); font-size: 10px; padding: 12px; border-radius: 20px; flex: 1; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
-        .mood-btn.active { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold); }
-
-        /* CATEGORIAS */
-        .categoria-btn { width: 100%; background: #1a1a1a; color: var(--gold); border: 1px solid #333; padding: 18px; text-align: left; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-bottom: 6px; border-radius: 8px; display: flex; justify-content: space-between; }
-        .lista-itens { display: none; padding: 5px; margin-bottom: 20px; border-left: 2px solid var(--rosa); animation: fadeIn 0.3s; }
-
-        /* ITEM CARDS */
-        .item-card { background: var(--card); border-bottom: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
-        .item-card.highlight { border: 1px solid var(--gold); background: #1a1608; }
-        .name { color: #fff; font-weight: bold; font-size: 14px; }
-        .price { font-family: 'Courier New', monospace; color: var(--accent); font-weight: 900; font-size: 17px; }
-
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
-        .modal-content { background: var(--card); margin: 15% auto; padding: 30px; border: 1px solid var(--gold); width: 85%; border-radius: 25px; position: relative; animation: pop 0.3s ease; }
-        .close { position: absolute; right: 20px; top: 10px; color: var(--rosa); font-size: 35px; font-weight: bold; }
-        .m-title { color: var(--gold); font-size: 22px; margin-bottom: 10px; border-bottom: 1px solid var(--rosa); padding-bottom: 5px; text-transform: uppercase; }
-        .m-desc { font-size: 15px; color: #ccc; line-height: 1.5; margin: 15px 0; }
-        .m-price { font-size: 28px; color: var(--accent); font-weight: 900; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes pop { from { transform: scale(0.8); } to { transform: scale(1); } }
+        :root { --bg: #050505; --gold: #D4AF37; --pink: #FF1493; --card: #121212; --text: #f0f0f0; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 15px; }
+        .header { text-align: center; border-bottom: 2px solid var(--pink); padding: 20px; margin-bottom: 20px; }
+        .aba-container { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; margin-bottom: 20px; }
+        .aba-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; border-radius: 5px; white-space: nowrap; cursor: pointer; }
+        .aba-btn.active { background: var(--gold); color: #000; }
+        .secao-itens { display: none; }
+        .secao-itens.active { display: block; }
+        .item { background: var(--card); margin-bottom: 5px; padding: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #222; }
+        .price { color: #00FF41; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div class="logo-text">DOK</div>
-    <div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 2px;">ELITE SYSTEM V70.0</div>
+    <h1 style="margin:0; letter-spacing:5px;">DOK</h1>
+    <small style="color:var(--gold)">CONSTRUÇÃO MODULAR POR BLOCOS</small>
 </div>
 
-<div class="mood-container">
-    <button class="mood-btn" onclick="filterM('gold', this)">💎 Luxo</button>
-    <button class="mood-btn" onclick="filterM('light', this)">🥗 Leve</button>
-    <button class="mood-btn" onclick="filterM('fast', this)">⚡ Rápido</button>
+<div class="aba-container">
+    <button class="aba-btn active" onclick="ver('aba1')">ENTRADAS</button>
+    <button class="aba-btn" onclick="ver('aba2')">SALADAS/OVOS</button>
+    <button class="aba-btn" onclick="ver('aba3')">PRINCIPAIS</button>
+    <button class="aba-btn" onclick="ver('aba4')">DRINKS</button>
+    <button class="aba-btn" onclick="ver('aba5')">VINHOS</button>
 </div>
 
-<button class="categoria-btn" onclick="t('b1')">🥪 01. ENTRADAS & ANTEPASTOS</button>
-<div id="b1" class="lista-itens">
-    <div class="item-card" data-mood="fast" onclick="o('01-Couvert', 'Cesto de pães, manteiga e antepastos.', '35')"><span>01 - COUVERT DA CASA</span><span class="price">35</span></div>
-    <div class="item-card" data-mood="gold" onclick="o('04-Burrata', 'Búfala, pesto, tomates cereja e pão artesanal.', '78')"><span>★ 04 - BURRATA AO PESTO</span><span class="price">78</span></div>
-    <div class="item-card" data-mood="fast" onclick="o('07-Croquetes', '6un de croquete de picanha na cerveja preta.', '59')"><span>07 - MINI CROQUETES</span><span class="price">59</span></div>
-    <div class="item-card" onclick="o('13-Pastéis', '12un de queijo com manjericão.', '58')"><span>13 - MINI PASTÉIS</span><span class="price">58</span></div>
-    <div class="item-card" data-mood="light" onclick="o('14-Fritas', 'Crocantes, acompanha maionese do chef.', '48')"><span>14 - BATATAS FRITAS</span><span class="price">48</span></div>
-    <div class="item-card" onclick="o('15-Chicken', 'Frango panko e molho honey mustard.', '68')"><span>15 - CHICKEN FINGERS</span><span class="price">68</span></div>
-    <div class="item-card" data-mood="light" onclick="o('16-Nuts', 'Mix de castanhas e amêndoas tostadas.', '49')"><span>16 - MIX DE NUTS</span><span class="price">49</span></div>
-    <div class="item-card" data-mood="gold" onclick="o('17-Mignon', 'Tiras de filé com cebola roxa.', '98')"><span>17 - TIRAS DE MIGNON</span><span class="price">98</span></div>
-    <div class="item-card" onclick="o('23-Bolinho', '12un de milho cremoso com queijo.', '54')"><span>23 - BOLINHO DE MILHO</span><span class="price">54</span></div>
-    <div class="item-card" onclick="o('24-Hommus', 'Grão de bico e chips de pão sírio.', '68')"><span>24 - PASTA DE HOMMUS</span><span class="price">68</span></div>
+<div id="aba1" class="secao-itens active">
+    <p style="text-align:center; color:var(--pink);">Aguardando Injeção de Dados do Bloco 1...</p>
 </div>
 
-<button class="categoria-btn" onclick="t('b2')">🥗 02. SALADAS, SOPAS & OVOS</button>
-<div id="b2" class="lista-itens">
-    <div class="item-card" data-mood="light" onclick="o('30-Caprese', 'Tomate, búfala e mix de folhas.', '78')"><span>30 - SALADA CAPRESE</span><span class="price">78</span></div>
-    <div class="item-card" data-mood="light" onclick="o('31-Caesar', 'Alface americana, frango e parmigiano.', '78')"><span>31 - CAESAR SALAD</span><span class="price">78</span></div>
-    <div class="item-card" data-mood="gold" onclick="o('37-Carpaccio', 'Lâminas de carne e molho de mostarda.', '73')"><span>37 - CARPACCIO SALADA</span><span class="price">73</span></div>
-    <div class="item-card" data-mood="fast" onclick="o('40-Omelete', 'Presunto, queijo e mix de folhas.', '58')"><span>40 - OMELETE SALADA</span><span class="price">58</span></div>
-    <div class="item-card" data-mood="fast" onclick="o('45-Mexidos', '3 ovos na manteiga com torradas.', '38')"><span>45 - OVOS MEXIDOS (3 UN)</span><span class="price">38</span></div>
-    <div class="item-card" onclick="o('41-Canja', 'Clássica com legumes e pães.', '54')"><span>41 - CANJA DE GALINHA</span><span class="price">54</span></div>
-    <div class="item-card" onclick="o('42-Mandioquinha', 'Creme aveludado e torradas.', '59')"><span>42 - CREME MANDIOQUINHA</span><span class="price">59</span></div>
-</div>
-
-<button class="categoria-btn" onclick="t('b3')">🍽️ 03. PRATOS PRINCIPAIS</button>
-<div id="b3" class="lista-itens">
-    <div class="item-card" data-mood="gold" onclick="o('116-Medalhão', 'Mignon em crosta de castanha e batata gratin.', '112')"><span>★ 116 - MEDALHÃO EM CROSTA</span><span class="price">112</span></div>
-    <div class="item-card" data-mood="gold" onclick="o('114-Risoto', 'Camarões grelhados e limão siciliano.', '130')"><span>★ 114 - RISOTO DE CAMARÃO</span><span class="price">130</span></div>
-    <div class="item-card" onclick="o('108-Gnocchi', 'Mandioquinha com ragu de mignon.', '84')"><span>108 - GNOCCHI MIGNON</span><span class="price">84</span></div>
-    <div class="item-card" data-mood="fast" onclick="o('118-Picadinho', 'Arroz, feijão, farofa, ovo e banana.', '98')"><span>118 - PICADINHO DO CHEF</span><span class="price">98</span></div>
-    <div class="item-card" data-mood="light" onclick="o('105-Salmão', 'Grelhado com legumes sazonais.', '105')"><span>105 - SALMÃO GRELHADO</span><span class="price">105</span></div>
-</div>
-
-<button class="categoria-btn" onclick="t('b4')">🍸 04. BAR & MIXOLOGIA</button>
-<div id="b4" class="lista-itens">
-    <div class="item-card" data-mood="gold" onclick="o('251-Gin', 'Gin Premium e tônica.', '48')"><span>251 - GIN TÔNICA</span><span class="price">48</span></div>
-    <div class="item-card" onclick="o('255-Negroni', 'Campari, Gin e Vermute.', '50')"><span>255 - NEGRONI</span><span class="price">50</span></div>
-    <div class="item-card" data-mood="fast" onclick="o('210-Refrigerante', 'Coca, Guaraná ou Sprite.', '12')"><span>REFRIGERANTE LATA</span><span class="price">12</span></div>
-</div>
-
-<div id="md" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="c()">&times;</span>
-        <div id="mt" class="m-title"></div>
-        <div id="ms" class="m-desc"></div>
-        <div id="mp" class="m-price"></div>
-    </div>
-</div>
-
-<div class="ipi-footer" style="text-align:center; padding:30px; font-size:10px; color:#444;">DOK V70.0 | IPI INCLUSO | FILTROS ATIVOS</div>
+<div id="aba2" class="secao-itens"></div>
+<div id="aba3" class="secao-itens"></div>
+<div id="aba4" class="secao-itens"></div>
+<div id="aba5" class="secao-itens"></div>
 
 <script>
-    function t(id){var e=document.getElementById(id);e.style.display=(e.style.display=='block')?'none':'block';}
-    function o(t,s,p){document.getElementById('mt').innerText=t;document.getElementById('ms').innerText=s;document.getElementById('mp').innerText='R$ '+p;document.getElementById('md').style.display='block';}
-    function c(){document.getElementById('md').style.display='none';}
-    
-    function filterM(m, btn){
-        document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.item-card').forEach(card=>{
-            card.classList.remove('highlight');
-            if(card.getAttribute('data-mood') === m){
-                card.classList.add('highlight');
-                card.parentElement.style.display = 'block';
-            }
-        });
+    function ver(id) {
+        document.querySelectorAll('.secao-itens').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
     }
 </script>
 </body>
-                                                                                                                                                                                            </html>
-        
+</html>
