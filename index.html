@@ -3,94 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK PREMIUM - MASTER</title>
+    <title>SISTEMA DOK - MASTER VISUAL</title>
     <style>
-        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --txt: #e0e0e0; }
-        body { background: var(--bg); color: var(--txt); font-family: sans-serif; margin: 0; padding: 10px; }
-        .header { text-align: center; border-bottom: 2px solid var(--gold); padding: 10px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        .nav { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0; border-bottom: 1px solid #333; }
-        .btn { background: #222; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-size: 12px; }
-        .btn.active { background: var(--gold); color: #000; font-weight: bold; }
-        .section { display: none; padding-top: 10px; }
+        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --txt: #e0e0e0; --green: #27ae60; }
+        body { background: var(--bg); color: var(--txt); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        
+        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+        
+        /* Menu de Navegação Segmentado */
+        .nav-container { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #111; }
+        .nav-btn { background: #222; color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .nav-btn.active { background: var(--gold); color: #000; }
+
+        .section { display: none; padding: 15px; animation: fadeIn 0.4s; }
         .section.active { display: block; }
-        .cat { background: #1a1608; color: var(--gold); padding: 6px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; margin: 15px 0 8px 0; border-left: 3px solid var(--gold); }
-        .item { background: var(--card); margin-bottom: 6px; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; }
-        .name { font-weight: bold; font-size: 12px; color: #fff; text-transform: uppercase; }
-        .desc { font-size: 10px; color: #888; margin-top: 2px; }
-        .price { color: var(--gold); font-weight: 800; font-size: 15px; }
-        .star { border: 1px solid var(--gold) !important; background: #1c1809 !important; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+        .cat-label { color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin: 20px 0 10px 5px; display: block; border-left: 3px solid var(--gold); padding-left: 10px; }
+
+        /* Estilo dos Itens */
+        .item { background: var(--card); margin-bottom: 10px; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; cursor: pointer; }
+        .item:hover { border-color: var(--gold); }
+        .item-info .name { display: block; font-weight: bold; color: #fff; font-size: 14px; }
+        .item-info .meta { font-size: 10px; color: #777; margin-top: 4px; }
+        .price { color: var(--gold); font-weight: bold; font-size: 18px; }
+
+        /* Modal (Pop-up) */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; }
+        .modal-content { background: var(--card); width: 90%; max-width: 450px; border-radius: 20px; border: 1px solid var(--gold); overflow: hidden; position: relative; }
+        .modal-img { width: 100%; height: 280px; background-size: cover; background-position: center; background-color: #222; }
+        .modal-body { padding: 25px; }
+        .modal-title { color: var(--gold); font-size: 22px; margin: 0 0 10px 0; }
+        .modal-desc { font-size: 14px; color: #bbb; line-height: 1.6; margin-bottom: 20px; }
+        .modal-footer { display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 15px; }
+        .stat-box { font-size: 12px; font-weight: bold; }
+        .btn-close { background: var(--gold); color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; font-size: 14px; }
+
+        ::-webkit-scrollbar { height: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="color:var(--gold); margin:0; font-size: 18px;">SISTEMA DOK - MASTER</h1>
-    <div style="font-size: 10px; color: #27ae60;">OPERADOR: C.S. | SINCRONIA TOTAL: 01-85</div>
+    <h1 style="margin:0; font-size: 20px; color: var(--gold);">DOK PREMIUM MASTER</h1>
+    <small style="color: var(--green);">OPERADOR: C.S. | SINCRONIA 01-85</small>
 </div>
 
-<div class="nav">
-    <button class="btn active" onclick="tab('gastro')">GASTRONOMIA</button>
-    <button class="btn" onclick="tab('drinks')">BAR & REFRESCANTES</button>
-    <button class="btn" onclick="tab('adega')">ADEGA & VINHOS</button>
+<div class="nav-container">
+    <button class="nav-btn active" onclick="showTab('tab-entradas', this)">Entradas</button>
+    <button class="nav-btn" onclick="showTab('tab-massas', this)">Massas & Risotos</button>
+    <button class="nav-btn" onclick="showTab('tab-carnes', this)">Carnes & Peixes</button>
+    <button class="nav-btn" onclick="showTab('tab-bebidas', this)">Bebidas</button>
+    <button class="nav-btn" onclick="showTab('tab-drinks', this)">Bar & Adega</button>
 </div>
 
-<div id="gastro" class="section active">
-    <div class="cat">🥗 ENTRADAS & PETISCOS</div>
-    <div class="item"><div class="info"><div class="name">01. Couvert da Casa</div></div><div class="price">35</div></div>
-    <div class="item star"><div class="info"><div class="name">★ 02. Burrata ao Pesto</div></div><div class="price">78</div></div>
-    <div class="item star"><div class="info"><div class="name">03. Tiras de Filé Mignon</div></div><div class="price">98</div></div>
-
-    <div class="cat">🍝 MASSAS & RISOTOS</div>
-    <div class="item"><div class="info"><div class="name">10. Lasanha Bolonhesa</div></div><div class="price">97</div></div>
-    <div class="item"><div class="info"><div class="name">11. Sorrentino de Búfala</div></div><div class="price">105</div></div>
-    <div class="item"><div class="info"><div class="name">12. Gnocchi Mandioquinha</div></div><div class="price">97</div></div>
-    <div class="item star"><div class="info"><div class="name">13. Risoto de Camarão</div></div><div class="price">130</div></div>
-
-    <div class="cat">🥩 PROTEÍNAS & CLÁSSICOS</div>
-    <div class="item star"><div class="info"><div class="name">20. Picadinho G. Torres</div></div><div class="price">98</div></div>
-    <div class="item star"><div class="info"><div class="name">21. Escalope Milanês</div></div><div class="price">122</div></div>
-    <div class="item"><div class="info"><div class="name">22. Medalhão em Crosta</div></div><div class="price">112</div></div>
-    <div class="item"><div class="info"><div class="name">23. Robalo ao Camarão</div></div><div class="price">129</div></div>
-
-    <div class="cat">🍨 SOBREMESAS</div>
-    <div class="item"><div class="info"><div class="name">30. Pudim de Leite</div></div><div class="price">38</div></div>
-    <div class="item"><div class="info"><div class="name">31. Petit Gateau</div></div><div class="price">39</div></div>
+<div id="tab-entradas" class="section active">
+    <span class="cat-label">Petiscos e Inícios</span>
+    <div class="item" onclick="openModal('02', 'Burrata ao Pesto', 'Burrata cremosa, pesto artesanal, tomates cereja e torradas.', '580 kcal', '0%', 'https://via.placeholder.com/400x280/161616/d4af37?text=BURRATA')">
+        <div class="item-info">
+            <span class="name">02. BURRATA AO PESTO ★</span>
+            <span class="meta">DETALHES NUTRICIONAIS</span>
+        </div>
+        <div class="price">78</div>
+    </div>
+    <div class="item" onclick="openModal('10', 'Tiras de Mignon', 'Filé mignon ao molho de cerveja preta e torradas.', '420 kcal', '0%', 'https://via.placeholder.com/400x280/161616/d4af37?text=MIGNON')">
+        <div class="item-info">
+            <span class="name">10. TIRAS DE MIGNON ★</span>
+            <span class="meta">RECEITA GUSTAVO TORRES</span>
+        </div>
+        <div class="price">98</div>
+    </div>
 </div>
 
-<div id="drinks" class="section">
-    <div class="cat">🍸 DRINKS CLÁSSICOS & REFRESCANTES</div>
-    <div class="item"><div class="info"><div class="name">40. Gin Tônica Clássica</div></div><div class="price">48</div></div>
-    <div class="item star"><div class="info"><div class="name">41. GT Hendricks</div></div><div class="price">65</div></div>
-    <div class="item"><div class="info"><div class="name">42. Aperol Spritz</div></div><div class="price">45</div></div>
-    <div class="item"><div class="info"><div class="name">43. Mojito Refrescante</div></div><div class="price">46</div></div>
-    <div class="item"><div class="info"><div class="name">44. Caipirinha / Caipiroska</div></div><div class="price">44</div></div>
-
-    <div class="cat">🥤 BEBIDAS NÃO ALCOÓLICAS</div>
-    <div class="item"><div class="info"><div class="name">50. Águas (S/G e C/G)</div></div><div class="price">11</div></div>
-    <div class="item"><div class="info"><div class="name">51. Refrigerantes Lata</div></div><div class="price">12</div></div>
-    <div class="item star"><div class="info"><div class="name">52. Red Bull (Original/Tropical)</div></div><div class="price">26</div></div>
+<div id="tab-massas" class="section">
+    <span class="cat-label">Massas Artesanais</span>
+    <div class="item" onclick="openModal('18', 'Sorrentino de Búfala', 'Massa artesanal recheada com mussarela de búfala ao molho pomodoro.', '520 kcal', '0%', '')">
+        <div class="item-info">
+            <span class="name">18. SORRENTINO DE BÚFALA</span>
+            <span class="meta">CLÁSSICO DA CASA</span>
+        </div>
+        <div class="price">105</div>
+    </div>
+    <div class="item" onclick="openModal('23', 'Risoto de Camarão', 'Arroz arbóreo, camarões médios, limão siciliano e grana padano.', '610 kcal', '0%', '')">
+        <div class="item-info">
+            <span class="name">23. RISOTO DE CAMARÃO ★</span>
+            <span class="meta">DESTAQUE DO CHEF</span>
+        </div>
+        <div class="price">130</div>
+    </div>
 </div>
 
-<div id="adega" class="section">
-    <div class="cat">🍾 CHAMPAGNES & ESPUMANTES</div>
-    <div class="item"><div class="info"><div class="name">60. Victoria Geisse Vintage</div></div><div class="price">230</div></div>
-    <div class="item star"><div class="info"><div class="name">61. Moët & Chandon</div></div><div class="price">720</div></div>
+<div id="tab-carnes" class="section">
+    <span class="cat-label">Proteínas Nobres</span>
+    <div class="item" onclick="openModal('29', 'Picadinho G. Torres', 'Filé mignon picado, arroz, feijão, farofa, ovo e fritas.', '750 kcal', '0%', '')">
+        <div class="item-info">
+            <span class="name">29. PICADINHO G. TORRES ★</span>
+            <span class="meta">O MAIS PEDIDO</span>
+        </div>
+        <div class="price">98</div>
+    </div>
+    <div class="item" onclick="openModal('32', 'Entrecôte com Batatas', 'Corte nobre grelhado acompanhado de batatas rústicas e molho especial.', '820 kcal', '0%', '')">
+        <div class="item-info">
+            <span class="name">32. ENTRECÔTE NOBRE</span>
+            <span class="meta">CORTE ARGENTINO</span>
+        </div>
+        <div class="price">115</div>
+    </div>
+</div>
 
-    <div class="cat">🍷 VINHOS SELECIONADOS</div>
-    <div class="item"><div class="info"><div class="name">70. Leyda Sauvignon Blanc</div></div><div class="price">188</div></div>
-    <div class="item"><div class="info"><div class="name">71. Estandon Brise Rosé</div></div><div class="price">163</div></div>
-    <div class="item"><div class="info"><div class="name">72. Ventus Malbec</div></div><div class="price">158</div></div>
-    <div class="item star"><div class="info"><div class="name">73. Cobos Felino Malbec</div></div><div class="price">230</div></div>
+<div id="tab-bebidas" class="section">
+    <span class="cat-label">Refrescos e Hidratação</span>
+    <div class="item" onclick="openModal('45', 'Red Bull', 'Bebida energética original ou sabores tropicais.', '110 kcal', '0%', '')">
+        <div class="item-info">
+            <span class="name">45. RED BULL</span>
+            <span class="meta">ENERGIA PURA</span>
+        </div>
+        <div class="price">26</div>
+    </div>
+</div>
+
+<div id="tab-drinks" class="section">
+    <span class="cat-label">Drinks e Cervejas</span>
+    <div class="item" onclick="openModal('49', 'Cerpa Export', 'Cerveja Premium de baixa fermentação.', '150 kcal', '4.8% ABV', '')">
+        <div class="item-info">
+            <span class="name">49. CERPA EXPORT</span>
+            <span class="meta">CERVEJA DO PARÁ</span>
+        </div>
+        <div class="price">26</div>
+    </div>
+    <div class="item" onclick="openModal('54', 'GT Hendricks ★', 'Gin Hendricks, tônica premium, pepino e pétalas de rosa.', '145 kcal', '12% ABV', '')">
+        <div class="item-info">
+            <span class="name">54. GT HENDRICKS ★</span>
+            <span class="meta">DRINK REFRESCANTE</span>
+        </div>
+        <div class="price">65</div>
+    </div>
+</div>
+
+<div id="mainModal" class="modal">
+    <div class="modal-content">
+        <div id="modalImg" class="modal-img"></div>
+        <div class="modal-body">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <p id="modalDesc" class="modal-desc"></p>
+            <div class="modal-footer">
+                <div class="stat-box" style="color: var(--green);">⚡ CALORIAS: <span id="modalKcal"></span></div>
+                <div class="stat-box" style="color: var(--gold);">🍷 TEOR: <span id="modalAbv"></span></div>
+            </div>
+        </div>
+        <button class="btn-close" onclick="closeModal()">VOLTAR AO CARDÁPIO</button>
+    </div>
 </div>
 
 <script>
-    function tab(id) {
+    function showTab(tabId, btn) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function openModal(id, title, desc, kcal, abv, img) {
+        document.getElementById('modalTitle').innerText = id + ". " + title;
+        document.getElementById('modalDesc').innerText = desc;
+        document.getElementById('modalKcal').innerText = kcal;
+        document.getElementById('modalAbv').innerText = abv;
+        // Se não houver imagem, usa um padrão escuro
+        const imgPath = img || 'https://via.placeholder.com/400x280/161616/d4af37?text=DOK+GASTRONOMIA';
+        document.getElementById('modalImg').style.backgroundImage = "url('" + imgPath + "')";
+        document.getElementById('mainModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('mainModal').style.display = 'none';
+    }
+
+    // Fechar ao clicar fora
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('mainModal')) { closeModal(); }
     }
 </script>
+
 </body>
-                                                                                                 </html>
-                                                                                                 
+                    </html>
+                    
