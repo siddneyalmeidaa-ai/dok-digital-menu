@@ -1,125 +1,96 @@
-<div id="aba1" class="secao-itens active">
-    <div class="item"><div class="info"><div class="name">01. COUVERT DA CASA</div></div><div class="price">35</div></div>
-    <div class="item"><div class="info"><div class="name">★ 02. BURRATA AO PESTO</div></div><div class="price">78</div></div>
-    <div class="item"><div class="info"><div class="name">03. MINI CROQUETES DE PICANHA</div></div><div class="price">59</div></div>
-    <div class="item"><div class="info"><div class="name">04. MINI PASTÉIS DE QUEIJO</div></div><div class="price">58</div></div>
-    <div class="item"><div class="info"><div class="name">05. FRITAS DE BATATA PALITO</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">06. BOLINHO DE MILHO</div></div><div class="price">54</div></div>
-    <div class="item"><div class="info"><div class="name">07. PASTA DE HOMMUS</div></div><div class="price">68</div></div>
-    <div class="item"><div class="info"><div class="name">08. CHICKEN FINGERS</div></div><div class="price">68</div></div>
-    <div class="item"><div class="info"><div class="name">09. MIX DE NUTS</div></div><div class="price">49</div></div>
-    <div class="item" style="border: 2px solid #d4af37; background: #1a1608;">
-        <div class="info"><div class="name" style="color:#d4af37">10. TIRAS DE FILÉ MIGNON (G. TORRES)</div></div><div class="price">98</div>
-    </div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOK PREMIUM - MASTER</title>
+    <style>
+        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --txt: #e0e0e0; }
+        body { background: var(--bg); color: var(--txt); font-family: sans-serif; margin: 0; padding: 10px; }
+        .header { text-align: center; border-bottom: 2px solid var(--gold); padding: 10px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+        .nav { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0; border-bottom: 1px solid #333; }
+        .btn { background: #222; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-size: 12px; }
+        .btn.active { background: var(--gold); color: #000; font-weight: bold; }
+        .section { display: none; padding-top: 10px; }
+        .section.active { display: block; }
+        .cat { background: #1a1608; color: var(--gold); padding: 6px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; margin: 15px 0 8px 0; border-left: 3px solid var(--gold); }
+        .item { background: var(--card); margin-bottom: 6px; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; }
+        .name { font-weight: bold; font-size: 12px; color: #fff; text-transform: uppercase; }
+        .desc { font-size: 10px; color: #888; margin-top: 2px; }
+        .price { color: var(--gold); font-weight: 800; font-size: 15px; }
+        .star { border: 1px solid var(--gold) !important; background: #1c1809 !important; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1 style="color:var(--gold); margin:0; font-size: 18px;">SISTEMA DOK - MASTER</h1>
+    <div style="font-size: 10px; color: #27ae60;">OPERADOR: C.S. | SINCRONIA TOTAL: 01-85</div>
 </div>
 
-<div id="aba2" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">11. SALADA CAPRESE</div></div><div class="price">78</div></div>
-    <div class="item"><div class="info"><div class="name">12. CAESAR SALAD</div></div><div class="price">78</div></div>
-    <div class="item"><div class="info"><div class="name">13. CARPACCIO SALADA</div></div><div class="price">73</div></div>
-    <div class="item"><div class="info"><div class="name">14. CANJA DE GALINHA</div></div><div class="price">54</div></div>
-    <div class="item"><div class="info"><div class="name">15. CREME DE MANDIOQUINHA</div></div><div class="price">59</div></div>
-    <div class="item"><div class="info"><div class="name">16. OMELETE SALADA</div></div><div class="price">53</div></div>
+<div class="nav">
+    <button class="btn active" onclick="tab('gastro')">GASTRONOMIA</button>
+    <button class="btn" onclick="tab('drinks')">BAR & REFRESCANTES</button>
+    <button class="btn" onclick="tab('adega')">ADEGA & VINHOS</button>
 </div>
 
-<div id="aba3" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">17. TOSTEX MISTO</div></div><div class="price">49</div></div>
-    <div class="item"><div class="info"><div class="name">18. CLUB SANDUÍCHE</div></div><div class="price">59</div></div>
-    <div class="item"><div class="info"><div class="name">19. CHEESEBURGUER SALADA</div></div><div class="price">62</div></div>
-    <div class="item"><div class="info"><div class="name">20. BACON BURGUER</div></div><div class="price">64</div></div>
-    <div class="item"><div class="info"><div class="name">21. PIZZA MARGUERITA</div></div><div class="price">78</div></div>
-    <div class="item"><div class="info"><div class="name">22. PIZZA CALABRESA</div></div><div class="price">86</div></div>
+<div id="gastro" class="section active">
+    <div class="cat">🥗 ENTRADAS & PETISCOS</div>
+    <div class="item"><div class="info"><div class="name">01. Couvert da Casa</div></div><div class="price">35</div></div>
+    <div class="item star"><div class="info"><div class="name">★ 02. Burrata ao Pesto</div></div><div class="price">78</div></div>
+    <div class="item star"><div class="info"><div class="name">03. Tiras de Filé Mignon</div></div><div class="price">98</div></div>
+
+    <div class="cat">🍝 MASSAS & RISOTOS</div>
+    <div class="item"><div class="info"><div class="name">10. Lasanha Bolonhesa</div></div><div class="price">97</div></div>
+    <div class="item"><div class="info"><div class="name">11. Sorrentino de Búfala</div></div><div class="price">105</div></div>
+    <div class="item"><div class="info"><div class="name">12. Gnocchi Mandioquinha</div></div><div class="price">97</div></div>
+    <div class="item star"><div class="info"><div class="name">13. Risoto de Camarão</div></div><div class="price">130</div></div>
+
+    <div class="cat">🥩 PROTEÍNAS & CLÁSSICOS</div>
+    <div class="item star"><div class="info"><div class="name">20. Picadinho G. Torres</div></div><div class="price">98</div></div>
+    <div class="item star"><div class="info"><div class="name">21. Escalope Milanês</div></div><div class="price">122</div></div>
+    <div class="item"><div class="info"><div class="name">22. Medalhão em Crosta</div></div><div class="price">112</div></div>
+    <div class="item"><div class="info"><div class="name">23. Robalo ao Camarão</div></div><div class="price">129</div></div>
+
+    <div class="cat">🍨 SOBREMESAS</div>
+    <div class="item"><div class="info"><div class="name">30. Pudim de Leite</div></div><div class="price">38</div></div>
+    <div class="item"><div class="info"><div class="name">31. Petit Gateau</div></div><div class="price">39</div></div>
 </div>
 
-<div id="aba4" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">23. LASANHA BOLONHESA</div></div><div class="price">97</div></div>
-    <div class="item"><div class="info"><div class="name">24. RISOTO DE CAMARÃO</div></div><div class="price">130</div></div>
-    <div class="item" style="border: 2px solid #d4af37; background: #1a1608;">
-        <div class="info"><div class="name" style="color:#d4af37">25. PICADINHO GUSTAVO TORRES</div><div class="desc">Arroz, Feijão, Fritas, Farofa e Ovo.</div></div><div class="price">98</div>
-    </div>
-    <div class="item" style="border: 2px solid #d4af37; background: #1a1608;">
-        <div class="info"><div class="name" style="color:#d4af37">26. ESCALOPE MILANÊS</div><div class="desc">Risoto de Açafrão com Parmigiano.</div></div><div class="price">122</div>
-    </div>
-    <div class="item"><div class="info"><div class="name">27. ROBALO AO CAMARÃO</div></div><div class="price">129</div></div>
+<div id="drinks" class="section">
+    <div class="cat">🍸 DRINKS CLÁSSICOS & REFRESCANTES</div>
+    <div class="item"><div class="info"><div class="name">40. Gin Tônica Clássica</div></div><div class="price">48</div></div>
+    <div class="item star"><div class="info"><div class="name">41. GT Hendricks</div></div><div class="price">65</div></div>
+    <div class="item"><div class="info"><div class="name">42. Aperol Spritz</div></div><div class="price">45</div></div>
+    <div class="item"><div class="info"><div class="name">43. Mojito Refrescante</div></div><div class="price">46</div></div>
+    <div class="item"><div class="info"><div class="name">44. Caipirinha / Caipiroska</div></div><div class="price">44</div></div>
+
+    <div class="cat">🥤 BEBIDAS NÃO ALCOÓLICAS</div>
+    <div class="item"><div class="info"><div class="name">50. Águas (S/G e C/G)</div></div><div class="price">11</div></div>
+    <div class="item"><div class="info"><div class="name">51. Refrigerantes Lata</div></div><div class="price">12</div></div>
+    <div class="item star"><div class="info"><div class="name">52. Red Bull (Original/Tropical)</div></div><div class="price">26</div></div>
 </div>
 
-<div id="aba5" class="secao-itens">
-    <div class="item" style="border-left: 4px solid #2ecc71; background: #0d1a10;">
-        <div class="info"><div class="name" style="color: #2ecc71;">🌱 28. MOQUECA DE PALMITO</div></div><div class="price">78</div>
-    </div>
+<div id="adega" class="section">
+    <div class="cat">🍾 CHAMPAGNES & ESPUMANTES</div>
+    <div class="item"><div class="info"><div class="name">60. Victoria Geisse Vintage</div></div><div class="price">230</div></div>
+    <div class="item star"><div class="info"><div class="name">61. Moët & Chandon</div></div><div class="price">720</div></div>
+
+    <div class="cat">🍷 VINHOS SELECIONADOS</div>
+    <div class="item"><div class="info"><div class="name">70. Leyda Sauvignon Blanc</div></div><div class="price">188</div></div>
+    <div class="item"><div class="info"><div class="name">71. Estandon Brise Rosé</div></div><div class="price">163</div></div>
+    <div class="item"><div class="info"><div class="name">72. Ventus Malbec</div></div><div class="price">158</div></div>
+    <div class="item star"><div class="info"><div class="name">73. Cobos Felino Malbec</div></div><div class="price">230</div></div>
 </div>
 
-<div id="aba6" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">29. PUDIM DE LEITE PERFEITO</div></div><div class="price">38</div></div>
-    <div class="item"><div class="info"><div class="name">30. PETIT GATEAU</div></div><div class="price">39</div></div>
-    <div class="item"><div class="info"><div class="name">🌱 31. FRUTAS DA ESTAÇÃO</div></div><div class="price">36</div></div>
-</div>
-
-<div id="aba7" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">32. ÁGUA S/G OU C/G</div></div><div class="price">11</div></div>
-    <div class="item"><div class="info"><div class="name">33. PERRIER</div></div><div class="price">34</div></div>
-    <div class="item"><div class="info"><div class="name">34. ACQUA PANNA</div></div><div class="price">36</div></div>
-    <div class="item"><div class="info"><div class="name">35. COCA OU ZERO</div></div><div class="price">12</div></div>
-    <div class="item"><div class="info"><div class="name">36. GUARANÁ OU ZERO</div></div><div class="price">12</div></div>
-    <div class="item"><div class="info"><div class="name">37. RED BULL</div></div><div class="price">26</div></div>
-    <div class="item"><div class="info"><div class="name">38. CHÁ MATE GELADO</div></div><div class="price">14</div></div>
-    <div class="item"><div class="info"><div class="name">39. CERPA</div></div><div class="price">26</div></div>
-    <div class="item"><div class="info"><div class="name">40. HEINEKEN / STELLA</div></div><div class="price">22</div></div>
-    <div class="item"><div class="info"><div class="name">41. SUCO NATURAL</div></div><div class="price">16</div></div>
-</div>
-
-<div id="aba8" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">42. GIN TÔNICA</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">43. GIN TROPICAL</div></div><div class="price">52</div></div>
-    <div class="item"><div class="info"><div class="name">44. GT HENDRICKS</div></div><div class="price">65</div></div>
-    <div class="item"><div class="info"><div class="name">45. COSMOPOLITAN</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">46. APEROL SPRITZ</div></div><div class="price">45</div></div>
-    <div class="item"><div class="info"><div class="name">47. BLOODY MARY</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">48. DRY MARTINI</div></div><div class="price">57</div></div>
-</div>
-
-<div id="aba9" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">49. MOJITO</div></div><div class="price">46</div></div>
-    <div class="item"><div class="info"><div class="name">50. MARGARITA</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">51. CAIPIRINHA</div></div><div class="price">44</div></div>
-    <div class="item"><div class="info"><div class="name">52. CAIPIROSKA</div></div><div class="price">46</div></div>
-    <div class="item"><div class="info"><div class="name">53. CAIPISAKÊ</div></div><div class="price">46</div></div>
-</div>
-
-<div id="aba10" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">54. VODKA ABSOLUT</div></div><div class="price">46</div></div>
-    <div class="item"><div class="info"><div class="name">55. VODKA GREY GOOSE</div></div><div class="price">52</div></div>
-    <div class="item"><div class="info"><div class="name">56. GIN TANQUERAY</div></div><div class="price">45</div></div>
-    <div class="item"><div class="info"><div class="name">57. TEQUILA J. CUERVO</div></div><div class="price">40</div></div>
-    <div class="item"><div class="info"><div class="name">58. CACHAÇA YAGUARA</div></div><div class="price">40</div></div>
-    <div class="item"><div class="info"><div class="name">59. LICOR 43</div></div><div class="price">42</div></div>
-    <div class="item"><div class="info"><div class="name">60. BLACK LABEL</div></div><div class="price">52</div></div>
-    <div class="item"><div class="info"><div class="name">61. JACK DANIELS</div></div><div class="price">50</div></div>
-</div>
-
-<div id="aba11" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">62. VICTORIA GEISSE VINTAGE</div></div><div class="price">230</div></div>
-    <div class="item"><div class="info"><div class="name">63. CHANDON BRUT</div></div><div class="price">210</div></div>
-    <div class="item" style="border: 2px solid #d4af37; background: #1a1608;">
-        <div class="info"><div class="name" style="color:#d4af37">64. MOËT & CHANDON</div></div><div class="price">720</div>
-    </div>
-</div>
-
-<div id="aba12" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">65. TAÇA VINHO BRANCO</div></div><div class="price">43</div></div>
-    <div class="item"><div class="info"><div class="name">66. LEYDA SAUVIGNON BLANC</div></div><div class="price">188</div></div>
-    <div class="item"><div class="info"><div class="name">67. COBOS FELINO CHARDONNAY</div></div><div class="price">198</div></div>
-    <div class="item"><div class="info"><div class="name">68. ESTANDON BRISE ROSÉ</div></div><div class="price">163</div></div>
-    <div class="item"><div class="info"><div class="name">69. TAÇA VINHO TINTO</div></div><div class="price">43</div></div>
-    <div class="item"><div class="info"><div class="name">70. VENTUS MALBEC</div></div><div class="price">158</div></div>
-    <div class="item"><div class="info"><div class="name">71. LEYDA PINOT NOIR</div></div><div class="price">178</div></div>
-    <div class="item"><div class="info"><div class="name">72. ERRAZURIZ CABERNET</div></div><div class="price">178</div></div>
-    <div class="item"><div class="info"><div class="name">73. MAISON CASTEL BORDEAUX</div></div><div class="price">210</div></div>
-    <div class="item"><div class="info"><div class="name">74. MATURO PRIMITIVO</div></div><div class="price">196</div></div>
-    <div class="item"><div class="info"><div class="name">75. PALAGETTO CHIANTI</div></div><div class="price">190</div></div>
-    <div class="item"><div class="info"><div class="name">76. VALLADO QUADRIFOLIA</div></div><div class="price">230</div></div>
-    <div class="item" style="border: 2px solid #d4af37; background: #1a1608;">
-        <div class="info"><div class="name" style="color:#d4af37">77. COBOS FELINO MALBEC</div></div><div class="price">230</div>
-    </div>
-    </div>
-    
+<script>
+    function tab(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+</body>
+                                                                                                 </html>
+                                                                                                 
