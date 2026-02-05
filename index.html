@@ -8,25 +8,17 @@
         :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --txt: #f0f0f0; --green: #27ae60; --red: #e74c3c; }
         * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 20px; }
-        
         .header { background: #000; padding: 15px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
-        
-        /* CONTADOR DE FROTA PSICÓTICO */
-        .frota-status { background: #111; padding: 5px; font-size: 10px; font-weight: bold; color: var(--green); border-bottom: 1px solid #333; display: flex; justify-content: center; gap: 10px; }
-        .alerta { color: var(--red); animation: blink 1s infinite; }
-        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-
+        .frota-status { background: #111; padding: 5px; font-size: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid #333; }
         .nav-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 12px; background: #111; position: sticky; top: 78px; z-index: 999; }
         .nav-btn { background: #222; color: var(--gold); border: 1px solid var(--gold); padding: 8px 18px; border-radius: 20px; white-space: nowrap; font-weight: bold; font-size: 11px; cursor: pointer; }
         .nav-btn.active { background: var(--gold); color: #000; }
-        
         .container { padding: 15px; display: flex; flex-direction: column; gap: 12px; }
         .item-card { background: var(--card); border-radius: 12px; border: 1px solid #333; overflow: hidden; display: flex; align-items: center; min-height: 100px; cursor: pointer; }
         .thumb { width: 100px; min-width: 100px; height: 100px; background-size: cover; background-position: center; border-right: 2px solid var(--gold); }
         .info { padding: 12px; flex: 1; }
         .name { font-weight: bold; font-size: 13px; color: #fff; text-transform: uppercase; }
         .price { color: var(--gold); font-size: 18px; font-weight: 900; padding-right: 15px; }
-
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 15px; }
         .modal-content { background: var(--card); width: 100%; max-width: 400px; border-radius: 20px; border: 2px solid var(--gold); overflow: hidden; }
         .m-img { width: 100%; height: 250px; background-size: cover; background-position: center; }
@@ -35,21 +27,15 @@
 </head>
 <body>
 
-<div class="header">
-    <h1 style="margin:0; font-size:16px; color:var(--gold);">DOK PREMIUM MASTER</h1>
-</div>
-
-<div class="frota-status" id="statusFrota">
-    CARREGANDO FROTA...
-</div>
+<div class="header"><h1>DOK PREMIUM MASTER</h1></div>
+<div class="frota-status" id="statusFrota">VERIFICANDO FROTA...</div>
 
 <div class="nav-scroll">
-    <button class="nav-btn active" onclick="filtrar('TODOS', this)">TODOS</button>
+    <button class="nav-btn active" onclick="filtrar('TODOS', this)">TODOS (85)</button>
     <button class="nav-btn" onclick="filtrar('ENTRADAS', this)">ENTRADAS</button>
     <button class="nav-btn" onclick="filtrar('MASSAS', this)">MASSAS/RISOTOS</button>
     <button class="nav-btn" onclick="filtrar('CARNES', this)">CARNES/PEIXES</button>
     <button class="nav-btn" onclick="filtrar('BEBIDAS', this)">BEBIDAS</button>
-    <button class="nav-btn" onclick="filtrar('ADEGA', this)">ADEGA/BAR</button>
 </div>
 
 <div class="container" id="listaItens"></div>
@@ -58,32 +44,35 @@
     <div class="modal-content">
         <div id="img" class="m-img"></div>
         <div class="m-body" style="padding:20px;">
-            <div id="tit" style="color:var(--gold); font-size:22px; font-weight:900; border-bottom:1px solid #333; padding-bottom:10px;"></div>
-            <p id="des" style="color:#ccc; line-height:1.5; margin-top:10px;"></p>
+            <div id="tit" style="color:var(--gold); font-size:22px; font-weight:900;"></div>
+            <p id="des" style="color:#ccc; line-height:1.5;"></p>
         </div>
         <button class="btn-close" onclick="closeP()">VOLTAR</button>
     </div>
 </div>
 
 <script>
-    // BANCO DE DADOS MODULAR (FROTA)
     const banco = [
-        // VOCÊ VAI COLAR OS BLOCOS AQUI DENTRO
+        // BLOCO 01 & 02 INTEGRADOS
+        {id:'01', cat:'ENTRADAS', nome:'Couvert da Casa', desc:'Pães, manteiga, caponata e azeite.', preco:'35', img:'https://images.unsplash.com/photo-1594910413528-941bd4451121'},
+        {id:'02', cat:'ENTRADAS', nome:'Burrata ao Pesto ★', desc:'Burrata, pesto e tomates cereja.', preco:'78', img:'https://images.unsplash.com/photo-1541529086526-db283c563270'},
+        {id:'10', cat:'ENTRADAS', nome:'Tiras de Mignon ★', desc:'Mignon acebolado na cerveja preta.', preco:'98', img:'https://images.unsplash.com/photo-1551183053-bf91a1d81141'},
+        {id:'17', cat:'MASSAS', nome:'Carbonara Clássico ★', desc:'Guanciale, gema e pecorino.', preco:'89', img:'https://images.unsplash.com/photo-1612874742237-6526221588e3'},
+        {id:'18', cat:'MASSAS', nome:'Penne à Carbonara', desc:'Massa curta ao molho carbonara.', preco:'85', img:'https://images.unsplash.com/photo-1546549032-9571cd6b27df'},
+        {id:'29', cat:'CARNES', nome:'Picadinho G. Torres ★', desc:'Mignon, arroz, feijão, farofa e ovo.', preco:'98', img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836'},
+        {id:'31', cat:'CARNES', nome:'Robalo Grelhado', desc:'Robalo fresco com legumes ao vapor.', preco:'115', img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2'},
+        {id:'34', cat:'CARNES', nome:'Arroz de Pato ★', desc:'Pato desfiado com chouriço português.', preco:'108', img:'https://images.unsplash.com/photo-1512058560560-69e3691a1f11'},
+        {id:'37', cat:'CARNES', nome:'Parmegiana Master', desc:'Filé mignon empanado, queijo e molho.', preco:'110', img:'https://images.unsplash.com/photo-1626244101292-362bc34541c6'},
+        {id:'53', cat:'BEBIDAS', nome:'Coca-Cola', desc:'Lata 350ml.', preco:'10', img:'https://images.unsplash.com/photo-1622708782596-13d974514436'}
+        // O SISTEMA AGUARDA OS DEMAIS IDs ATÉ 85
     ];
 
     function renderizar(itens) {
         const container = document.getElementById('listaItens');
         const status = document.getElementById('statusFrota');
-        
-        // Atualiza Contador de Frota
         const total = banco.length;
-        if(total < 85) {
-            status.innerHTML = `⚠️ FROTA INCOMPLETA: ${total} / 85 <span class="alerta">(VÁCUO DETECTADO)</span>`;
-            status.style.color = "var(--red)";
-        } else {
-            status.innerHTML = `✅ FROTA BLINDADA: ${total} / 85 ITENS CARREGADOS`;
-            status.style.color = "var(--green)";
-        }
+        
+        status.innerHTML = total < 85 ? `<span style="color:var(--red)">⚠️ FROTA: ${total}/85 (VÁCUO DETECTADO)</span>` : `<span style="color:var(--green)">✅ FROTA: ${total}/85 BLINDADA</span>`;
 
         container.innerHTML = itens.map(i => `
             <div class="item-card" onclick="openP('${i.id}', '${i.nome}', '${i.desc}', '${i.img}')">
@@ -109,7 +98,6 @@
     }
 
     function closeP() { document.getElementById('modal').style.display = 'none'; }
-    
     renderizar(banco);
 </script>
 </body>
