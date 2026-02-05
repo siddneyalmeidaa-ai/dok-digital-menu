@@ -1,55 +1,81 @@
-                                                                                                                                                                                     </html>
-        
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK - SISTEMA MODULAR V101.0</title>
-    <style>
-        :root { --bg: #050505; --gold: #D4AF37; --pink: #FF1493; --card: #121212; --text: #f0f0f0; }
-        body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 15px; }
-        .header { text-align: center; border-bottom: 2px solid var(--pink); padding: 20px; margin-bottom: 20px; }
-        .aba-container { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; margin-bottom: 20px; }
-        .aba-btn { background: #1a1a1a; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; border-radius: 5px; white-space: nowrap; cursor: pointer; }
-        .aba-btn.active { background: var(--gold); color: #000; }
-        .secao-itens { display: none; }
-        .secao-itens.active { display: block; }
-        .item { background: var(--card); margin-bottom: 5px; padding: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #222; }
-        .price { color: #00FF41; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <h1 style="margin:0; letter-spacing:5px;">DOK</h1>
-    <small style="color:var(--gold)">CONSTRUÇÃO MODULAR POR BLOCOS</small>
-</div>
-
-<div class="aba-container">
-    <button class="aba-btn active" onclick="ver('aba1')">ENTRADAS</button>
-    <button class="aba-btn" onclick="ver('aba2')">SALADAS/OVOS</button>
-    <button class="aba-btn" onclick="ver('aba3')">PRINCIPAIS</button>
-    <button class="aba-btn" onclick="ver('aba4')">DRINKS</button>
-    <button class="aba-btn" onclick="ver('aba5')">VINHOS</button>
-</div>
-
 <div id="aba1" class="secao-itens active">
-    <p style="text-align:center; color:var(--pink);">Aguardando Injeção de Dados do Bloco 1...</p>
+    <div class="item">
+        <div class="info">
+            <div class="name">01 - COUVERT DA CASA</div>
+            <div class="desc">Pães artesanais, manteiga e antepasto da casa.</div>
+        </div>
+        <div class="price">35</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">★ 04 - BURRATA AO PESTO</div>
+            <div class="desc">Com Tomates Cereja Confit e Torrada de Pão Fermentação Natural.</div>
+        </div>
+        <div class="price">78</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">07 - MINI CROQUETES DE PICANHA</div>
+            <div class="desc">Na Cerveja Preta com Dip de Mostarda Escura.</div>
+        </div>
+        <div class="price">59</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">13 - MINI PASTÉIS DE QUEIJO</div>
+            <div class="desc">Com Tomate e Manjericão (12 unid.).</div>
+        </div>
+        <div class="price">58</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">14 - FRITAS DE BATATA PALITO</div>
+            <div class="desc">Com Dips: Maionese do Chef.</div>
+        </div>
+        <div class="price">48</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">23 - BOLINHO DE MILHO</div>
+            <div class="desc">Recheado de queijo com geléia de pimenta (12 unid.).</div>
+        </div>
+        <div class="price">54</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">24 - PASTA DE HOMMUS (para compartilhar)</div>
+            <div class="desc">Com Tomate Cereja Confit, Búfala Temperada e Pesto com Torrada de Pão de Fermentação Natural e Chips de Pão Sírio.</div>
+        </div>
+        <div class="price">68</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">CHICKEN FINGERS</div>
+            <div class="desc">Tiras de Frango Empanado com Molho Honey Mustard.</div>
+        </div>
+        <div class="price">68</div>
+    </div>
+
+    <div class="item">
+        <div class="info">
+            <div class="name">MIX DE NUTS</div>
+            <div class="desc">Especialmente Temperado com Azeite de Alecrim.</div>
+        </div>
+        <div class="price">49</div>
+    </div>
+
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608; margin-top: 10px;">
+        <div class="info">
+            <div class="name" style="color:var(--gold)">17 - TIRAS DE FILÉ MIGNON</div>
+            <div class="desc">No Molho de Cerveja Preta e Cebola Roxa. DELICIOSA RECEITA DO CHEF GUSTAVO TORRES.</div>
+        </div>
+        <div class="price">98</div>
+    </div>
 </div>
-
-<div id="aba2" class="secao-itens"></div>
-<div id="aba3" class="secao-itens"></div>
-<div id="aba4" class="secao-itens"></div>
-<div id="aba5" class="secao-itens"></div>
-
-<script>
-    function ver(id) {
-        document.querySelectorAll('.secao-itens').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-</script>
-</body>
-</html>
