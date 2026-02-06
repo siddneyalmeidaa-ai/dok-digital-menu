@@ -3,146 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK MASTER | SISTEMA DE AUDITORIA</title>
+    <title>DOK MASTER S.A.</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        
-        :root {
-            --gold: #D4AF37;
-            --bg: #050505;
-            --card: #121212;
-            --border: #222;
-            --green: #2ecc71;
-            --text-muted: #888;
-        }
-
-        body { 
-            background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; 
-            margin: 0; padding: 0; -webkit-font-smoothing: antialiased;
-        }
-
-        /* Header Estilo Executivo */
-        .header { 
-            text-align: center; padding: 30px 15px; background: #000;
-            border-bottom: 1px solid var(--border);
-        }
-        .header h1 { color: var(--gold); letter-spacing: 5px; font-weight: 900; margin: 0; font-size: 24px; }
-        .header p { color: #444; font-size: 10px; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* Navegação por Abas Deslizante */
-        .tabs-nav {
-            display: flex; overflow-x: auto; background: #000; position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid var(--border); padding: 10px 5px; scrollbar-width: none;
-        }
-        .tabs-nav::-webkit-scrollbar { display: none; }
-        
-        .tab-btn {
-            padding: 10px 20px; color: var(--text-muted); font-size: 11px; font-weight: 700;
-            text-transform: uppercase; border: none; background: transparent; cursor: pointer; white-space: nowrap;
-            transition: 0.3s;
-        }
+        :root { --gold: #D4AF37; --bg: #050505; --card: #111; --border: #222; --green: #2ecc71; --text-muted: #888; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 50px; }
+        .header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 1px solid var(--border); }
+        .header h1 { color: var(--gold); letter-spacing: 4px; font-weight: 900; margin: 0; font-size: 20px; }
+        .tabs-nav { display: flex; overflow-x: auto; background: #000; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); padding: 8px 5px; scrollbar-width: none; }
+        .tab-btn { padding: 10px 15px; color: #555; font-size: 10px; font-weight: 700; text-transform: uppercase; border: none; background: transparent; cursor: pointer; white-space: nowrap; }
         .tab-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-
-        /* Container de Itens */
-        .secao-itens { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
+        .secao-itens { display: none; padding: 15px; animation: fadeIn 0.3s ease; }
         .secao-itens.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .item { 
-            background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-            padding: 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .info { flex: 1; }
-        .name { color: #fff; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .desc { color: var(--text-muted); font-size: 11px; margin-top: 5px; font-weight: 300; line-height: 1.4; }
-        .price { font-size: 20px; font-weight: 900; color: #fff; margin-left: 20px; font-variant-numeric: tabular-nums; }
-
-        /* Estilos Especiais Mapeados */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .name { color: #eee; font-weight: 700; font-size: 12px; text-transform: uppercase; }
+        .desc { color: #666; font-size: 10px; margin-top: 4px; font-weight: 300; }
+        .price { font-size: 18px; font-weight: 900; color: #fff; margin-left: 15px; }
         .premium { border: 1px solid var(--gold) !important; background: #1a1608 !important; }
         .premium .name { color: var(--gold) !important; }
         .vegan { border-left: 4px solid var(--green) !important; background: #0d1a10 !important; }
-        .vegan .name { color: var(--green) !important; }
-        
-        .categoria-label { 
-            color: var(--gold); font-size: 10px; text-align: center; 
-            padding: 15px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7;
-        }
-
-        .btn-download-box { text-align: center; padding: 40px 0; }
-        .btn-dl { 
-            background: var(--gold); color: #000; border: none; padding: 18px 45px; 
-            border-radius: 4px; font-weight: 900; font-size: 12px; cursor: pointer;
-            letter-spacing: 2px; transition: 0.3s;
-        }
-        .btn-dl:hover { background: #fff; }
+        .label-cat { color: var(--gold); font-size: 9px; text-align: center; padding: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>DOK MASTER</h1>
-    <p>Sincronia Quantum • Auditoria 2026</p>
-</div>
+<div class="header"><h1>DOK MASTER</h1></div>
 
 <div class="tabs-nav">
     <button class="tab-btn active" onclick="openTab(event, 'aba1')">Entradas</button>
     <button class="tab-btn" onclick="openTab(event, 'aba2')">Saladas</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba3')">Sanduíches</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba3')">Lanches</button>
     <button class="tab-btn" onclick="openTab(event, 'aba4')">Pratos</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba5')">Vegano</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba5')">Veg</button>
     <button class="tab-btn" onclick="openTab(event, 'aba6')">Doces</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba7')">Soft Drinks</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba8')">Gin/Drinks</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba9')">Clássicos</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba7')">Soft</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba8')">Drinks I</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba9')">Drinks II</button>
     <button class="tab-btn" onclick="openTab(event, 'aba10')">Doses</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba11')">Champagne</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba12')">Adega</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba11')">Champ</button>
+    <button class="tab-btn" onclick="openTab(event, 'aba12')">Vinhos</button>
 </div>
 
 <div id="aba1" class="secao-itens active">
-    <div class="item"><div class="info"><div class="name">01 - COUVERT DA CASA</div><div class="desc">Pães artesanais, manteiga e antepasto.</div></div><div class="price">35</div></div>
-    <div class="item"><div class="info"><div class="name">★ 04 - BURRATA AO PESTO</div><div class="desc">Tomates Cereja Confit e Torrada.</div></div><div class="price">78</div></div>
-    <div class="item"><div class="info"><div class="name">07 - MINI CROQUETES DE PICANHA</div><div class="desc">Na Cerveja Preta com Dip de Mostarda.</div></div><div class="price">59</div></div>
-    <div class="item"><div class="info"><div class="name">13 - MINI PASTÉIS DE QUEIJO</div><div class="desc">Com Tomate e Manjericão (12 unid.).</div></div><div class="price">58</div></div>
-    <div class="item"><div class="info"><div class="name">14 - FRITAS DE BATATA PALITO</div><div class="desc">Com Dips: Maionese do Chef.</div></div><div class="price">48</div></div>
-    <div class="item"><div class="info"><div class="name">23 - BOLINHO DE MILHO</div><div class="desc">Queijo com geléia de pimenta (12 unid.).</div></div><div class="price">54</div></div>
-    <div class="item premium"><div class="info"><div class="name">17 - TIRAS DE FILÉ MIGNON</div><div class="desc">Molho de Cerveja Preta. RECEITA GUSTAVO TORRES.</div></div><div class="price">98</div></div>
+    <div class="item"><div><div class="name">01 - COUVERT DA CASA</div><div class="desc">Pães artesanais, manteiga e antepasto.</div></div><div class="price">35</div></div>
+    <div class="item"><div><div class="name">★ 04 - BURRATA AO PESTO</div><div class="desc">Tomates Cereja Confit e Torrada.</div></div><div class="price">78</div></div>
+    <div class="item"><div><div class="name">07 - MINI CROQUETES PICANHA</div><div class="desc">Na Cerveja Preta e Mostarda.</div></div><div class="price">59</div></div>
+    <div class="item"><div><div class="name">13 - MINI PASTÉIS QUEIJO</div><div class="desc">Tomate e Manjericão (12 unid.).</div></div><div class="price">58</div></div>
+    <div class="item"><div><div class="name">14 - FRITAS BATATA PALITO</div><div class="desc">Dips: Maionese do Chef.</div></div><div class="price">48</div></div>
+    <div class="item"><div><div class="name">23 - BOLINHO DE MILHO</div><div class="desc">Queijo e geléia pimenta (12 unid.).</div></div><div class="price">54</div></div>
+    <div class="item premium"><div><div class="name">17 - TIRAS DE FILÉ MIGNON</div><div class="desc">Molho Cerveja. REC. GUSTAVO TORRES.</div></div><div class="price">98</div></div>
 </div>
 
-<div id="aba4" class="secao-itens">
-    <div class="item"><div class="info"><div class="name">101 - LASANHA À BOLONHESA</div><div class="desc">Artesanal ao Molho Bolonhesa.</div></div><div class="price">97</div></div>
-    <div class="item"><div class="info"><div class="name">114 - RISOTO DE CAMARÃO</div><div class="desc">Limão Siciliano e Búfala Maçaricada.</div></div><div class="price">130</div></div>
-    <div class="item premium"><div class="info"><div class="name">118 - PICADINHO GUSTAVO TORRES</div><div class="desc">Arroz, Feijão, Fritas, Farofa e Ovo.</div></div><div class="price">98</div></div>
-</div>
-
-<div id="aba5" class="secao-itens">
-    <div class="item vegan"><div class="info"><div class="name">🌱 137 - MOQUECA DE PALMITO</div><div class="desc">Castanha de Caju e Arroz Branco.</div></div><div class="price">78</div></div>
-</div>
-
-<div id="aba12" class="secao-itens">
-    <div class="categoria-label">BRANCOS / ROSÉS</div>
-    <div class="item"><div class="info"><div class="name">622 - LEYDA SAUVIGNON</div><div class="desc">CHI.</div></div><div class="price">188</div></div>
-    <div class="categoria-label">TINTOS</div>
-    <div class="item premium"><div class="info"><div class="name">654 - COBOS FELINO MALBEC</div><div class="desc">ARGENTINA.</div></div><div class="price">230</div></div>
-</div>
-
-<div class="btn-download-box">
-    <button class="btn-dl">EXPORTAR RELATÓRIO PDF</button>
-</div>
-
-<script>
-    function openTab(evt, tabName) {
-        var i, x, tablinks;
-        x = document.getElementsByClassName("secao-itens");
-        for (i = 0; i < x.length; i++) { x[i].style.display = "none"; }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
-
-</body>
-</html>
+<div id="aba2" class="secao-itens">
+    <div class="item"><div><div class="name">30 - SALADA CAPRESE</div><div class="desc">Tomate, Búfala e Pesto.</div></div><div class="price">78</div></div>
+    <div class="item"><div><div class="name">31 - CAESAR SALAD</div><div class="
+                                                                        
