@@ -5,57 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOK MASTER S.A.</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        :root { --gold: #D4AF37; --bg: #050505; --card: #111; --border: #222; --green: #2ecc71; --text-muted: #888; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        :root { --gold: #D4AF37; --bg: #050505; --card: #111; --border: #222; --green: #2ecc71; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 50px; }
-        .header { text-align: center; padding: 25px 10px; background: #000; border-bottom: 1px solid var(--border); }
+        
+        /* Header */
+        .header { text-align: center; padding: 20px; background: #000; border-bottom: 1px solid var(--border); }
         .header h1 { color: var(--gold); letter-spacing: 4px; font-weight: 900; margin: 0; font-size: 20px; }
-        .tabs-nav { display: flex; overflow-x: auto; background: #000; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); padding: 8px 5px; scrollbar-width: none; }
-        .tab-btn { padding: 10px 15px; color: #555; font-size: 10px; font-weight: 700; text-transform: uppercase; border: none; background: transparent; cursor: pointer; white-space: nowrap; }
+
+        /* Navegação Blindada */
+        .tabs-nav { 
+            display: flex; overflow-x: auto; background: #000; position: sticky; top: 0; z-index: 1000; 
+            border-bottom: 1px solid var(--border); padding: 5px; gap: 5px;
+        }
+        .tab-btn { 
+            padding: 12px 20px; color: #666; font-size: 11px; font-weight: 700; 
+            text-transform: uppercase; border: none; background: transparent; cursor: pointer; white-space: nowrap;
+        }
         .tab-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-        .secao-itens { display: none; padding: 15px; animation: fadeIn 0.3s ease; }
-        .secao-itens.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+
+        /* Conteúdo */
+        .secao-itens { display: none; padding: 15px; }
+        .secao-itens.active { display: block !important; }
+
+        .item { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 6px; 
+            padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; 
+        }
         .name { color: #eee; font-weight: 700; font-size: 12px; text-transform: uppercase; }
-        .desc { color: #666; font-size: 10px; margin-top: 4px; font-weight: 300; }
-        .price { font-size: 18px; font-weight: 900; color: #fff; margin-left: 15px; }
-        .premium { border: 1px solid var(--gold) !important; background: #1a1608 !important; }
-        .premium .name { color: var(--gold) !important; }
-        .vegan { border-left: 4px solid var(--green) !important; background: #0d1a10 !important; }
-        .label-cat { color: var(--gold); font-size: 9px; text-align: center; padding: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
-    </style>
-</head>
-<body>
-
-<div class="header"><h1>DOK MASTER</h1></div>
-
-<div class="tabs-nav">
-    <button class="tab-btn active" onclick="openTab(event, 'aba1')">Entradas</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba2')">Saladas</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba3')">Lanches</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba4')">Pratos</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba5')">Veg</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba6')">Doces</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba7')">Soft</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba8')">Drinks I</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba9')">Drinks II</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba10')">Doses</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba11')">Champ</button>
-    <button class="tab-btn" onclick="openTab(event, 'aba12')">Vinhos</button>
-</div>
-
-<div id="aba1" class="secao-itens active">
-    <div class="item"><div><div class="name">01 - COUVERT DA CASA</div><div class="desc">Pães artesanais, manteiga e antepasto.</div></div><div class="price">35</div></div>
-    <div class="item"><div><div class="name">★ 04 - BURRATA AO PESTO</div><div class="desc">Tomates Cereja Confit e Torrada.</div></div><div class="price">78</div></div>
-    <div class="item"><div><div class="name">07 - MINI CROQUETES PICANHA</div><div class="desc">Na Cerveja Preta e Mostarda.</div></div><div class="price">59</div></div>
-    <div class="item"><div><div class="name">13 - MINI PASTÉIS QUEIJO</div><div class="desc">Tomate e Manjericão (12 unid.).</div></div><div class="price">58</div></div>
-    <div class="item"><div><div class="name">14 - FRITAS BATATA PALITO</div><div class="desc">Dips: Maionese do Chef.</div></div><div class="price">48</div></div>
-    <div class="item"><div><div class="name">23 - BOLINHO DE MILHO</div><div class="desc">Queijo e geléia pimenta (12 unid.).</div></div><div class="price">54</div></div>
-    <div class="item premium"><div><div class="name">17 - TIRAS DE FILÉ MIGNON</div><div class="desc">Molho Cerveja. REC. GUSTAVO TORRES.</div></div><div class="price">98</div></div>
-</div>
-
-<div id="aba2" class="secao-itens">
-    <div class="item"><div><div class="name">30 - SALADA CAPRESE</div><div class="desc">Tomate, Búfala e Pesto.</div></div><div class="price">78</div></div>
-    <div class="item"><div><div class="name">31 - CAESAR SALAD</div><div class="
-                                                                        
+        .desc { color: #666; font-size: 10px; margin-top: 4px; }
+        
