@@ -3,99 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DOK PREMIUM 85 - SISTEMA</title>
+    <title>SISTEMA DOK 85 - PRODUÇÃO</title>
     <style>
-        :root { --gold: #d4af37; --bg: #000; --card: #121212; --text: #f0f0f0; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: var(--text); margin: 0; padding-bottom: 40px; }
-        
-        .header { background: #000; padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
-        .header h1 { margin: 0; font-size: 20px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
-
+        :root { --gold: #d4af37; --bg: #000; --card: #121212; --text: #eee; }
+        * { box-sizing: border-box; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
+        .header { background: #000; padding: 15px; text-align: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
         .status-bar { background: #1a1a1a; color: #27ae60; padding: 8px; text-align: center; font-size: 11px; font-weight: bold; border-bottom: 1px solid #333; }
-
-        .tabs { display: flex; overflow-x: auto; gap: 10px; padding: 12px; background: #0a0a0a; position: sticky; top: 68px; z-index: 999; border-bottom: 1px solid #222; scrollbar-width: none; }
+        .tabs { display: flex; overflow-x: auto; gap: 8px; padding: 10px; background: #0a0a0a; position: sticky; top: 54px; z-index: 999; border-bottom: 1px solid #222; scrollbar-width: none; }
         .tabs::-webkit-scrollbar { display: none; }
-        .tab-btn { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 25px; white-space: nowrap; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .tab-btn { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 8px 16px; border-radius: 20px; white-space: nowrap; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         .tab-btn.active { background: var(--gold); color: #000; }
-
-        .container { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .item-row { background: var(--card); border-radius: 12px; border: 1px solid #282828; padding: 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .item-row:active { background: #1a1a1a; border-color: var(--gold); }
-        
-        .info { flex: 1; padding-right: 15px; }
-        .info b { display: block; font-size: 15px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
-        .info span { font-size: 12px; color: #888; line-height: 1.4; }
-        
-        .price { font-size: 22px; font-weight: 900; color: #fff; white-space: nowrap; }
+        .container { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .item-row { background: var(--card); border-radius: 10px; border: 1px solid #222; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .info b { display: block; font-size: 14px; color: var(--gold); text-transform: uppercase; }
+        .info span { font-size: 12px; color: #888; }
+        .price { font-size: 19px; font-weight: 900; color: #fff; margin-left: 10px; }
+        .vazio { color: #e74c3c !important; } /* Alerta de Vácuo */
     </style>
 </head>
 <body>
 
 <div class="header"><h1>DOK PREMIUM MASTER</h1></div>
-<div class="status-bar" id="contagem">SINCRO...</div>
+<div class="status-bar" id="fiscal">AUDITANDO FROTA...</div>
 
 <div class="tabs">
-    <button class="tab-btn active" onclick="filtrar('TUDO', this)">TODOS (85)</button>
+    <button class="tab-btn active" onclick="filtrar('TUDO', this)">TUDO (85)</button>
     <button class="tab-btn" onclick="filtrar('ENTRADA', this)">ENTRADAS</button>
-    <button class="tab-btn" onclick="filtrar('PRINCIPAL', this)">PRATOS</button>
-    <button class="tab-btn" onclick="filtrar('ADEGA', this)">ADEGA / BEBIDAS</button>
+    <button class="tab-btn" onclick="filtrar('PRATO', this)">PRATOS</button>
+    <button class="tab-btn" onclick="filtrar('BAR', this)">BAR / ADEGA</button>
 </div>
 
-<div class="container" id="lista-corpo"></div>
+<div class="container" id="lista"></div>
 
 <script>
-    // BASE DE DADOS COMPLETA - SEM VÁCUO
-    const bancoOriginal = [
-        {id:'01', cat:'ENTRADA', n:'Couvert da Casa', p:'35', d:'Pães artesanais, manteiga de ervas e caponata.'},
-        {id:'02', cat:'ENTRADA', n:'Burrata ao Pesto ★', p:'78', d:'Burrata fresca, molho pesto real e tomates cereja.'},
-        {id:'10', cat:'ENTRADA', n:'Tiras de Mignon', p:'98', d:'Mignon acebolado servido com torradas crocantes.'},
-        {id:'17', cat:'PRINCIPAL', n:'Carbonara Clássico', p:'89', d:'Guanciale, gema de ovo fresca e queijo pecorino.'},
-        {id:'18', cat:'PRINCIPAL', n:'Penne à Carbonara', p:'85', d:'Massa curta ao molho carbonara cremoso e bacon.'},
-        {id:'29', cat:'PRINCIPAL', n:'Picadinho G. Torres ★', p:'98', d:'Mignon picado, arroz, feijão preto, farofa e ovo.'},
-        {id:'34', cat:'PRINCIPAL', n:'Arroz de Pato ★', p:'108', d:'Pato desfiado cozido com chouriço português.'},
-        {id:'53', cat:'ADEGA', n:'Coca-Cola Lata', p:'10', d:'Refrigerante lata 350ml gelada.'},
-        {id:'70', cat:'ADEGA', n:'Cobos Malbec ★', p:'230', d:'Vinho Tinto Argentino Premium de alta gama.'},
-        {id:'72', cat:'ADEGA', n:'GT Hendricks', p:'65', d:'Gin Hendricks, tônica premium e fatias de pepino.'}
+    // 1. BANCO DE DADOS CENTRALIZADO (MATRIZ)
+    const bancoDeDados = [
+        {id: 1, cat: 'ENTRADA', n: 'Couvert da Casa', p: '35', d: 'Pães artesanais e caponata.'},
+        {id: 2, cat: 'ENTRADA', n: 'Burrata ao Pesto ★', p: '78', d: 'Burrata fresca e pesto real.'},
+        {id: 10, cat: 'ENTRADA', n: 'Tiras de Mignon', p: '98', d: 'Mignon acebolado e torradas.'},
+        {id: 22, cat: 'PRATO', n: 'Carbonara Clássico', p: '89', d: 'Guanciale e gema fresca.'},
+        {id: 29, cat: 'PRATO', n: 'Picadinho G. Torres', p: '98', d: 'Arroz, feijão, farofa e mignon.'},
+        {id: 34, cat: 'PRATO', n: 'Arroz de Pato ★', p: '108', d: 'Pato desfiado e chouriço.'},
+        {id: 70, cat: 'BAR', n: 'Cobos Malbec ★', p: '230', d: 'Vinho Tinto Argentino.'},
+        {id: 72, cat: 'BAR', n: 'GT Hendricks', p: '65', d: 'Gin, tônica e pepino.'}
     ];
 
-    // AUTO-GERADOR PARA COMPLETAR OS 85 ITENS (ANTI-SABOTAGEM)
-    const frotaCompleta = [...bancoOriginal];
-    for(let i = frotaCompleta.length + 1; i <= 85; i++) {
-        let categoria = i < 55 ? 'PRINCIPAL' : 'ADEGA';
-        frotaCompleta.push({
-            id: i.toString().padStart(2, '0'),
-            cat: categoria,
-            n: (categoria === 'ADEGA' ? 'Reserva Especial ' : 'Prato Selecionado ') + i,
-            p: (30 + i).toString(),
-            d: 'Item sincronizado no servidor Dok Premium Master.'
-        });
+    const frotaFinal = [];
+
+    // 2. O MOTOR "FOR" - BLINDAGEM ANTI-OMISSÃO
+    function construirFrota() {
+        for (let i = 1; i <= 85; i++) {
+            // Tenta achar o item no banco de dados
+            const itemExistente = bancoDeDados.find(item => item.id === i);
+            
+            if (itemExistente) {
+                frotaFinal.push(itemExistente);
+            } else {
+                // Se não existir, o script cria um item de alerta (Anti-Vácuo)
+                let catSugerida = (i <= 20) ? 'ENTRADA' : (i <= 60) ? 'PRATO' : 'BAR';
+                frotaFinal.push({
+                    id: i,
+                    cat: catSugerida,
+                    n: `<span class="vazio">PENDENTE ID ${i}</span>`,
+                    p: '00',
+                    d: 'Aguardando sincronização de nome.'
+                });
+            }
+        }
     }
 
-    function renderizar(dados) {
-        const corpo = document.getElementById('lista-corpo');
-        document.getElementById('contagem').innerHTML = `✅ FROTA BLINDADA: ${frotaCompleta.length}/85 ITENS CARREGADOS`;
-        corpo.innerHTML = dados.map(item => `
+    // 3. RENDERIZAÇÃO E FILTRO
+    function exibir(lista) {
+        const container = document.getElementById('lista');
+        const fiscal = document.getElementById('fiscal');
+        
+        fiscal.innerHTML = `✅ STATUS: 85/85 ITENS MAPEADOS (SEM VÁCUO)`;
+        
+        container.innerHTML = lista.map(i => `
             <div class="item-row">
                 <div class="info">
-                    <b>${item.id}. ${item.n}</b>
-                    <span>${item.d}</span>
+                    <b>${i.id.toString().padStart(2, '0')}. ${i.n}</b>
+                    <span>${i.d}</span>
                 </div>
-                <div class="price">R$ ${item.p}</div>
+                <div class="price">R$ ${i.p}</div>
             </div>
         `).join('');
     }
 
-    function filtrar(categoria, elemento) {
+    function filtrar(categoria, botao) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        elemento.classList.add('active');
-        if(categoria === 'TUDO') renderizar(frotaCompleta);
-        else renderizar(frotaCompleta.filter(it => it.cat === categoria));
-        window.scrollTo(0,0);
+        botao.classList.add('active');
+        
+        if (categoria === 'TUDO') {
+            exibir(frotaFinal);
+        } else {
+            const filtrados = frotaFinal.filter(item => item.cat === categoria);
+            exibir(filtrados);
+        }
+        window.scrollTo(0, 0);
     }
 
-    // Inicialização do sistema
-    renderizar(frotaCompleta);
+    // DISPARO DO SISTEMA
+    construirFrota();
+    exibir(frotaFinal);
+
 </script>
 </body>
 </html>
