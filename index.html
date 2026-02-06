@@ -1,52 +1,98 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOK PREMIUM - ESPELHO REAL</title>
-    <style>
-        body { background: #000; color: #eee; font-family: sans-serif; margin: 0; padding: 10px; }
-        .header { text-align: center; border-bottom: 2px solid #d4af37; padding: 15px; margin-bottom: 20px; }
-        .categoria { color: #d4af37; font-size: 13px; text-transform: uppercase; margin: 25px 0 10px; font-weight: bold; border-left: 3px solid #d4af37; padding-left: 10px; letter-spacing: 1px; }
-        .item { background: #121212; border: 1px solid #282828; border-radius: 8px; padding: 15px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-        .info { flex: 1; }
-        .nome { color: #d4af37; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; }
-        .desc { color: #888; font-size: 11px; margin-top: 4px; display: block; line-height: 1.3; }
-        .preco { font-size: 18px; font-weight: 900; color: #fff; margin-left: 15px; }
-    </style>
-</head>
-<body>
+<div id="aba1" class="secao-itens active">
+    <div class="item"><div class="info"><div class="name">01 - COUVERT DA CASA</div><div class="desc">Pães artesanais, manteiga e antepasto.</div></div><div class="price">35</div></div>
+    <div class="item"><div class="info"><div class="name">★ 04 - BURRATA AO PESTO</div><div class="desc">Tomates Cereja Confit e Torrada.</div></div><div class="price">78</div></div>
+    <div class="item"><div class="info"><div class="name">07 - MINI CROQUETES DE PICANHA</div><div class="desc">Na Cerveja Preta com Dip de Mostarda.</div></div><div class="price">59</div></div>
+    <div class="item"><div class="info"><div class="name">13 - MINI PASTÉIS DE QUEIJO</div><div class="desc">Com Tomate e Manjericão (12 unid.).</div></div><div class="price">58</div></div>
+    <div class="item"><div class="info"><div class="name">14 - FRITAS DE BATATA PALITO</div><div class="desc">Com Dips: Maionese do Chef.</div></div><div class="price">48</div></div>
+    <div class="item"><div class="info"><div class="name">23 - BOLINHO DE MILHO</div><div class="desc">Queijo com geléia de pimenta (12 unid.).</div></div><div class="price">54</div></div>
+    <div class="item"><div class="info"><div class="name">24 - PASTA DE HOMMUS</div><div class="desc">Búfala, Pesto e Torrada de Fermentação Natural.</div></div><div class="price">68</div></div>
+    <div class="item"><div class="info"><div class="name">CHICKEN FINGERS</div><div class="desc">Frango Empanado com Honey Mustard.</div></div><div class="price">68</div></div>
+    <div class="item"><div class="info"><div class="name">MIX DE NUTS</div><div class="desc">Temperado com Azeite de Alecrim.</div></div><div class="price">49</div></div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608; margin-top: 10px;">
+        <div class="info"><div class="name" style="color:var(--gold)">17 - TIRAS DE FILÉ MIGNON</div><div class="desc">Molho de Cerveja Preta. RECEITA GUSTAVO TORRES.</div></div><div class="price">98</div>
+    </div>
+</div>
 
-<div class="header"><h1>DOK PREMIUM MASTER</h1></div>
+<div id="aba2" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">30 - SALADA CAPRESE COM FOLHAS</div><div class="desc">Tomate, Búfala e Pesto.</div></div><div class="price">78</div></div>
+    <div class="item"><div class="info"><div class="name">31 - CAESAR SALAD</div><div class="desc">Frango, Croutons e Molho Caesar.</div></div><div class="price">78</div></div>
+    <div class="item"><div class="info"><div class="name">37 - CARPACCIO SALADA</div><div class="desc">Rúcula, Parmigiano e Mostarda.</div></div><div class="price">73</div></div>
+    <div class="item"><div class="info"><div class="name">41 - CANJA DE GALINHA</div><div class="desc">Legumes da Terra e Cesto de Pães.</div></div><div class="price">54</div></div>
+    <div class="item"><div class="info"><div class="name">42 - CREME DE MANDIOQUINHA</div><div class="desc">Acompanha Cesto de Pães.</div></div><div class="price">59</div></div>
+    <div class="item"><div class="info"><div class="name">40 - OMELETE SALADA</div><div class="desc">Presunto e Queijo com Folhas Verdes.</div></div><div class="price">53</div></div>
+</div>
 
-<div class="categoria">Para Compartilhar</div>
-<div class="item"><div class="info"><span class="nome">04. Burrata ao Pesto</span><span class="desc">Tomates cereja confit e torrada artesanal.</span></div><div class="preco">R$ 78</div></div>
-<div class="item"><div class="info"><span class="nome">07. Mini Croquetes de Picanha</span><span class="desc">Na cerveja preta com dip de mostarda (6 unid).</span></div><div class="preco">R$ 59</div></div>
-<div class="item"><div class="info"><span class="nome">13. Mini Pastéis de Queijo</span><span class="desc">Com tomate e manjericão (12 unid).</span></div><div class="preco">R$ 58</div></div>
-<div class="item"><div class="info"><span class="nome">14. Batata Frita Palito</span><span class="desc">Acompanha maionese do Chef.</span></div><div class="preco">R$ 48</div></div>
-<div class="item"><div class="info"><span class="nome">17. Tiras de Filé Mignon</span><span class="desc">Ao molho de cerveja preta e cebola roxa.</span></div><div class="preco">R$ 98</div></div>
-<div class="item"><div class="info"><span class="nome">23. Bolinho de Milho</span><span class="desc">Recheado com queijo e geleia de pimenta.</span></div><div class="preco">R$ 54</div></div>
+<div id="aba3" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">50 - TOSTEX MISTO</div><div class="desc">Pão de Miga, Presunto e Queijo Prato.</div></div><div class="price">49</div></div>
+    <div class="item"><div class="info"><div class="name">53 - CLUB SANDUÍCHE</div><div class="desc">Peru, Ovo, Bacon e Maionese.</div></div><div class="price">59</div></div>
+    <div class="item"><div class="info"><div class="name">51 - CHEESEBURGUER SALADA</div><div class="desc">Picanha, Queijo, Alface e Tomate.</div></div><div class="price">62</div></div>
+    <div class="item"><div class="info"><div class="name">54 - BACON BURGUER</div><div class="desc">Picanha, Bacon e Cebola Caramelizada.</div></div><div class="price">64</div></div>
+    <div class="item"><div class="info"><div class="name">64 - PIZZA MARGUERITA</div><div class="desc">Mussarela, Tomate e Pesto.</div></div><div class="price">78</div></div>
+    <div class="item"><div class="info"><div class="name">65 - PIZZA CALABRESA</div><div class="desc">Mussarela, Calabresa e Cebola Roxa.</div></div><div class="price">86</div></div>
+</div>
 
-<div class="categoria">Saladas e Sanduíches</div>
-<div class="item"><div class="info"><span class="nome">30. Salada Caprese</span><span class="desc">Mussarela de búfala, tomate e pesto.</span></div><div class="preco">R$ 78</div></div>
-<div class="item"><div class="info"><span class="nome">31. Caesar Salad</span><span class="desc">Alface, frango grelhado e croutons.</span></div><div class="preco">R$ 78</div></div>
-<div class="item"><div class="info"><span class="nome">50. Tostex Misto</span><span class="desc">Pão de miga, presunto e queijo prato.</span></div><div class="preco">R$ 49</div></div>
-<div class="item"><div class="info"><span class="nome">54. Bacon Burguer</span><span class="desc">Blend de picanha, queijo e cebola caramelizada.</span></div><div class="preco">R$ 64</div></div>
-<div class="item"><div class="info"><span class="nome">65. Pizza Calabresa</span><span class="desc">Mussarela, calabresa e orégano.</span></div><div class="preco">R$ 86</div></div>
+<div id="aba4" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">101 - LASANHA À BOLONHESA</div><div class="desc">Artesanal ao Molho Bolonhesa.</div></div><div class="price">97</div></div>
+    <div class="item"><div class="info"><div class="name">114 - RISOTO DE CAMARÃO</div><div class="desc">Limão Siciliano e Búfala Maçaricada.</div></div><div class="price">130</div></div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608;">
+        <div class="info"><div class="name" style="color:var(--gold)">118 - PICADINHO GUSTAVO TORRES</div><div class="desc">Arroz, Feijão, Fritas, Farofa e Ovo.</div></div><div class="price">98</div>
+    </div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608;">
+        <div class="info"><div class="name" style="color:var(--gold)">133 - ESCALOPE MILANÊS</div><div class="desc">Risoto de Açafrão com Parmigiano.</div></div><div class="price">122</div>
+    </div>
+</div>
 
-<div class="categoria">Pratos Principais</div>
-<div class="item"><div class="info"><span class="nome">101. Lasanha à Bolonhesa</span><span class="desc">Ragu de carne e molho de tomates frescos.</span></div><div class="preco">R$ 97</div></div>
-<div class="item"><div class="info"><span class="nome">108. Gnocchi de Mandioquinha</span><span class="desc">Fonduta de queijo Grana Padano.</span></div><div class="preco">R$ 97</div></div>
-<div class="item"><div class="info"><span class="nome">114. Risoto de Camarão</span><span class="desc">Camarão grelhado e toque de limão siciliano.</span></div><div class="preco">R$ 130</div></div>
-<div class="item"><div class="info"><span class="nome">118. Picadinho Chef G. Torres</span><span class="desc">Arroz, feijão, farofa, fritas e ovo.</span></div><div class="preco">R$ 98</div></div>
+<div id="aba5" class="secao-itens">
+    <div class="item" style="border-left: 4px solid #2ecc71; background: #0d1a10;">
+        <div class="info"><div class="name" style="color: #2ecc71;">🌱 137 - MOQUECA DE PALMITO</div><div class="desc">Castanha de Caju e Arroz Branco.</div></div><div class="price">78</div>
+    </div>
+</div>
 
-<div class="categoria">Bebidas e Bar</div>
-<div class="item"><div class="info"><span class="nome">200. Água Mineral</span><span class="desc">Com ou sem gás 310ml.</span></div><div class="preco">R$ 11</div></div>
-<div class="item"><div class="info"><span class="nome">209. Coca-Cola</span><span class="desc">Lata 350ml (Normal ou Zero).</span></div><div class="preco">R$ 12</div></div>
-<div class="item"><div class="info"><span class="nome">240. Cerveja Stella Artois</span><span class="desc">Long Neck gelada.</span></div><div class="preco">R$ 22</div></div>
-<div class="item"><div class="info"><span class="nome">253. Gin Tônica Hendricks</span><span class="desc">Gin Premium e pepino fresco.</span></div><div class="preco">R$ 65</div></div>
-<div class="item"><div class="info"><span class="nome">301. Whisky Black Label</span><span class="desc">Dose 12 anos.</span></div><div class="preco">R$ 42</div></div>
-<div class="item"><div class="info"><span class="nome">654. Cobos Felino Malbec</span><span class="desc">Garrafa de Vinho Tinto Argentino.</span></div><div class="preco">R$ 230</div></div>
+<div id="aba6" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">70 - PUDIM DE LEITE PERFEITO</div><div class="desc">Textura cremosa artesanal.</div></div><div class="price">38</div></div>
+    <div class="item"><div class="info"><div class="name">74 - PETIT GATEAU</div><div class="desc">Chocolate Belga com Sorvete de Creme.</div></div><div class="price">39</div></div>
+</div>
 
-</body>
-</html>
+<div id="aba7" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">200/201 - ÁGUA S/G OU C/G</div><div class="desc">Mineral Water 310ml.</div></div><div class="price">11</div></div>
+    <div class="item"><div class="info"><div class="name">209/210 - COCA OU ZERO</div><div class="desc">Soda.</div></div><div class="price">12</div></div>
+</div>
+
+<div id="aba8" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">251 - GIN TÔNICA</div><div class="desc">Gin, Tônica e Limão.</div></div><div class="price">48</div></div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608;">
+        <div class="info"><div class="name" style="color:var(--gold)">253 - GT HENDRICKS</div><div class="desc">Gin Premium e Pepino.</div></div><div class="price">65</div>
+    </div>
+    <div class="item"><div class="info"><div class="name">258 - BLOODY MARY</div><div class="desc">Vodka e Suco de Tomate Temperado.</div></div><div class="price">48</div></div>
+</div>
+
+<div id="aba9" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">263 - MOJITO</div><div class="desc">Rum, Hortelã e Soda.</div></div><div class="price">46</div></div>
+    <div class="item"><div class="info"><div class="name">266 - CAIPIRINHA</div><div class="desc">Cachaça Especial e Limão.</div></div><div class="price">44</div></div>
+</div>
+
+<div id="aba10" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">341 - VODKA GREY GOOSE</div><div class="desc">Dose.</div></div><div class="price">52</div></div>
+    <div class="item"><div class="info"><div class="name">301 - BLACK LABEL</div><div class="desc">Dose.</div></div><div class="price">52</div></div>
+    <div class="item"><div class="info"><div class="name">364 - CACHAÇA YAGUARA</div><div class="desc">Dose.</div></div><div class="price">40</div></div>
+</div>
+
+<div id="aba11" class="secao-itens">
+    <div class="item"><div class="info"><div class="name">608 - CHANDON BRUT</div><div class="desc">BRA.</div></div><div class="price">210</div></div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608;">
+        <div class="info"><div class="name" style="color:var(--gold)">604 - MOËT & CHANDON</div><div class="desc">FRA.</div></div><div class="price">720</div>
+    </div>
+</div>
+
+<div id="aba12" class="secao-itens">
+    <div style="padding: 10px; color: var(--gold); text-align: center; font-size: 11px;">BRANCOS & ROSÉS</div>
+    <div class="item"><div class="info"><div class="name">622 - LEYDA SAUVIGNON BLANC</div><div class="desc">CHI.</div></div><div class="price">188</div></div>
+    <div class="item"><div class="info"><div class="name">615 - ESTANDON ROSÉ</div><div class="desc">FRA.</div></div><div class="price">163</div></div>
+    <div style="padding: 10px; color: var(--gold); text-align: center; font-size: 11px;">TINTOS</div>
+    <div class="item"><div class="info"><div class="name">656 - VENTUS MALBEC</div><div class="desc">ARG.</div></div><div class="price">158</div></div>
+    <div class="item"><div class="info"><div class="name">642 - LEYDA RESERVA PINOT NOIR</div><div class="desc">CHI.</div></div><div class="price">178</div></div>
+    <div class="item" style="border: 1px solid var(--gold); background: #1a1608;">
+        <div class="info"><div class="name" style="color:var(--gold)">654 - COBOS FELINO MALBEC</div><div class="desc">ARG - Premium.</div></div><div class="price">230</div>
+    </div>
+                                                                                                        </div>
+                                            
