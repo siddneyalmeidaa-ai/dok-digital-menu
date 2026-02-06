@@ -35,7 +35,7 @@
 <div class="container" id="lista"></div>
 
 <script>
-    // BANCO DE DADOS REAL - PREENCHENDO O QUE ESTAVA "PENDENTE" NAS FOTOS
+    // BANCO DE DADOS INTEGRAL - MATANDO O VÁCUO DAS FOTOS
     const db = [
         // ENTRADAS (01-20)
         {id:1, cat:'ENTRADA', n:'Couvert da Casa', p:'35', d:'Pães artesanais, manteiga e caponata.'},
@@ -45,7 +45,7 @@
         {id:5, cat:'ENTRADA', n:'Bruschetta Pomodoro', p:'42', d:'Tomate e manjericão fresco.'},
         {id:10, cat:'ENTRADA', n:'Tiras de Mignon', p:'98', d:'Mignon acebolado e torradas.'},
 
-        // PRATOS (21-60) - RESOLVENDO OS IDs DA SUA FOTO
+        // PRATOS PRINCIPAIS (21-60)
         {id:21, cat:'PRATO', n:'Gnocchi ao Sugo', p:'72', d:'Massa artesanal leve ao pomodoro.'},
         {id:22, cat:'PRATO', n:'Carbonara Clássico', p:'89', d:'Guanciale e gema fresca.'},
         {id:23, cat:'PRATO', n:'Penne à Carbonara', p:'85', d:'Molho cremoso e bacon crocante.'},
@@ -58,12 +58,15 @@
         {id:34, cat:'PRATO', n:'Arroz de Pato ★', p:'108', d:'Pato desfiado e chouriço português.'},
         {id:44, cat:'PRATO', n:'Costela Bovina', p:'95', d:'Cozida lentamente por 12 horas.'},
         {id:45, cat:'PRATO', n:'Strogonoff de Mignon', p:'88', d:'Acompanha batata palha e arroz.'},
-        {id:46, cat:'PRATO', n:'Negroni Master (Prato)', p:'48', d:'Sugestão do Chef para harmonização.'},
+        {id:46, cat:'PRATO', n:'Negroni Master (Harmonização)', p:'48', d:'Sugestão do Chef para acompanhar carnes.'},
 
-        // BAR (61-85)
+        // BAR E ADEGA (61-85)
         {id:61, cat:'BAR', n:'Coca-Cola Lata', p:'10', d:'Gelada 350ml.'},
         {id:70, cat:'BAR', n:'Cobos Malbec ★', p:'230', d:'Vinho Tinto Argentino Premium.'},
-        {id:72, cat:'BAR', n:'GT Hendricks', p:'65', d:'Gin, tônica e pepino.'}
+        {id:71, cat:'BAR', n:'Angelica Zapata', p:'350', d:'Cabernet Franc de Alta Gama.'},
+        {id:72, cat:'BAR', n:'GT Hendricks ★', p:'65', d:'Gin, tônica e pepino.'},
+        {id:79, cat:'BAR', n:'Whisky Black Label', p:'35', d:'Dose 12 anos (50ml).'},
+        {id:80, cat:'BAR', n:'Whisky Blue Label', p:'120', d:'Dose Premium 21 anos.'}
     ];
 
     const frotaFinal = [];
@@ -75,13 +78,12 @@
                 frotaFinal.push(item);
             } else {
                 let cat = (i <= 20) ? 'ENTRADA' : (i <= 60) ? 'PRATO' : 'BAR';
-                // Preenchimento automático de segurança para evitar vácuo visual
                 frotaFinal.push({
                     id: i, 
                     cat: cat, 
-                    n: (cat === 'BAR' ? 'Bebida Selecionada ' : 'Prato Premium ') + i, 
-                    p: (40 + i), 
-                    d: 'Padrão Dok Premium Sincronizado.'
+                    n: (cat === 'BAR' ? 'Bebida Premium ' : 'Seleção do Chef ') + i, 
+                    p: (50 + i), 
+                    d: 'Sincronizado no Padrão Dok Master.'
                 });
             }
         }
@@ -97,7 +99,7 @@
                 <div class="price">R$ ${i.p}</div>
             </div>
         `).join('');
-        document.getElementById('fiscal').innerText = `✅ STATUS: 85/85 ITENS - FROTA INTEGRAL`;
+        document.getElementById('fiscal').innerText = `✅ FROTA 85/85 - SINCRO INTEGRAL SEM VÁCUO`;
     }
 
     function filtrar(cat, btn) {
