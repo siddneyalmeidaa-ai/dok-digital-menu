@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DOK PREMIUM 85 - AUTOMATIZADO</title>
+    <title>DOK 85 - SEM DUPLICIDADE</title>
     <style>
         :root { --gold: #d4af37; --bg: #000; --card: #121212; --text: #eee; }
         * { box-sizing: border-box; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -15,8 +15,9 @@
         .container { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
         .item-row { background: var(--card); border-radius: 12px; border: 1px solid #282828; padding: 18px; display: flex; justify-content: space-between; align-items: center; }
         .info b { display: block; font-size: 14px; color: var(--gold); text-transform: uppercase; }
-        .info span { font-size: 11px; color: #888; line-height: 1.4; display: block; margin-top: 4px; }
-        .price { font-size: 20px; font-weight: 900; color: #fff; margin-left: 10px; }
+        .info span { font-size: 11px; color: #888; margin-top: 4px; display: block; }
+        .price { font-size: 20px; font-weight: 900; color: #fff; }
+        .vago { opacity: 0.4; filter: grayscale(1); }
     </style>
 </head>
 <body>
@@ -33,63 +34,54 @@
 <div class="container" id="lista"></div>
 
 <script>
-    // BANCO DE DADOS EXTRAÍDO DOS PRINTS (AUTOMAÇÃO REAL)
-    const dbReal = [
-        // --- SEÇÃO ENTRADAS ---
-        {id: 4, cat:'ENTRADA', n:'Burrata ao Pesto', p:'78', d:'Tomates cereja confit e torrada artesanal.'},
-        {id: 7, cat:'ENTRADA', n:'Mini Croquetes de Picanha', p:'59', d:'Na cerveja preta com dip de mostarda.'},
-        {id: 13, cat:'ENTRADA', n:'Mini Pastéis de Queijo', p:'58', d:'Com tomate e manjericão (12 unid).'},
-        {id: 14, cat:'ENTRADA', n:'Fritas de Batata Palito', p:'48', d:'Acompanha maionese do Chef.'},
-        {id: 17, cat:'ENTRADA', n:'Tiras de Filé Mignon', p:'98', d:'Ao molho de cerveja preta e cebola roxa.'},
-        {id: 23, cat:'ENTRADA', n:'Bolinho de Milho', p:'54', d:'Recheado com queijo e geleia de pimenta.'},
-
-        // --- SEÇÃO PRATOS / SALADAS / SANDUÍCHES ---
-        {id: 30, cat:'PRATO', n:'Salada Caprese', p:'78', d:'Tomate italiano, mussarela de búfala e pesto.'},
-        {id: 31, cat:'PRATO', n:'Caesar Salad', p:'78', d:'Alface americana, tiras de frango e croutons.'},
-        {id: 50, cat:'PRATO', n:'Tostex Misto', p:'49', d:'No pão de miga com presunto e queijo prato.'},
-        {id: 54, cat:'PRATO', n:'Bacon Burguer', p:'64', d:'Picanha, queijo prato e cebola caramelizada.'},
-        {id: 65, cat:'PRATO', n:'Pizza Calabresa', p:'86', d:'Molho de tomate, mussarela e calabresa.'},
-        {id: 101, cat:'PRATO', n:'Lasanha à Bolonhesa', p:'97', d:'Massa artesanal e molho de tomates frescos.'},
-        {id: 108, cat:'PRATO', n:'Gnocchi de Mandioquinha', p:'97', d:'Com fonduta de Grana Padano.'},
-        {id: 114, cat:'PRATO', n:'Risoto de Camarão', p:'130', d:'Camarão grelhado e limão siciliano.'},
-        {id: 118, cat:'PRATO', n:'Picadinho Chef G. Torres', p:'98', d:'Arroz, feijão, farofa, fritas e ovo.'},
-
-        // --- SEÇÃO BAR / BEBIDAS ---
-        {id: 200, cat:'BAR', n:'Água sem Gás', p:'11', d:'Garrafa mineral 310ml.'},
-        {id: 209, cat:'BAR', n:'Coca-Cola', p:'12', d:'Lata 350ml.'},
-        {id: 240, cat:'BAR', n:'Stella Artois', p:'22', d:'Long Neck.'},
-        {id: 253, cat:'BAR', n:'GT Hendricks', p:'65', d:'Gin, tônica e pepino.'},
-        {id: 301, cat:'BAR', n:'Whisky Black Label', p:'42', d:'Dose 12 anos.'},
-        {id: 654, cat:'BAR', n:'Cobos Felino Malbec', p:'230', d:'Vinho Tinto Argentino.'}
+    // DADOS ÚNICOS EXTRAÍDOS DOS SEUS PRINTS
+    const dadosReais = [
+        {id: 4, cat:'ENTRADA', n:'Burrata ao Pesto', p:'78', d:'Tomates cereja confit e torrada.'},
+        {id: 7, cat:'ENTRADA', n:'Mini Croquetes de Picanha', p:'59', d:'Na cerveja preta.'},
+        {id: 13, cat:'ENTRADA', n:'Mini Pastéis de Queijo', p:'58', d:'12 unidades.'},
+        {id: 14, cat:'ENTRADA', n:'Fritas de Batata Palito', p:'48', d:'Maionese do Chef.'},
+        {id: 17, cat:'ENTRADA', n:'Tiras de Filé Mignon', p:'98', d:'Molho de cerveja preta.'},
+        {id: 23, cat:'ENTRADA', n:'Bolinho de Milho', p:'54', d:'Geleia de pimenta.'},
+        {id: 30, cat:'PRATO', n:'Salada Caprese', p:'78', d:'Mussarela de búfala.'},
+        {id: 31, cat:'PRATO', n:'Caesar Salad', p:'78', d:'Tiras de frango.'},
+        {id: 50, cat:'PRATO', n:'Tostex Misto', p:'49', d:'Pão de miga.'},
+        {id: 54, cat:'PRATO', n:'Bacon Burguer', p:'64', d:'Picanha e cebola caramelizada.'},
+        {id: 65, cat:'PRATO', n:'Pizza Calabresa', p:'86', d:'Mussarela e calabresa.'},
+        {id: 70, cat:'PRATO', n:'Lasanha à Bolonhesa', p:'97', d:'Massa artesanal.'},
+        {id: 71, cat:'PRATO', n:'Gnocchi de Mandioquinha', p:'97', d:'Fonduta de Grana Padano.'},
+        {id: 75, cat:'PRATO', n:'Risoto de Camarão', p:'130', d:'Limão siciliano.'},
+        {id: 76, cat:'PRATO', n:'Picadinho G. Torres', p:'98', d:'O clássico completo.'},
+        {id: 80, cat:'BAR', n:'Coca-Cola', p:'12', d:'Lata 350ml.'},
+        {id: 81, cat:'BAR', n:'Água sem Gás', p:'11', d:'Garrafa.'},
+        {id: 82, cat:'BAR', n:'Stella Artois', p:'22', d:'Long Neck.'},
+        {id: 83, cat:'BAR', n:'GT Hendricks', p:'65', d:'Gin e tônica.'},
+        {id: 84, cat:'BAR', n:'Black Label', p:'42', d:'Dose Whisky.'},
+        {id: 85, cat:'BAR', n:'Cobos Felino Malbec', p:'230', d:'Vinho Tinto.'}
     ];
 
     const frota85 = [];
 
-    // MOTOR AUTOMATIZADO - MONTAGEM DA FROTA
-    function inicializar() {
+    // MONTAGEM SEM DUPLICAR - CADA UM NO SEU QUADRADO
+    function montar() {
         for (let i = 1; i <= 85; i++) {
-            // Procurar se o item existe no banco real extraído do print
-            const itemReal = dbReal.find(x => x.id === i) || dbReal[i % dbReal.length]; 
-            
-            // Injeta o item no slot correspondente
-            frota85.push({
-                id: i,
-                cat: itemReal.cat,
-                n: itemReal.n,
-                p: itemReal.p,
-                d: itemReal.d
-            });
+            const itemReal = dadosReais.find(x => x.id === i);
+            if (itemReal) {
+                frota85.push(itemReal);
+            } else {
+                let cat = (i <= 25) ? 'ENTRADA' : (i <= 75) ? 'PRATO' : 'BAR';
+                frota85.push({id: i, cat: cat, n: 'Posição Reserva ' + i, p: '--', d: 'Espaço disponível para novo item.', vago: true});
+            }
         }
     }
 
     function render(dados) {
         document.getElementById('lista').innerHTML = dados.map(i => `
-            <div class="item-row">
+            <div class="item-row ${i.vago ? 'vago' : ''}">
                 <div class="info">
                     <b>${i.id.toString().padStart(2, '0')}. ${i.n}</b>
                     <span>${i.d}</span>
                 </div>
-                <div class="price">R$ ${i.p}</div>
+                <div class="price">${i.p === '--' ? '--' : 'R$ ' + i.p}</div>
             </div>
         `).join('');
     }
@@ -98,12 +90,11 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if(cat === 'TUDO') render(frota85);
-        else render(frota85.filter(it => it.cat === (cat === 'BAR' ? 'BAR' : cat)));
+        else render(frota85.filter(it => it.cat === cat));
         window.scrollTo(0,0);
     }
 
-    inicializar();
-    render(frota85);
+    montar(); render(frotaFinal = frota85);
 </script>
 </body>
 </html>
